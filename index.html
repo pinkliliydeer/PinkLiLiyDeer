@@ -798,6 +798,34 @@ footer{
 .fade-up:nth-child(7){animation-delay:.47s}
 .fade-up:nth-child(8){animation-delay:.54s}
 
+/* ── BOTTOM NAV (mobile only) ── */
+.bottom-nav{display:none}
+@media(max-width:768px){
+  .bottom-nav{
+    display:flex;position:fixed;bottom:0;left:0;right:0;
+    background:#fff;border-top:1px solid var(--border);
+    z-index:200;padding:8px 0 calc(8px + env(safe-area-inset-bottom));
+  }
+  .bottom-nav a,.bottom-nav button{
+    flex:1;display:flex;flex-direction:column;align-items:center;
+    gap:4px;text-decoration:none;color:var(--muted);
+    font-family:var(--sans);font-size:9px;letter-spacing:1.5px;
+    text-transform:uppercase;transition:color .2s;
+    background:none;border:none;cursor:pointer;padding:0;
+    position:relative;
+  }
+  .bottom-nav a:hover,.bottom-nav button:hover,
+  .bottom-nav a.active,.bottom-nav button.active{color:var(--accent)}
+  .bottom-nav svg{width:22px;height:22px;stroke-width:1.5}
+  .bottom-nav .bnav-badge{
+    position:absolute;top:-2px;right:calc(50% - 20px);
+    background:var(--accent);color:#fff;border-radius:50%;
+    width:16px;height:16px;font-size:9px;
+    display:flex;align-items:center;justify-content:center;font-weight:600;
+  }
+  .toast{bottom:80px}
+}
+
 /* ── RESPONSIVE ── */
 @media(max-width:900px){
   nav{padding:0 20px}
@@ -816,7 +844,7 @@ footer{
   .footer-grid{grid-template-columns:1fr 1fr}
   .products-section,.lookbook,.instagram,.categories,.section-header{padding-left:20px;padding-right:20px}
   .features,.newsletter{padding-left:20px;padding-right:20px}
-  footer{padding:40px 20px 20px}
+  footer{padding:40px 20px 80px}
 }
 </style>
 </head>
@@ -1154,6 +1182,40 @@ footer{
 <!-- Toast -->
 <div class="toast" id="toast"></div>
 
+<!-- Bottom nav — mobile only -->
+<nav class="bottom-nav">
+  <a href="#products" class="active">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/>
+      <rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>
+    </svg>
+    Shop
+  </a>
+  <button onclick="openCart()">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+      <line x1="3" y1="6" x2="21" y2="6" stroke-linecap="round"/>
+      <path stroke-linecap="round" stroke-linejoin="round" d="M16 10a4 4 0 0 1-8 0"/>
+    </svg>
+    <span class="bnav-badge" id="bnavCartCount">0</span>
+    Cart
+  </button>
+  <a href="#">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+      <circle cx="12" cy="7" r="4"/>
+    </svg>
+    Account
+  </a>
+  <button onclick="toggleSearch()">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <circle cx="11" cy="11" r="8"/>
+      <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-4.35-4.35"/>
+    </svg>
+    Search
+  </button>
+</nav>
+
 <script>
 const PRODUCTS_DATA = [
   {id:1,name:'Ivory Tiered Midi Dress',price:2200,priceStr:'LE 2,200',cat:'dresses',badge:'new',colors:['#f5f0e8','#e8d5c0'],sizes:['S/M','M/L'],bg:'p1',img:'img/img1.jpg'},
@@ -1286,6 +1348,8 @@ function updateCartUI(){
   const count=cart.reduce((s,i)=>s+i.qty,0);
   const total=cartTotal(cart);
   document.getElementById('cartCount').textContent=count;
+  const bnavBadge=document.getElementById('bnavCartCount');
+  if(bnavBadge){bnavBadge.textContent=count;bnavBadge.style.display=count>0?'flex':'none';}
 
   /* shipping progress */
   const remaining=Math.max(0,FREE_SHIP-total);
