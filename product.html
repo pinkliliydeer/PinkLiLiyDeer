@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pink Liliy Deer</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --cream:#fff5f7;--warm:#fdeef2;--blush:#f9c8d0;
+  --dark:#1a1218;--mid:#5a3040;--muted:#9c7885;--border:#f5d5db;
+  --accent:#dc768c;--accent-dark:#c0284a;--accent-light:#fde8ec;
+  --serif:'Cormorant Garamond',Georgia,serif;--sans:'Jost',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--cream);color:var(--dark);font-family:var(--sans);font-weight:300;overflow-x:hidden}
+
+/* ANNOUNCE */
+.announce{background:var(--accent);color:#fff;text-align:center;padding:11px;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-family:var(--sans);font-weight:500}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;background:var(--cream);border-bottom:1px solid var(--border);padding:0 40px;display:flex;align-items:center;justify-content:space-between;height:64px}
+.nav-links{display:flex;gap:32px;list-style:none}
+.nav-links a{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--mid);text-decoration:none;font-family:var(--sans);font-weight:400;transition:color .2s;position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:0.5px;background:var(--dark);transition:width .25s}
+.nav-links a:hover{color:var(--dark)}
+.nav-links a:hover::after{width:100%}
+.brand{font-family:var(--serif);font-size:22px;font-weight:400;letter-spacing:1px;color:var(--dark);text-decoration:none;position:absolute;left:50%;transform:translateX(-50%);white-space:nowrap}
+.nav-right{display:flex;align-items:center;gap:20px}
+.nav-icon{background:none;border:none;cursor:pointer;color:var(--mid);display:flex;align-items:center;gap:6px;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-family:var(--sans);font-weight:400;transition:color .2s}
+.nav-icon:hover{color:var(--dark)}
+.cart-count{background:var(--accent);color:#fff;border-radius:50%;width:16px;height:16px;font-size:9px;display:flex;align-items:center;justify-content:center;font-weight:600}
+
+/* BREADCRUMB */
+.breadcrumb{padding:14px 40px;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border)}
+.breadcrumb a{color:var(--muted);text-decoration:none;transition:color .2s}
+.breadcrumb a:hover{color:var(--dark)}
+
+/* LAYOUT */
+.product-layout{display:grid;grid-template-columns:1fr 480px;align-items:start}
+
+/* GALLERY */
+.gallery{display:grid;grid-template-columns:1fr 1fr;gap:3px}
+.gallery-item{aspect-ratio:3/4;overflow:hidden;cursor:zoom-in;background:var(--warm)}
+.gallery-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease}
+.gallery-item:hover img{transform:scale(1.03)}
+
+/* PANEL */
+.product-panel{position:sticky;top:64px;height:calc(100vh - 64px);overflow-y:auto;padding:44px 44px 60px;border-left:1px solid var(--border);scrollbar-width:thin;scrollbar-color:var(--border) transparent}
+.product-panel::-webkit-scrollbar{width:4px}
+.product-panel::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+
+.product-badge-tag{display:inline-block;font-size:8px;letter-spacing:3px;text-transform:uppercase;color:#fff;background:var(--accent);padding:4px 10px;margin-bottom:14px;font-family:var(--sans)}
+.product-title{font-family:var(--serif);font-size:28px;font-weight:400;line-height:1.2;margin-bottom:10px;letter-spacing:-0.2px}
+.price-row{display:flex;align-items:baseline;gap:12px;margin-bottom:6px}
+.price-main{font-family:var(--serif);font-size:22px;font-weight:400}
+.price-note{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
+.product-desc{font-size:12px;color:var(--muted);line-height:1.9;margin:16px 0 4px;max-width:360px}
+.read-more-btn{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);background:none;border:none;cursor:pointer;font-family:var(--sans);font-weight:500;padding:0;margin-bottom:20px}
+.divider{height:1px;background:var(--border);margin:20px 0}
+
+/* STOCK */
+.stock-badge{font-size:10px;letter-spacing:1px;color:var(--dark);display:flex;align-items:center;gap:8px;margin-bottom:16px;font-family:var(--sans)}
+.stock-dot{width:8px;height:8px;border-radius:50%;background:var(--accent);flex-shrink:0}
+
+/* SIZE */
+.field-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:500;display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.size-guide{font-size:9px;color:var(--muted);text-decoration:underline;cursor:pointer;font-weight:300;text-transform:uppercase;letter-spacing:1.5px;background:none;border:none;font-family:var(--sans)}
+.size-btns{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}
+.size-btn{padding:9px 18px;border:1px solid var(--border);background:transparent;cursor:pointer;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;font-family:var(--sans);color:var(--mid);transition:all .2s}
+.size-btn:hover{border-color:var(--dark);color:var(--dark)}
+.size-btn.active{border-color:var(--dark);background:var(--dark);color:#fff}
+
+/* QTY */
+.qty-row{display:flex;align-items:center;gap:16px;margin-bottom:16px}
+.qty-wrap{display:flex;align-items:center;border:1px solid var(--border)}
+.qty-ctrl{width:42px;height:44px;background:none;border:none;cursor:pointer;font-size:18px;color:var(--mid);display:flex;align-items:center;justify-content:center;transition:background .15s}
+.qty-ctrl:hover{background:var(--warm);color:var(--dark)}
+.qty-val{width:52px;height:44px;border:none;border-left:1px solid var(--border);border-right:1px solid var(--border);background:transparent;text-align:center;font-size:13px;font-family:var(--sans);color:var(--dark);outline:none}
+
+/* CTA */
+.cta-stack{display:flex;flex-direction:column;gap:10px;margin-bottom:20px}
+.btn-atc{width:100%;padding:16px;background:var(--accent);color:#fff;border:none;cursor:pointer;font-size:10px;letter-spacing:3px;text-transform:uppercase;font-family:var(--sans);font-weight:500;transition:background .25s;box-shadow:0 4px 20px rgba(220,118,140,.35)}
+.btn-atc:hover{background:var(--accent-dark)}
+.btn-buy{width:100%;padding:15px;background:transparent;color:var(--dark);border:1.5px solid var(--dark);cursor:pointer;font-size:10px;letter-spacing:3px;text-transform:uppercase;font-family:var(--sans);font-weight:400;transition:all .25s}
+.btn-buy:hover{background:var(--dark);color:#fff}
+
+/* TRUST */
+.trust-list{list-style:none;margin-bottom:20px}
+.trust-list li{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:8px;padding:5px 0}
+.trust-list li::before{content:'✓';color:var(--accent);font-weight:600}
+
+/* ACCORDION */
+.accordion{border-top:1px solid var(--border)}
+.acc-item{border-bottom:1px solid var(--border)}
+.acc-head{display:flex;align-items:center;justify-content:space-between;padding:16px 0;cursor:pointer;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--dark);background:none;border:none;width:100%;text-align:left;font-family:var(--sans);font-weight:400;transition:color .2s}
+.acc-head:hover{color:var(--accent)}
+.acc-icon{font-size:18px;color:var(--muted);transition:transform .25s}
+.acc-body{overflow:hidden;max-height:0;transition:max-height .35s ease}
+.acc-body.open{max-height:500px}
+.acc-body-inner{padding-bottom:18px;font-size:12px;color:var(--muted);line-height:1.9;white-space:pre-line}
+
+/* FEATURES GRID */
+.features-mini{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--border);margin-top:28px}
+.feat-mini{padding:18px 16px;text-align:center;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);border-right:1px solid var(--border)}
+.feat-mini:nth-child(2n){border-right:none}
+.feat-mini:nth-child(n+3){border-top:1px solid var(--border)}
+.feat-mini-icon{margin-bottom:8px;color:var(--accent);display:flex;justify-content:center}
+
+/* RELATED */
+.related{padding:60px 40px 80px;border-top:1px solid var(--border)}
+.related-head{font-family:var(--serif);font-size:32px;font-weight:300;margin-bottom:40px}
+.related-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.related-card{display:block;text-decoration:none;color:inherit;cursor:pointer}
+.related-img{aspect-ratio:3/4;overflow:hidden;background:var(--warm);margin-bottom:12px}
+.related-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s}
+.related-card:hover .related-img img{transform:scale(1.04)}
+.related-name{font-family:var(--serif);font-size:15px;margin-bottom:4px}
+.related-price{font-size:12px;color:var(--muted)}
+
+/* CART DRAWER */
+.cart-overlay{position:fixed;inset:0;background:rgba(26,22,18,.4);z-index:200;opacity:0;pointer-events:none;transition:opacity .3s}
+.cart-overlay.open{opacity:1;pointer-events:all}
+.cart-drawer{position:fixed;top:0;right:0;bottom:0;width:400px;background:var(--cream);z-index:201;transform:translateX(100%);transition:transform .35s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column}
+.cart-drawer.open{transform:translateX(0)}
+.cart-head{padding:22px 28px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.cart-head h3{font-family:var(--serif);font-size:22px;font-weight:400}
+.cart-close{background:none;border:none;cursor:pointer;font-size:18px;color:var(--mid)}
+.ship-progress{padding:12px 28px;background:var(--accent-light);border-bottom:1px solid var(--border)}
+.ship-text{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--mid);margin-bottom:8px;font-family:var(--sans)}
+.prog-bar{height:2px;background:var(--border);border-radius:1px}
+.prog-fill{height:100%;background:var(--accent);border-radius:1px;transition:width .4s}
+.cart-body{flex:1;overflow-y:auto;padding:24px 28px}
+.cart-empty-msg{text-align:center;padding:60px 0;font-family:var(--serif);font-size:18px;color:var(--muted)}
+.cart-item{display:flex;gap:16px;padding-bottom:20px;margin-bottom:20px;border-bottom:1px solid var(--border)}
+.cart-item:last-child{border-bottom:none}
+.ci-img{width:76px;height:95px;flex-shrink:0;overflow:hidden;background:var(--warm)}
+.ci-img img{width:100%;height:100%;object-fit:cover;display:block}
+.ci-info{flex:1;min-width:0}
+.ci-name{font-family:var(--serif);font-size:14px;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ci-meta{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.ci-row{display:flex;align-items:center;justify-content:space-between}
+.ci-price{font-size:13px;color:var(--dark)}
+.ci-qty{display:flex;align-items:center;gap:8px}
+.ci-qbtn{background:none;border:0.5px solid var(--border);width:24px;height:24px;cursor:pointer;font-size:14px;color:var(--mid);display:flex;align-items:center;justify-content:center;transition:all .15s}
+.ci-qbtn:hover{border-color:var(--dark);color:var(--dark)}
+.ci-qnum{font-size:12px;min-width:16px;text-align:center}
+.ci-remove{background:none;border:none;cursor:pointer;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);font-family:var(--sans);margin-top:6px;display:block;transition:color .15s}
+.ci-remove:hover{color:var(--accent)}
+.cart-foot{padding:18px 28px;border-top:1px solid var(--border)}
+.cart-sub-row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px}
+.cart-sub-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);font-family:var(--sans)}
+.cart-sub-val{font-family:var(--serif);font-size:20px}
+.cart-foot-note{font-size:9px;color:var(--muted);margin-bottom:16px;font-family:var(--sans)}
+.cart-cta-stack{display:flex;flex-direction:column;gap:8px}
+.btn-continue{display:block;width:100%;padding:13px;text-align:center;background:transparent;color:var(--dark);border:1.5px solid var(--dark);font-size:9px;letter-spacing:3px;text-transform:uppercase;font-family:var(--sans);cursor:pointer;transition:all .25s}
+.btn-continue:hover{background:var(--dark);color:#fff}
+.btn-checkout{display:block;width:100%;padding:15px;text-align:center;background:var(--accent);color:#fff;border:none;text-decoration:none;font-size:10px;letter-spacing:3px;text-transform:uppercase;font-family:var(--sans);font-weight:500;transition:background .2s;box-shadow:0 4px 20px rgba(220,118,140,.4)}
+.btn-checkout:hover{background:var(--accent-dark)}
+
+/* TOAST */
+.toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--accent);color:#fff;padding:12px 28px;border-radius:30px;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;font-family:var(--sans);font-weight:500;opacity:0;pointer-events:none;transition:all .3s;z-index:300;box-shadow:0 8px 30px rgba(220,118,140,.5);white-space:nowrap}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+@media(max-width:960px){
+  nav{padding:0 20px}
+  .brand{font-size:18px}
+  .product-layout{grid-template-columns:1fr}
+  .product-panel{position:static;height:auto;border-left:none;border-top:1px solid var(--border);padding:32px 20px 48px}
+  .breadcrumb{padding:12px 20px}
+  .related{padding:40px 20px}
+  .related-grid{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+<body>
+
+<div class="announce">Free delivery on orders over LE 2,000 &nbsp;·&nbsp; New summer drop is live</div>
+
+<nav>
+  <ul class="nav-links">
+    <li><a href="index.html">New In</a></li>
+    <li><a href="index.html">Shop</a></li>
+    <li><a href="index.html">Edits</a></li>
+    <li><a href="#">Contact Us</a></li>
+  </ul>
+  <a href="index.html" class="brand">Pink Liliy Deer</a>
+  <div class="nav-right">
+    <button class="nav-icon" onclick="showToast('Search coming soon ✦')">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg>
+    </button>
+    <button class="nav-icon" onclick="openCart()">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+      <span class="cart-count" id="cartCount">0</span>
+    </button>
+  </div>
+</nav>
+
+<div class="breadcrumb">
+  <a href="index.html">Home</a>
+  <span style="color:var(--border)">/</span>
+  <a href="index.html" id="bcCat">Shop</a>
+  <span style="color:var(--border)">/</span>
+  <span id="bcName" style="color:var(--dark)">Product</span>
+</div>
+
+<main class="product-layout">
+  <div class="gallery" id="gallery"></div>
+  <div class="product-panel" id="productPanel"></div>
+</main>
+
+<section class="related">
+  <h2 class="related-head">You May Also Like</h2>
+  <div class="related-grid" id="relatedGrid"></div>
+</section>
+
+<!-- Cart -->
+<div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+<div class="cart-drawer" id="cartDrawer">
+  <div class="cart-head">
+    <h3>Your Cart <span id="cartHeadCount" style="font-size:16px;color:var(--muted)">0</span></h3>
+    <button class="cart-close" onclick="closeCart()">✕</button>
+  </div>
+  <div class="ship-progress">
+    <div class="ship-text" id="shipText">Spend LE 2,000 for free shipping</div>
+    <div class="prog-bar"><div class="prog-fill" id="progFill" style="width:0%"></div></div>
+  </div>
+  <div class="cart-body" id="cartBody"><div class="cart-empty-msg">Your bag is empty</div></div>
+  <div class="cart-foot" id="cartFoot" style="display:none">
+    <div class="cart-sub-row">
+      <span class="cart-sub-label">Subtotal</span>
+      <span class="cart-sub-val" id="cartSubtotal">LE 0</span>
+    </div>
+    <p class="cart-foot-note">Taxes included · Shipping calculated at checkout</p>
+    <div class="cart-cta-stack">
+      <button class="btn-continue" onclick="closeCart()">Continue Shopping</button>
+      <a href="checkout.html" class="btn-checkout">Checkout →</a>
+    </div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+const PRODUCTS = [
+  {id:1,name:'Ivory Tiered Midi Dress',price:2200,cat:'Dresses',badge:'new',stock:3,
+   sizes:['S/M','M/L'],
+   images:['img/img1.jpg','img/img2.jpg','img/img3.jpg','img/img4.jpg'],
+   descShort:'Experience effortless elegance with our Ivory Tiered Midi Dress. Crafted from premium linen fabric that allows skin to breathe during warm weather, this ensemble combines practicality with sophisticated style.',
+   desc:'Experience effortless elegance with our Ivory Tiered Midi Dress. Crafted from premium linen fabric that allows skin to breathe during warm weather, this ensemble combines practicality with sophisticated style. The lightweight construction ensures comfort throughout the day, while the crisp ivory hue offers versatile styling options for the discerning wearer seeking both functionality and refined aesthetics in summer attire.',
+   designNotes:'Flowing midi length with tiered skirt detail. Relaxed silhouette with wide sleeves and a modest neckline. Tie detail at front waist.',
+   fitNotes:'Our model is 170cm tall and wearing size S/M. This style runs true to size. We recommend sizing up if between sizes.',
+   fabricCare:'95% Linen, 5% Cotton. Hand wash cold or gentle machine wash. Lay flat to dry. Do not bleach or tumble dry.',
+   sizeChart:'S/M: fits UK 8–12 / US 4–8 / EU 36–40\nM/L: fits UK 12–16 / US 8–12 / EU 40–44'},
+  {id:2,name:'Sky Blue Linen Co-ord Set',price:2800,cat:'Sets',badge:'new',stock:5,
+   sizes:['S/M','M/L'],
+   images:['img/img2.jpg','img/img3.jpg','img/img4.jpg','img/img5.jpg'],
+   descShort:'Effortlessly chic, our Sky Blue Linen Co-ord Set features a relaxed wide-leg trouser and a flowing top with delicate tie details. Perfect for summer outings.',
+   desc:'Effortlessly chic, our Sky Blue Linen Co-ord Set features a relaxed wide-leg trouser and a flowing top with delicate tie details. Perfect for summer outings, this set moves beautifully and keeps you cool. The matching fabric creates a cohesive look that is effortlessly put-together.',
+   designNotes:'Matching set with wide-leg trousers and boxy top. Tie waist detail on top. Side pockets on trousers.',
+   fitNotes:'Our model is 170cm tall and wearing size S/M. True to size.',
+   fabricCare:'100% Linen. Machine wash cold, gentle cycle. Hang to dry.',
+   sizeChart:'S/M: fits UK 8–12\nM/L: fits UK 12–16'},
+  {id:3,name:'Layered Street Look',price:3200,cat:'Sets',badge:'',stock:2,
+   sizes:['S/M','M/L'],
+   images:['img/img3.jpg','img/img4.jpg','img/img5.jpg','img/img6.jpg'],
+   descShort:'Make a statement with our Layered Street Look — a curated ensemble designed for the modern modest fashionista.',
+   desc:'Make a statement with our Layered Street Look — a curated ensemble designed for the modern modest fashionista. Mix-and-match pieces for endless styling possibilities. Each layer adds depth and dimension to your look.',
+   designNotes:'Three-piece set: inner layer, outer drape, and wide-leg trousers. Versatile pieces that can be worn separately.',
+   fitNotes:'Oversized silhouette. Model wears S/M. Can be styled loose or belted.',
+   fabricCare:'100% Cotton Gauze. Hand wash cold. Line dry.',
+   sizeChart:'S/M: fits UK 8–14\nM/L: fits UK 14–18'},
+  {id:4,name:'Sand Linen Shirt Set',price:2650,cat:'Sets',badge:'new',stock:6,
+   sizes:['S/M','M/L'],
+   images:['img/img4.jpg','img/img5.jpg','img/img6.jpg','img/img1.jpg'],
+   descShort:'Our Sand Linen Shirt Set combines the comfort of natural fibres with a refined tailored aesthetic.',
+   desc:'Our Sand Linen Shirt Set combines the comfort of natural fibres with a refined tailored aesthetic. Perfect for both casual and semi-formal occasions, this matching set is a wardrobe staple for the modern modest woman.',
+   designNotes:'Button-front shirt with relaxed collar paired with wide-leg trousers. Matching fabric throughout.',
+   fitNotes:'True to size. Model wears S/M. Classic tailored fit with comfortable allowance.',
+   fabricCare:'55% Linen, 45% Viscose. Dry clean recommended. Can hand wash cold.',
+   sizeChart:'S/M: fits UK 8–12\nM/L: fits UK 12–16'},
+  {id:5,name:'Oatmeal Wide-Leg Trousers',price:1550,cat:'Trousers',badge:'',stock:8,
+   sizes:['S/M','M/L'],
+   images:['img/img5.jpg','img/img6.jpg','img/img1.jpg','img/img2.jpg'],
+   descShort:'A wardrobe essential. Our Oatmeal Wide-Leg Trousers offer the perfect balance of comfort and sophistication.',
+   desc:'A wardrobe essential. Our Oatmeal Wide-Leg Trousers offer the perfect balance of comfort and sophistication. High-waisted silhouette with a relaxed wide leg, crafted in breathable natural fabric.',
+   designNotes:'High-waist construction. Wide, flowing leg. Elasticated back waistband for comfort. Side pockets.',
+   fitNotes:'Model wears S/M. True to size. High-rise waist provides excellent coverage.',
+   fabricCare:'100% Linen. Machine wash cold. Hang dry. Iron while slightly damp.',
+   sizeChart:'S/M: fits UK 8–12 / waist 26"–30"\nM/L: fits UK 12–16 / waist 30"–34"'},
+  {id:6,name:'White Notch Collar Linen Top',price:1250,cat:'Tops',badge:'',stock:10,
+   sizes:['S/M','M/L','L/XL'],
+   images:['img/img6.jpg','img/img1.jpg','img/img2.jpg','img/img3.jpg'],
+   descShort:'The perfect foundation piece. Our White Notch Collar Linen Top features a classic notch collar, relaxed fit, and elegant tie-front detail.',
+   desc:'The perfect foundation piece. Our White Notch Collar Linen Top features a classic notch collar, relaxed fit, and elegant tie-front detail. Pairs beautifully with any bottom — wide-leg trousers, midi skirts, or tailored sets.',
+   designNotes:'Notch collar with button closure. Tie front detail. 3/4 sleeve length. Relaxed, modest silhouette.',
+   fitNotes:'True to size. Model wears S/M. Lightweight and breathable.',
+   fabricCare:'100% Linen. Machine wash cold, gentle cycle. Hang to dry. Iron on medium.',
+   sizeChart:'S/M: fits UK 8–12\nM/L: fits UK 12–16\nL/XL: fits UK 16–20'},
+];
+
+const CART_KEY = 'pld_cart';
+const FREE_SHIP = 2000;
+const SHIP_FEE = 90;
+
+function getCart(){return JSON.parse(localStorage.getItem(CART_KEY)||'[]')}
+function saveCart(c){localStorage.setItem(CART_KEY,JSON.stringify(c))}
+function cartTotal(c){return c.reduce((s,i)=>s+i.price*i.qty,0)}
+
+function getProductId(){
+  const p=new URLSearchParams(location.search);
+  const id=parseInt(p.get('id'));
+  return isNaN(id)?1:id;
+}
+
+let currentProduct=null;
+let selectedSize='';
+let qty=1;
+let descExpanded=false;
+
+function renderProduct(){
+  const id=getProductId();
+  const p=PRODUCTS.find(x=>x.id===id)||PRODUCTS[0];
+  currentProduct=p;
+  selectedSize=p.sizes[0];
+  document.title=p.name+' — Pink Liliy Deer';
+  document.getElementById('bcCat').textContent=p.cat;
+  document.getElementById('bcName').textContent=p.name;
+
+  document.getElementById('gallery').innerHTML=p.images.map(src=>`
+    <div class="gallery-item"><img src="${src}" alt="${p.name}" loading="lazy"></div>
+  `).join('');
+
+  document.getElementById('productPanel').innerHTML=`
+    ${p.badge?`<div class="product-badge-tag">${p.badge==='new'?'New Arrival':'Limited'}</div>`:''}
+    <h1 class="product-title">${p.name}</h1>
+    <div class="price-row">
+      <span class="price-main">LE ${p.price.toLocaleString()}.00</span>
+      <span class="price-note">Taxes Included</span>
+    </div>
+    <p class="product-desc" id="descText">${p.descShort}</p>
+    <button class="read-more-btn" id="rmBtn" onclick="toggleDesc()">Read More +</button>
+    <div class="divider"></div>
+    ${p.stock<=5?`<div class="stock-badge"><span class="stock-dot"></span>Only ${p.stock} left in stock. Order soon.</div>`:''}
+    <div class="field-label">
+      Size <span id="selSizeLabel">${selectedSize}</span>
+      <button class="size-guide" onclick="toggleAcc('sizeAcc')">Size Guide</button>
+    </div>
+    <div class="size-btns" id="sizeBtns">
+      ${p.sizes.map(s=>`<button class="size-btn${s===selectedSize?' active':''}" onclick="selectSize('${s}',this)">${s}</button>`).join('')}
+    </div>
+    <div class="qty-row">
+      <span class="field-label" style="flex:0 0 auto;margin-bottom:0">Qty</span>
+      <div class="qty-wrap">
+        <button class="qty-ctrl" onclick="changeQty(-1)">−</button>
+        <input class="qty-val" id="qtyInput" type="number" value="1" min="1" max="${p.stock}" onchange="qty=Math.max(1,Math.min(${p.stock},parseInt(this.value)||1));this.value=qty">
+        <button class="qty-ctrl" onclick="changeQty(1)">+</button>
+      </div>
+    </div>
+    <div class="cta-stack">
+      <button class="btn-atc" onclick="handleATC()">Add to Cart</button>
+      <button class="btn-buy" onclick="handleBuyNow()">Buy It Now</button>
+    </div>
+    <ul class="trust-list">
+      <li>Secure Shipping All Around Egypt</li>
+      <li>Accurate to pictures</li>
+      <li>Easy 14-day returns</li>
+    </ul>
+    <div class="accordion">
+      ${['designNotes:Design Notes','fitNotes:Fit Notes','fabricCare:Fabrication & Care','sizeChart:Size Chart'].map(pair=>{
+        const [key,label]=pair.split(':');
+        return `<div class="acc-item">
+          <button class="acc-head" onclick="toggleAcc('acc_${key}')">
+            ${label} <span class="acc-icon" id="icon_${key}">+</span>
+          </button>
+          <div class="acc-body" id="acc_${key}">
+            <div class="acc-body-inner">${p[key]}</div>
+          </div>
+        </div>`;
+      }).join('')}
+    </div>
+    <div class="features-mini">
+      <div class="feat-mini"><div class="feat-mini-icon"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.81 19.79 19.79 0 012 2a2 2 0 012-2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z"/></svg></div>Fast Customer Service</div>
+      <div class="feat-mini"><div class="feat-mini-icon"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></div>Comfortable Fabric</div>
+      <div class="feat-mini"><div class="feat-mini-icon"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>Promised Quality</div>
+      <div class="feat-mini"><div class="feat-mini-icon"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>Essential Wardrobe</div>
+    </div>
+  `;
+}
+
+function renderRelated(){
+  const id=getProductId();
+  const list=PRODUCTS.filter(p=>p.id!==id).slice(0,4);
+  document.getElementById('relatedGrid').innerHTML=list.map(p=>`
+    <a href="product.html?id=${p.id}" class="related-card">
+      <div class="related-img"><img src="${p.images[0]}" alt="${p.name}" loading="lazy"></div>
+      <div class="related-name">${p.name}</div>
+      <div class="related-price">LE ${p.price.toLocaleString()}.00</div>
+    </a>
+  `).join('');
+}
+
+function toggleDesc(){
+  descExpanded=!descExpanded;
+  document.getElementById('descText').textContent=descExpanded?currentProduct.desc:currentProduct.descShort;
+  document.getElementById('rmBtn').textContent=descExpanded?'Read Less −':'Read More +';
+}
+
+function selectSize(size,el){
+  selectedSize=size;
+  document.getElementById('selSizeLabel').textContent=size;
+  document.querySelectorAll('.size-btn').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+}
+
+function changeQty(delta){
+  qty=Math.max(1,Math.min(currentProduct.stock,qty+delta));
+  document.getElementById('qtyInput').value=qty;
+}
+
+function handleATC(){
+  const cart=getCart();
+  const key=`${currentProduct.id}-${selectedSize}`;
+  const ex=cart.find(i=>i.key===key);
+  if(ex){ex.qty=Math.min(currentProduct.stock,ex.qty+qty);}
+  else{cart.push({id:currentProduct.id,key,name:currentProduct.name,price:currentProduct.price,size:selectedSize,img:currentProduct.images[0],qty,stock:currentProduct.stock});}
+  saveCart(cart);
+  updateCartUI();
+  openCart();
+  showToast('Added to bag ✦');
+}
+
+function handleBuyNow(){
+  handleATC();
+  setTimeout(()=>{location.href='checkout.html'},300);
+}
+
+function toggleAcc(id){
+  const body=document.getElementById(id);
+  if(!body)return;
+  const keyPart=id.replace('acc_','');
+  const icon=document.getElementById('icon_'+keyPart)||document.getElementById('icon_size');
+  const isOpen=body.classList.contains('open');
+  document.querySelectorAll('.acc-body').forEach(b=>b.classList.remove('open'));
+  document.querySelectorAll('.acc-icon').forEach(i=>{i.textContent='+'});
+  if(!isOpen){body.classList.add('open');if(icon)icon.textContent='−';}
+}
+
+function updateCartUI(){
+  const cart=getCart();
+  const count=cart.reduce((s,i)=>s+i.qty,0);
+  const total=cartTotal(cart);
+  document.getElementById('cartCount').textContent=count;
+  document.getElementById('cartHeadCount').textContent=count;
+  const remaining=Math.max(0,FREE_SHIP-total);
+  const pct=Math.min(100,(total/FREE_SHIP)*100);
+  document.getElementById('progFill').style.width=pct+'%';
+  document.getElementById('shipText').textContent=remaining>0
+    ?`Spend LE ${remaining.toLocaleString()} more for free shipping`
+    :'You\'ve unlocked free shipping! 🎉';
+  const body=document.getElementById('cartBody');
+  const foot=document.getElementById('cartFoot');
+  if(!cart.length){body.innerHTML='<div class="cart-empty-msg">Your bag is empty</div>';foot.style.display='none';return;}
+  body.innerHTML=cart.map(item=>`
+    <div class="cart-item">
+      <div class="ci-img"><img src="${item.img}" alt="${item.name}"></div>
+      <div class="ci-info">
+        <div class="ci-name">${item.name}</div>
+        <div class="ci-meta">Size: ${item.size}</div>
+        <div class="ci-row">
+          <span class="ci-price">LE ${(item.price*item.qty).toLocaleString()}.00</span>
+          <div class="ci-qty">
+            <button class="ci-qbtn" onclick="cartQty('${item.key}',-1)">−</button>
+            <span class="ci-qnum">${item.qty}</span>
+            <button class="ci-qbtn" onclick="cartQty('${item.key}',1)">+</button>
+          </div>
+        </div>
+        <button class="ci-remove" onclick="cartRemove('${item.key}')">Remove</button>
+      </div>
+    </div>
+  `).join('');
+  document.getElementById('cartSubtotal').textContent=`LE ${total.toLocaleString()}.00`;
+  foot.style.display='block';
+}
+
+function cartQty(key,delta){
+  const cart=getCart();
+  const item=cart.find(i=>i.key===key);
+  if(!item)return;
+  item.qty=Math.max(1,Math.min(item.stock||99,item.qty+delta));
+  saveCart(cart);updateCartUI();
+}
+function cartRemove(key){
+  saveCart(getCart().filter(i=>i.key!==key));
+  updateCartUI();showToast('Item removed');
+}
+function openCart(){document.getElementById('cartOverlay').classList.add('open');document.getElementById('cartDrawer').classList.add('open')}
+function closeCart(){document.getElementById('cartOverlay').classList.remove('open');document.getElementById('cartDrawer').classList.remove('open')}
+let toastTimer;
+function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('show'),2400)}
+
+renderProduct();
+renderRelated();
+updateCartUI();
+</script>
+</body>
+</html>

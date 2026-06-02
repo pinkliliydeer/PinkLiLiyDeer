@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(gh --version)",
+      "Bash(gh auth *)",
+      "Bash(git init *)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git remote *)",
+      "Bash(git branch *)",
+      "Bash(git push *)",
+      "PowerShell(Copy-Item \"c:\\\\Users\\\\Radwa\\\\pink-liliy-deer\\\\index.html\" \"c:\\\\Users\\\\Radwa\\\\pink-liliy-deer\\\\shop.html\")",
+      "Bash(git pull *)"
+    ]
+  }
+}

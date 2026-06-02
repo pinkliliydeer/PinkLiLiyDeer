@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checkout — Pink Liliy Deer</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --cream:#fff5f7;--warm:#fdeef2;--blush:#f9c8d0;
+  --dark:#1a1218;--mid:#5a3040;--muted:#9c7885;--border:#f5d5db;
+  --accent:#dc768c;--accent-dark:#c0284a;--accent-light:#fde8ec;
+  --serif:'Cormorant Garamond',Georgia,serif;--sans:'Jost',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--cream);color:var(--dark);font-family:var(--sans);font-weight:300;min-height:100vh}
+
+/* HEADER */
+.co-header{display:flex;align-items:center;justify-content:space-between;padding:18px 40px;border-bottom:1px solid var(--border);background:var(--cream)}
+.co-brand{font-family:var(--serif);font-size:22px;font-weight:400;color:var(--dark);text-decoration:none}
+.co-cart-icon{background:none;border:none;cursor:pointer;color:var(--mid);display:flex;align-items:center;gap:6px;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;font-family:var(--sans);transition:color .2s;position:relative}
+.co-cart-icon:hover{color:var(--dark)}
+.co-cart-badge{background:var(--accent);color:#fff;border-radius:50%;width:16px;height:16px;font-size:9px;display:flex;align-items:center;justify-content:center;font-weight:600}
+
+/* BREADCRUMB */
+.co-progress{display:flex;align-items:center;justify-content:center;gap:8px;padding:18px 40px;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);font-family:var(--sans);border-bottom:1px solid var(--border)}
+.co-progress .step{color:var(--muted)}
+.co-progress .step.done{color:var(--dark)}
+.co-progress .step.active{color:var(--accent);font-weight:500}
+.co-progress .arrow{color:var(--border)}
+
+/* LAYOUT */
+.co-layout{display:grid;grid-template-columns:1fr 460px;min-height:calc(100vh - 130px)}
+
+/* FORM COL */
+.co-form-col{padding:44px 56px 80px;border-right:1px solid var(--border)}
+.co-section{margin-bottom:36px}
+.co-section-title{font-family:var(--serif);font-size:20px;font-weight:400;margin-bottom:20px;color:var(--dark)}
+.co-section-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.co-section-head h2{font-family:var(--serif);font-size:20px;font-weight:400}
+.co-section-head a{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);text-decoration:none}
+
+/* FORM ELEMENTS */
+.field-group{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.field-group.trio{grid-template-columns:1fr 1fr 1fr}
+.field{position:relative;margin-bottom:12px}
+.field-full{grid-column:1/-1}
+.field label{display:block;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:6px;font-family:var(--sans)}
+.field input,.field select,.field textarea{
+  width:100%;padding:12px 16px;
+  border:1px solid var(--border);background:var(--cream);
+  font-size:13px;color:var(--dark);font-family:var(--sans);font-weight:300;
+  outline:none;transition:border-color .2s,box-shadow .2s;
+  appearance:none;-webkit-appearance:none;
+}
+.field input:focus,.field select:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(220,118,140,.1)}
+.field input::placeholder{color:var(--muted)}
+.field select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239c8790' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:40px;cursor:pointer}
+.field-error{font-size:10px;color:#c0284a;margin-top:4px;display:none;letter-spacing:.5px}
+.field.has-error input,.field.has-error select{border-color:#c0284a}
+.field.has-error .field-error{display:block}
+
+.checkbox-row{display:flex;align-items:center;gap:10px;margin:14px 0;cursor:pointer}
+.checkbox-row input[type=checkbox]{width:16px;height:16px;accent-color:var(--accent);cursor:pointer}
+.checkbox-row span{font-size:12px;color:var(--muted)}
+
+/* SHIPPING OPTIONS */
+.ship-option{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border:1px solid var(--border);margin-bottom:8px;cursor:pointer;transition:border-color .2s,background .2s}
+.ship-option:hover{border-color:var(--accent)}
+.ship-option.selected{border-color:var(--accent);background:var(--accent-light)}
+.ship-option-left{display:flex;align-items:center;gap:12px}
+.ship-radio{width:16px;height:16px;accent-color:var(--accent)}
+.ship-info{}
+.ship-name{font-size:12px;color:var(--dark);font-weight:400;letter-spacing:.5px}
+.ship-eta{font-size:10px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-top:2px}
+.ship-price{font-size:13px;color:var(--dark);font-family:var(--serif)}
+.ship-price.free{color:var(--accent);font-weight:400}
+
+/* PAYMENT */
+.pay-option{border:1px solid var(--border);margin-bottom:8px;transition:border-color .2s}
+.pay-option.selected{border-color:var(--accent)}
+.pay-option-head{display:flex;align-items:center;gap:12px;padding:14px 18px;cursor:pointer}
+.pay-option-head input[type=radio]{width:16px;height:16px;accent-color:var(--accent)}
+.pay-option-head label{font-size:12px;color:var(--dark);cursor:pointer;flex:1}
+.pay-icons{display:flex;gap:6px}
+.pay-icon-tag{background:var(--warm);border:0.5px solid var(--border);border-radius:3px;padding:3px 7px;font-size:8px;color:var(--muted)}
+.pay-body{padding:0 18px 16px 46px;font-size:12px;color:var(--muted);line-height:1.7}
+.card-fields{display:grid;gap:10px;margin-top:12px}
+.card-field{padding:12px 16px;border:1px solid var(--border);background:var(--cream);font-size:13px;color:var(--dark);font-family:var(--sans);font-weight:300;outline:none;width:100%}
+.card-field:focus{border-color:var(--accent)}
+.card-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+
+/* PLACE ORDER */
+.co-submit{margin-top:32px}
+.btn-place-order{width:100%;padding:18px;background:var(--accent);color:#fff;border:none;cursor:pointer;font-size:11px;letter-spacing:3px;text-transform:uppercase;font-family:var(--sans);font-weight:500;transition:background .25s;box-shadow:0 4px 24px rgba(220,118,140,.4)}
+.btn-place-order:hover{background:var(--accent-dark)}
+.return-link{display:flex;align-items:center;justify-content:center;margin-top:18px;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted)}
+.return-link a{color:var(--muted);text-decoration:none;display:flex;align-items:center;gap:6px;transition:color .2s}
+.return-link a:hover{color:var(--dark)}
+.secure-note{text-align:center;font-size:10px;color:var(--muted);margin-top:20px;letter-spacing:1px;display:flex;align-items:center;justify-content:center;gap:6px}
+
+/* SUMMARY COL */
+.co-summary-col{background:var(--warm);padding:44px 40px;border-left:1px solid var(--border)}
+.summary-items{border-bottom:1px solid var(--border);padding-bottom:24px;margin-bottom:24px}
+.s-item{display:flex;gap:16px;margin-bottom:20px}
+.s-item:last-child{margin-bottom:0}
+.s-item-img{width:64px;height:80px;flex-shrink:0;overflow:hidden;background:var(--cream);position:relative;border:1px solid var(--border)}
+.s-item-img img{width:100%;height:100%;object-fit:cover;display:block}
+.s-item-qty{position:absolute;top:-6px;right:-6px;background:var(--mid);color:#fff;border-radius:50%;width:18px;height:18px;font-size:10px;display:flex;align-items:center;justify-content:center;font-weight:600}
+.s-item-info{flex:1}
+.s-item-name{font-family:var(--serif);font-size:14px;margin-bottom:3px;line-height:1.3}
+.s-item-meta{font-size:10px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:4px}
+.s-item-price{font-size:14px;color:var(--dark);font-family:var(--serif)}
+
+/* DISCOUNT */
+.discount-row{display:flex;gap:0;margin-bottom:24px}
+.discount-input{flex:1;padding:12px 16px;border:1px solid var(--border);border-right:none;background:var(--cream);font-size:12px;font-family:var(--sans);color:var(--dark);outline:none;transition:border-color .2s}
+.discount-input:focus{border-color:var(--accent)}
+.discount-input::placeholder{color:var(--muted)}
+.discount-btn{padding:12px 18px;background:var(--dark);color:#fff;border:1px solid var(--dark);font-size:10px;letter-spacing:2px;text-transform:uppercase;font-family:var(--sans);cursor:pointer;transition:background .2s;white-space:nowrap}
+.discount-btn:hover{background:var(--mid)}
+
+/* TOTALS */
+.summary-lines{border-bottom:1px solid var(--border);padding-bottom:20px;margin-bottom:20px}
+.s-line{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.s-line-label{font-size:12px;color:var(--muted)}
+.s-line-val{font-size:13px;color:var(--dark)}
+.s-line-val.free{color:var(--accent)}
+.s-total{display:flex;justify-content:space-between;align-items:baseline}
+.s-total-label{font-size:13px;color:var(--dark);letter-spacing:.5px}
+.s-total-sub{font-size:10px;color:var(--muted);margin-top:2px}
+.s-total-right{text-align:right}
+.s-total-currency{font-size:11px;color:var(--muted);margin-right:4px}
+.s-total-amount{font-family:var(--serif);font-size:24px;font-weight:400;color:var(--dark)}
+.s-tax-note{font-size:10px;color:var(--muted);margin-top:12px;text-align:right}
+
+/* SUCCESS OVERLAY */
+.success-overlay{position:fixed;inset:0;background:rgba(26,22,18,.5);z-index:500;display:none;align-items:center;justify-content:center}
+.success-overlay.show{display:flex}
+.success-box{background:var(--cream);padding:60px 52px;max-width:480px;width:90%;text-align:center}
+.success-icon{font-size:40px;color:var(--accent);margin-bottom:20px}
+.success-title{font-family:var(--serif);font-size:32px;font-weight:300;margin-bottom:14px}
+.success-msg{font-size:13px;color:var(--muted);line-height:1.8;margin-bottom:32px}
+.success-order{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:32px;font-family:var(--sans)}
+.btn-continue-shop{display:inline-flex;align-items:center;gap:10px;background:var(--accent);color:#fff;padding:14px 36px;text-decoration:none;font-size:10px;letter-spacing:3px;text-transform:uppercase;font-family:var(--sans);font-weight:500;transition:background .25s;box-shadow:0 4px 20px rgba(220,118,140,.35)}
+.btn-continue-shop:hover{background:var(--accent-dark)}
+
+/* TOAST */
+.toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--accent);color:#fff;padding:12px 28px;border-radius:30px;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;font-family:var(--sans);font-weight:500;opacity:0;pointer-events:none;transition:all .3s;z-index:300;box-shadow:0 8px 30px rgba(220,118,140,.5);white-space:nowrap}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+@media(max-width:960px){
+  .co-header{padding:16px 20px}
+  .co-progress{padding:12px 20px;gap:5px}
+  .co-layout{grid-template-columns:1fr}
+  .co-summary-col{order:-1;border-left:none;border-bottom:1px solid var(--border);padding:28px 20px}
+  .co-form-col{padding:32px 20px 60px}
+  .field-group.trio{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="co-header">
+  <a href="index.html" class="co-brand">Pink Liliy Deer</a>
+  <button class="co-cart-icon" onclick="showToast('Update your cart from the shop')">
+    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+    <span class="co-cart-badge" id="coCartCount">0</span>
+  </button>
+</header>
+
+<!-- Progress -->
+<div class="co-progress">
+  <span class="step done"><a href="index.html" style="color:inherit;text-decoration:none">Shop</a></span>
+  <span class="arrow">›</span>
+  <span class="step active">Information</span>
+  <span class="arrow">›</span>
+  <span class="step">Payment</span>
+  <span class="arrow">›</span>
+  <span class="step">Confirm</span>
+</div>
+
+<div class="co-layout">
+
+  <!-- FORM -->
+  <div class="co-form-col">
+
+    <!-- Contact -->
+    <div class="co-section">
+      <div class="co-section-head">
+        <h2>Contact</h2>
+        <a href="#">Sign in</a>
+      </div>
+      <div class="field">
+        <label>Email or mobile phone number</label>
+        <input type="email" id="fEmail" placeholder="you@example.com">
+        <div class="field-error">Please enter a valid email</div>
+      </div>
+      <label class="checkbox-row">
+        <input type="checkbox" checked>
+        <span>Email me with news and exclusive offers</span>
+      </label>
+    </div>
+
+    <!-- Delivery -->
+    <div class="co-section">
+      <h2 class="co-section-title">Delivery</h2>
+
+      <div class="field">
+        <label>Country / Region</label>
+        <select id="fCountry">
+          <option value="EG" selected>Egypt</option>
+          <option value="SA">Saudi Arabia</option>
+          <option value="AE">United Arab Emirates</option>
+          <option value="KW">Kuwait</option>
+          <option value="QA">Qatar</option>
+          <option value="BH">Bahrain</option>
+          <option value="OM">Oman</option>
+          <option value="JO">Jordan</option>
+          <option value="LB">Lebanon</option>
+        </select>
+      </div>
+
+      <div class="field-group">
+        <div class="field">
+          <label>First name</label>
+          <input type="text" id="fFirstName" placeholder="First name">
+          <div class="field-error">Required</div>
+        </div>
+        <div class="field">
+          <label>Last name</label>
+          <input type="text" id="fLastName" placeholder="Last name">
+          <div class="field-error">Required</div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Address</label>
+        <input type="text" id="fAddress" placeholder="Street address">
+        <div class="field-error">Required</div>
+      </div>
+
+      <div class="field">
+        <label>Apartment, suite, floor (optional)</label>
+        <input type="text" id="fAddress2" placeholder="Apt, suite, etc.">
+      </div>
+
+      <div class="field-group trio">
+        <div class="field">
+          <label>City</label>
+          <input type="text" id="fCity" placeholder="City">
+          <div class="field-error">Required</div>
+        </div>
+        <div class="field">
+          <label>Governorate</label>
+          <select id="fGov">
+            <option value="">Select governorate</option>
+            <option>Cairo</option>
+            <option>Alexandria</option>
+            <option>Giza</option>
+            <option>Qalyubia</option>
+            <option>Sharqia</option>
+            <option>Dakahlia</option>
+            <option>Gharbia</option>
+            <option>Beheira</option>
+            <option>Monufia</option>
+            <option>Kafr El Sheikh</option>
+            <option>Damietta</option>
+            <option>Port Said</option>
+            <option>Ismailia</option>
+            <option>Suez</option>
+            <option>Faiyum</option>
+            <option>Beni Suef</option>
+            <option>Minya</option>
+            <option>Asyut</option>
+            <option>Sohag</option>
+            <option>Qena</option>
+            <option>Luxor</option>
+            <option>Aswan</option>
+            <option>Red Sea</option>
+            <option>North Sinai</option>
+            <option>South Sinai</option>
+            <option>New Valley</option>
+            <option>Matrouh</option>
+          </select>
+          <div class="field-error">Required</div>
+        </div>
+        <div class="field">
+          <label>Postal code (optional)</label>
+          <input type="text" id="fPostal" placeholder="—">
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Phone</label>
+        <input type="tel" id="fPhone" placeholder="+20 1XX XXX XXXX">
+        <div class="field-error">Required</div>
+      </div>
+
+      <label class="checkbox-row">
+        <input type="checkbox" id="fSaveInfo">
+        <span>Save this information for next time</span>
+      </label>
+    </div>
+
+    <!-- Shipping Method -->
+    <div class="co-section">
+      <h2 class="co-section-title">Shipping Method</h2>
+      <div class="ship-option selected" id="ship-standard" onclick="selectShipping('standard',90,this)">
+        <div class="ship-option-left">
+          <input class="ship-radio" type="radio" name="shipping" checked>
+          <div class="ship-info">
+            <div class="ship-name">Standard Delivery</div>
+            <div class="ship-eta">3–5 business days</div>
+          </div>
+        </div>
+        <div class="ship-price">LE 90.00</div>
+      </div>
+      <div class="ship-option" id="ship-express" onclick="selectShipping('express',150,this)">
+        <div class="ship-option-left">
+          <input class="ship-radio" type="radio" name="shipping">
+          <div class="ship-info">
+            <div class="ship-name">Express Delivery</div>
+            <div class="ship-eta">1–2 business days</div>
+          </div>
+        </div>
+        <div class="ship-price">LE 150.00</div>
+      </div>
+    </div>
+
+    <!-- Payment -->
+    <div class="co-section">
+      <h2 class="co-section-title">Payment</h2>
+      <p style="font-size:11px;color:var(--muted);margin-bottom:16px;display:flex;align-items:center;gap:6px">
+        <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+        All transactions are secure and encrypted.
+      </p>
+
+      <div class="pay-option selected" id="pay-cod">
+        <div class="pay-option-head" onclick="selectPayment('cod')">
+          <input type="radio" name="payment" value="cod" checked>
+          <label>Cash on Delivery</label>
+        </div>
+        <div class="pay-body">Pay with cash when your order arrives.</div>
+      </div>
+
+      <div class="pay-option" id="pay-card">
+        <div class="pay-option-head" onclick="selectPayment('card')">
+          <input type="radio" name="payment" value="card">
+          <label>Credit / Debit Card</label>
+          <div class="pay-icons">
+            <span class="pay-icon-tag">Visa</span>
+            <span class="pay-icon-tag">MC</span>
+          </div>
+        </div>
+        <div class="pay-body" id="cardBody" style="display:none">
+          <div class="card-fields">
+            <input class="card-field" type="text" placeholder="Card number" maxlength="19" oninput="formatCard(this)">
+            <div class="card-row">
+              <input class="card-field" type="text" placeholder="MM / YY" maxlength="7" oninput="formatExpiry(this)">
+              <input class="card-field" type="text" placeholder="CVV" maxlength="4">
+            </div>
+            <input class="card-field" type="text" placeholder="Name on card">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Submit -->
+    <div class="co-submit">
+      <button class="btn-place-order" onclick="placeOrder()">Place Order →</button>
+      <div class="return-link">
+        <a href="index.html">← Return to shop</a>
+      </div>
+      <div class="secure-note">
+        <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+        Secure 256-bit SSL encryption
+      </div>
+    </div>
+
+  </div><!-- /form-col -->
+
+  <!-- SUMMARY -->
+  <div class="co-summary-col">
+    <div class="summary-items" id="summaryItems">
+      <div style="font-size:13px;color:var(--muted);padding:20px 0;text-align:center">Your cart is empty</div>
+    </div>
+
+    <div class="discount-row">
+      <input class="discount-input" type="text" id="discountInput" placeholder="Discount code or gift card">
+      <button class="discount-btn" onclick="applyDiscount()">Apply</button>
+    </div>
+
+    <div class="summary-lines">
+      <div class="s-line">
+        <span class="s-line-label">Subtotal</span>
+        <span class="s-line-val" id="sumSubtotal">LE 0.00</span>
+      </div>
+      <div class="s-line">
+        <span class="s-line-label">Shipping</span>
+        <span class="s-line-val" id="sumShipping">LE 90.00</span>
+      </div>
+      <div class="s-line" id="discountLine" style="display:none">
+        <span class="s-line-label">Discount</span>
+        <span class="s-line-val free" id="sumDiscount">−LE 0.00</span>
+      </div>
+    </div>
+
+    <div class="s-total">
+      <div>
+        <div class="s-total-label">Total</div>
+        <div class="s-total-sub" id="taxNote">Including LE 0 in taxes</div>
+      </div>
+      <div class="s-total-right">
+        <span class="s-total-currency">EGP</span>
+        <span class="s-total-amount" id="sumTotal">0.00</span>
+      </div>
+    </div>
+
+  </div><!-- /summary-col -->
+
+</div><!-- /layout -->
+
+<!-- Success Overlay -->
+<div class="success-overlay" id="successOverlay">
+  <div class="success-box">
+    <div class="success-icon">✦</div>
+    <h2 class="success-title">Order Placed!</h2>
+    <p class="success-msg">Thank you for shopping with Pink Liliy Deer. We'll send you a confirmation and tracking details shortly.</p>
+    <div class="success-order" id="successOrderNum">Order #PLD-000000</div>
+    <a href="index.html" class="btn-continue-shop">Continue Shopping →</a>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const CART_KEY = 'pld_cart';
+const FREE_SHIP = 2000;
+let shippingFee = 90;
+let paymentMethod = 'cod';
+let discountAmount = 0;
+
+function getCart(){return JSON.parse(localStorage.getItem(CART_KEY)||'[]')}
+function saveCart(c){localStorage.setItem(CART_KEY,JSON.stringify(c))}
+function cartSubtotal(c){return c.reduce((s,i)=>s+i.price*i.qty,0)}
+
+function renderSummary(){
+  const cart=getCart();
+  const sub=cartSubtotal(cart);
+  document.getElementById('coCartCount').textContent=cart.reduce((s,i)=>s+i.qty,0);
+
+  if(!cart.length){
+    document.getElementById('summaryItems').innerHTML='<div style="font-size:13px;color:var(--muted);padding:20px 0;text-align:center">Your cart is empty</div>';
+  } else {
+    document.getElementById('summaryItems').innerHTML=cart.map(item=>`
+      <div class="s-item">
+        <div class="s-item-img">
+          <img src="${item.img}" alt="${item.name}">
+          <span class="s-item-qty">${item.qty}</span>
+        </div>
+        <div class="s-item-info">
+          <div class="s-item-name">${item.name}</div>
+          <div class="s-item-meta">Size: ${item.size}</div>
+          <div class="s-item-price">LE ${(item.price*item.qty).toLocaleString()}.00</div>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  const actualShipping = sub >= FREE_SHIP ? 0 : shippingFee;
+  const total = sub + actualShipping - discountAmount;
+  const taxes = Math.round(total * 0.14);
+
+  document.getElementById('sumSubtotal').textContent=`LE ${sub.toLocaleString()}.00`;
+
+  const shipEl = document.getElementById('sumShipping');
+  if(sub >= FREE_SHIP){
+    shipEl.textContent='Free';
+    shipEl.className='s-line-val free';
+  } else {
+    shipEl.textContent=`LE ${actualShipping.toLocaleString()}.00`;
+    shipEl.className='s-line-val';
+  }
+
+  document.getElementById('sumTotal').textContent=`${total.toLocaleString()}.00`;
+  document.getElementById('taxNote').textContent=`Including LE ${taxes.toLocaleString()} in taxes`;
+}
+
+function selectShipping(type, fee, el){
+  shippingFee = fee;
+  document.querySelectorAll('.ship-option').forEach(o=>o.classList.remove('selected'));
+  document.querySelectorAll('.ship-radio').forEach(r=>r.checked=false);
+  el.classList.add('selected');
+  el.querySelector('.ship-radio').checked=true;
+  renderSummary();
+}
+
+function selectPayment(type){
+  paymentMethod=type;
+  document.querySelectorAll('.pay-option').forEach(o=>o.classList.remove('selected'));
+  document.getElementById('pay-'+type).classList.add('selected');
+  document.querySelectorAll('.pay-option input[type=radio]').forEach(r=>r.checked=false);
+  document.getElementById('pay-'+type).querySelector('input[type=radio]').checked=true;
+  const cardBody=document.getElementById('cardBody');
+  if(cardBody) cardBody.style.display = type==='card'?'block':'none';
+}
+
+function applyDiscount(){
+  const code=document.getElementById('discountInput').value.trim().toUpperCase();
+  if(code==='SUMMER10'){
+    const sub=cartSubtotal(getCart());
+    discountAmount=Math.round(sub*0.1);
+    document.getElementById('discountLine').style.display='flex';
+    document.getElementById('sumDiscount').textContent=`−LE ${discountAmount.toLocaleString()}.00`;
+    renderSummary();
+    showToast('10% discount applied ✦');
+  } else if(code==='WELCOME'){
+    discountAmount=200;
+    document.getElementById('discountLine').style.display='flex';
+    document.getElementById('sumDiscount').textContent=`−LE 200.00`;
+    renderSummary();
+    showToast('LE 200 discount applied ✦');
+  } else if(code){
+    showToast('Invalid discount code');
+  }
+}
+
+function formatCard(el){
+  let v=el.value.replace(/\D/g,'').slice(0,16);
+  el.value=v.match(/.{1,4}/g)?.join(' ')||v;
+}
+
+function formatExpiry(el){
+  let v=el.value.replace(/\D/g,'').slice(0,4);
+  if(v.length>=3) v=v.slice(0,2)+' / '+v.slice(2);
+  el.value=v;
+}
+
+function validateForm(){
+  let valid=true;
+  const required=[
+    {id:'fEmail',type:'email'},
+    {id:'fFirstName',type:'text'},
+    {id:'fLastName',type:'text'},
+    {id:'fAddress',type:'text'},
+    {id:'fCity',type:'text'},
+    {id:'fGov',type:'select'},
+    {id:'fPhone',type:'text'},
+  ];
+  required.forEach(f=>{
+    const el=document.getElementById(f.id);
+    const wrapper=el.closest('.field');
+    const val=el.value.trim();
+    let ok=true;
+    if(!val){ok=false;}
+    else if(f.type==='email'&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)&&!/^\+?\d{8,}$/.test(val)){ok=false;}
+    if(wrapper){
+      wrapper.classList.toggle('has-error',!ok);
+    }
+    if(!ok) valid=false;
+  });
+  return valid;
+}
+
+emailjs.init('6LRRvq-ENdWBck1yH');
+
+const SERVICE_ID        = 'service_b5kh73h';
+const OWNER_TEMPLATE    = 'template_mgrowk2'; // owner notification
+const CUSTOMER_TEMPLATE = 'template_mo671vp';
+const SITE_BASE         = 'https://radwa75.github.io/pink-liliy-deer/';
+
+function buildItemsHtml(cart){
+  return cart.map(i=>`
+    <table style="width:100%;margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid #f5d5db;border-collapse:collapse">
+      <tr>
+        <td style="width:80px;vertical-align:top;padding-right:14px">
+          <img src="${SITE_BASE}${i.img}" width="70" height="88"
+               style="display:block;object-fit:cover;border:1px solid #f5d5db">
+        </td>
+        <td style="vertical-align:top">
+          <div style="font-weight:bold;color:#1a1218;margin-bottom:4px">${i.name}</div>
+          <div style="color:#9c8790;font-size:12px;margin-bottom:2px">Size: ${i.size}</div>
+          <div style="color:#9c8790;font-size:12px;margin-bottom:6px">Qty: ${i.qty}</div>
+          <div style="color:#dc768c;font-weight:bold">LE ${(i.price*i.qty).toLocaleString()}.00</div>
+        </td>
+      </tr>
+    </table>
+  `).join('');
+}
+
+function showSuccess(orderNum){
+  saveCart([]);
+  document.getElementById('successOrderNum').textContent = 'Order #' + orderNum;
+  document.getElementById('successOverlay').classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+
+function placeOrder(){
+  if(!getCart().length){showToast('Your cart is empty');return;}
+  if(!validateForm()){showToast('Please fill all required fields');return;}
+
+  const cart       = getCart();
+  const orderNum   = 'PLD-' + Date.now().toString().slice(-6);
+  const orderDate  = new Date().toLocaleDateString('en-GB',{day:'2-digit',month:'long',year:'numeric',hour:'2-digit',minute:'2-digit'});
+  const sub        = cartSubtotal(cart);
+  const actualShip = sub >= FREE_SHIP ? 0 : shippingFee;
+  const total      = sub + actualShip - discountAmount;
+
+  const sharedParams = {
+    order_num:        orderNum,
+    order_date:       orderDate,
+    customer_name:    document.getElementById('fFirstName').value.trim() + ' ' + document.getElementById('fLastName').value.trim(),
+    customer_email:   document.getElementById('fEmail').value.trim(),
+    customer_phone:   document.getElementById('fPhone').value.trim(),
+    customer_address: document.getElementById('fAddress').value.trim() + (document.getElementById('fAddress2').value.trim() ? ', ' + document.getElementById('fAddress2').value.trim() : ''),
+    customer_city:    document.getElementById('fCity').value.trim(),
+    customer_gov:     document.getElementById('fGov').value,
+    order_items_html: buildItemsHtml(cart),
+    subtotal:         'LE ' + sub.toLocaleString() + '.00',
+    shipping:         actualShip === 0 ? 'Free' : 'LE ' + actualShip.toLocaleString() + '.00',
+    total:            'LE ' + total.toLocaleString() + '.00',
+    payment_method:   paymentMethod === 'cod' ? 'Cash on Delivery' : 'Credit / Debit Card',
+  };
+
+  const btn = document.querySelector('.btn-place-order');
+  btn.textContent = 'Placing Order...';
+  btn.disabled = true;
+
+  // Send owner notification first, then customer confirmation
+  emailjs.send(SERVICE_ID, OWNER_TEMPLATE, sharedParams)
+    .then(() => {
+      // Send customer confirmation
+      return emailjs.send(SERVICE_ID, CUSTOMER_TEMPLATE, {
+        ...sharedParams,
+        to_email: sharedParams.customer_email,
+      });
+    })
+    .then(() => {
+      showSuccess(orderNum);
+    })
+    .catch(err => {
+      console.error('EmailJS error:', err);
+      showSuccess(orderNum); // still confirm order even if email fails
+    })
+    .finally(() => {
+      btn.textContent = 'Place Order →';
+      btn.disabled = false;
+    });
+}
+
+// Clear errors on input
+document.addEventListener('input',function(e){
+  const field=e.target.closest('.field');
+  if(field&&field.classList.contains('has-error')) field.classList.remove('has-error');
+});
+
+let toastTimer;
+function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('show'),2600)}
+
+renderSummary();
+</script>
+</body>
+</html>

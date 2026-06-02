@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pink Liliy Deer — Modest Fashion</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --cream:#fff9fb;
+  --warm:#fef0f3;
+  --blush:#ffd6de;
+  --rose:#ff8da1;
+  --dark:#1a1218;
+  --mid:#5a4750;
+  --muted:#9c8790;
+  --border:#f0dde2;
+  --accent:#ff8da1;
+  --accent-dark:#e8607a;
+  --accent-light:#ffe4ea;
+  --serif:'Cormorant Garamond',Georgia,serif;
+  --sans:'Jost',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--cream);color:var(--dark);font-family:var(--sans);font-weight:300;overflow-x:hidden}
+
+/* ── ANNOUNCEMENT BAR ── */
+.announce{
+  background:var(--accent);color:#fff;
+  text-align:center;padding:11px;
+  font-size:11px;letter-spacing:2.5px;text-transform:uppercase;
+  font-family:var(--sans);font-weight:500;
+  letter-spacing:2px;
+}
+
+/* ── NAV ── */
+nav{
+  position:sticky;top:0;z-index:100;
+  background:var(--cream);
+  border-bottom:1px solid var(--border);
+  padding:0 40px;
+  display:flex;align-items:center;justify-content:space-between;
+  height:64px;
+}
+.nav-links{display:flex;gap:32px;list-style:none}
+.nav-links a{
+  font-size:11px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--mid);text-decoration:none;
+  font-family:var(--sans);font-weight:400;
+  transition:color .2s;position:relative;
+}
+.nav-links a::after{
+  content:'';position:absolute;bottom:-2px;left:0;width:0;height:0.5px;
+  background:var(--dark);transition:width .25s;
+}
+.nav-links a:hover{color:var(--dark)}
+.nav-links a:hover::after{width:100%}
+.brand{
+  font-family:var(--serif);font-size:22px;font-weight:400;
+  letter-spacing:1px;color:var(--dark);text-decoration:none;
+  position:absolute;left:50%;transform:translateX(-50%);
+  white-space:nowrap;
+}
+.nav-right{display:flex;align-items:center;gap:20px}
+.nav-icon{
+  background:none;border:none;cursor:pointer;
+  font-size:11px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--mid);font-family:var(--sans);font-weight:400;
+  display:flex;align-items:center;gap:6px;
+  transition:color .2s;
+}
+.nav-icon:hover{color:var(--dark)}
+.cart-count{
+  background:var(--accent);color:#fff;
+  border-radius:50%;width:16px;height:16px;
+  font-size:9px;display:flex;align-items:center;justify-content:center;
+  font-weight:600;
+}
+
+/* ── HERO ── */
+.hero{
+  position:relative;height:92vh;min-height:600px;
+  background:var(--warm);overflow:hidden;
+  display:flex;align-items:flex-end;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse at 70% 40%, rgba(255,141,161,0.18) 0%, transparent 60%),
+    radial-gradient(ellipse at 20% 80%, rgba(255,141,161,0.12) 0%, transparent 50%),
+    linear-gradient(160deg, #fff9fb 0%, #fef0f3 100%);
+}
+.hero-img-placeholder{
+  position:absolute;right:0;top:0;bottom:0;width:62%;
+  background:linear-gradient(135deg,#ffd6de 0%,#ffb3c1 60%,#ff8da1 100%);
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
+}
+.hero-img-placeholder::before{
+  content:'';position:absolute;inset:0;
+  background:repeating-linear-gradient(
+    45deg,rgba(255,255,255,0.03) 0px,rgba(255,255,255,0.03) 1px,
+    transparent 1px,transparent 20px
+  );
+}
+.hero-img-placeholder span{
+  font-family:var(--serif);font-size:13px;letter-spacing:3px;
+  color:rgba(90,79,71,0.4);text-transform:uppercase;
+}
+.hero-content{
+  position:relative;z-index:2;
+  padding:0 60px 80px;max-width:520px;
+}
+.hero-eyebrow{
+  font-size:10px;letter-spacing:4px;text-transform:uppercase;
+  color:var(--accent);margin-bottom:20px;font-family:var(--sans);
+  display:flex;align-items:center;gap:12px;
+}
+.hero-eyebrow::before{content:'';width:24px;height:0.5px;background:var(--accent)}
+.hero-title{
+  font-family:var(--serif);font-size:clamp(48px,6vw,80px);
+  font-weight:300;line-height:1.0;color:var(--dark);
+  margin-bottom:28px;letter-spacing:-0.5px;
+}
+.hero-title em{font-style:italic;font-weight:300;color:var(--accent)}
+.hero-sub{
+  font-size:12px;letter-spacing:1.5px;color:var(--muted);
+  text-transform:uppercase;margin-bottom:40px;line-height:1.8;
+}
+.btn-primary{
+  display:inline-flex;align-items:center;gap:12px;
+  background:var(--accent);color:#fff;
+  padding:14px 36px;text-decoration:none;
+  font-size:10px;letter-spacing:3px;text-transform:uppercase;
+  font-family:var(--sans);font-weight:500;
+  transition:background .25s,gap .25s,box-shadow .25s;cursor:pointer;border:none;
+  box-shadow:0 4px 20px rgba(255,141,161,0.35);
+}
+.btn-primary:hover{background:var(--accent-dark);gap:18px;box-shadow:0 6px 28px rgba(255,141,161,0.5)}
+.btn-outline{
+  display:inline-flex;align-items:center;gap:12px;
+  border:1.5px solid var(--accent);color:var(--accent);
+  padding:13px 32px;text-decoration:none;
+  font-size:10px;letter-spacing:3px;text-transform:uppercase;
+  font-family:var(--sans);font-weight:400;
+  transition:all .25s;cursor:pointer;background:transparent;
+}
+.btn-outline:hover{background:var(--accent);color:#fff;box-shadow:0 4px 20px rgba(255,141,161,0.3)}
+.hero-scroll{
+  position:absolute;bottom:30px;right:40px;
+  font-size:9px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--muted);writing-mode:vertical-rl;
+  display:flex;align-items:center;gap:10px;
+}
+.hero-scroll::after{content:'';width:0.5px;height:40px;background:var(--muted)}
+
+/* ── MARQUEE ── */
+.marquee-wrap{
+  background:var(--accent-light);color:var(--dark);
+  padding:13px 0;overflow:hidden;
+  border-top:1px solid var(--blush);border-bottom:1px solid var(--blush);
+}
+.marquee-track{
+  display:flex;gap:0;white-space:nowrap;
+  animation:marquee 22s linear infinite;
+}
+.marquee-track span{
+  font-size:10px;letter-spacing:3px;text-transform:uppercase;
+  padding:0 40px;font-family:var(--sans);font-weight:400;
+  color:var(--mid);
+}
+.marquee-track .sep{color:var(--accent);padding:0 10px;font-weight:600}
+@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* ── SECTION HEADERS ── */
+.section-header{text-align:center;padding:80px 40px 40px}
+.section-tag{
+  font-size:10px;letter-spacing:4px;text-transform:uppercase;
+  color:var(--accent);margin-bottom:16px;
+  display:flex;align-items:center;justify-content:center;gap:16px;
+}
+.section-tag::before,.section-tag::after{
+  content:'';flex:0 0 30px;height:0.5px;background:var(--accent)
+}
+.section-title{
+  font-family:var(--serif);font-size:clamp(36px,4vw,54px);
+  font-weight:300;color:var(--dark);letter-spacing:-0.5px;
+  line-height:1.1;
+}
+.section-title em{font-style:italic}
+.section-sub{
+  font-size:12px;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--muted);margin-top:16px;
+}
+
+/* ── CATEGORY STRIP ── */
+.categories{padding:0 40px 60px}
+.cat-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.cat-item{position:relative;cursor:pointer;overflow:hidden;aspect-ratio:3/4}
+.cat-img{
+  width:100%;height:100%;
+  background:var(--warm);
+  transition:transform .4s ease;
+}
+.cat-item:hover .cat-img{transform:scale(1.04)}
+.cat-img-1{background:linear-gradient(160deg,#e8ddd5,#d5c8c0)}
+.cat-img-2{background:linear-gradient(160deg,#dfe8e0,#c8d5ca)}
+.cat-img-3{background:linear-gradient(160deg,#e8e0e8,#d5c8d5)}
+.cat-img-4{background:linear-gradient(160deg,#e8e5d5,#d5d0c0)}
+.cat-img-5{background:linear-gradient(160deg,#e8d5d5,#d5c0c0)}
+.cat-label{
+  position:absolute;bottom:0;left:0;right:0;
+  background:linear-gradient(to top,rgba(26,22,18,0.6),transparent);
+  padding:24px 16px 16px;
+  font-family:var(--serif);font-size:18px;font-weight:400;
+  color:#fff;letter-spacing:0.5px;
+}
+.cat-label small{
+  display:block;font-family:var(--sans);font-size:9px;
+  letter-spacing:2px;text-transform:uppercase;opacity:0.75;margin-bottom:4px;
+}
+
+/* ── PRODUCT GRID ── */
+.products-section{padding:0 40px 80px}
+.filter-bar{
+  display:flex;align-items:center;justify-content:space-between;
+  border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+  padding:16px 0;margin-bottom:40px;
+}
+.filter-tabs{display:flex;gap:0;list-style:none}
+.filter-tabs li{
+  font-size:10px;letter-spacing:2.5px;text-transform:uppercase;
+  color:var(--muted);padding:6px 20px;cursor:pointer;
+  transition:color .2s;border-right:1px solid var(--border);
+  font-family:var(--sans);font-weight:400;
+}
+.filter-tabs li:first-child{padding-left:0}
+.filter-tabs li:last-child{border:none}
+.filter-tabs li.active,.filter-tabs li:hover{color:var(--accent)}
+.filter-tabs li.active{font-weight:500;border-bottom:1.5px solid var(--accent)}
+.sort-select{
+  font-size:10px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--muted);background:none;border:none;cursor:pointer;
+  font-family:var(--sans);outline:none;
+}
+.product-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:24px;
+}
+.product-card{cursor:pointer}
+.product-img{
+  aspect-ratio:3/4;background:var(--warm);
+  position:relative;overflow:hidden;margin-bottom:14px;
+}
+.product-img-fill{
+  width:100%;height:100%;
+  transition:transform .5s ease;
+  display:flex;align-items:center;justify-content:center;
+}
+.product-card:hover .product-img-fill{transform:scale(1.04)}
+.product-img-fill span{
+  font-family:var(--serif);font-size:11px;letter-spacing:2px;
+  color:rgba(90,79,71,0.3);text-transform:uppercase;
+}
+.product-badge{
+  position:absolute;top:12px;left:12px;
+  background:var(--dark);color:#fff;
+  font-size:8px;letter-spacing:2px;text-transform:uppercase;
+  padding:5px 10px;font-family:var(--sans);border-radius:2px;
+}
+.product-badge.new{background:var(--accent);box-shadow:0 2px 12px rgba(255,141,161,0.4)}
+.product-badge.sold{background:var(--muted)}
+.product-actions{
+  position:absolute;bottom:12px;left:12px;right:12px;
+  opacity:0;transform:translateY(6px);
+  transition:all .25s;
+}
+.product-card:hover .product-actions{opacity:1;transform:translateY(0)}
+.btn-addcart{
+  width:100%;padding:11px;
+  background:rgba(255,141,161,0.92);color:#fff;border:none;
+  font-size:9px;letter-spacing:2.5px;text-transform:uppercase;
+  font-family:var(--sans);cursor:pointer;font-weight:500;
+  backdrop-filter:blur(4px);
+  transition:background .2s;
+}
+.btn-addcart:hover{background:var(--accent-dark)}
+.size-chips{display:flex;gap:4px;margin-bottom:6px;justify-content:center}
+.size-chip{
+  background:rgba(250,248,245,0.9);color:var(--dark);
+  font-size:8px;letter-spacing:1px;padding:4px 7px;
+  font-family:var(--sans);border:0.5px solid rgba(26,22,18,0.2);
+  cursor:pointer;transition:background .15s;
+}
+.size-chip:hover,.size-chip.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.product-name{
+  font-family:var(--serif);font-size:15px;font-weight:400;
+  color:var(--dark);margin-bottom:5px;line-height:1.3;
+}
+.product-price{
+  font-size:12px;color:var(--muted);letter-spacing:1px;
+  font-family:var(--sans);
+}
+.product-colors{display:flex;gap:5px;margin-top:8px}
+.color-dot{
+  width:12px;height:12px;border-radius:50%;
+  border:1.5px solid transparent;cursor:pointer;
+  transition:border-color .15s;
+}
+.color-dot:hover,.color-dot.active{border-color:var(--accent)}
+
+/* Product placeholder backgrounds */
+.p1{background:linear-gradient(160deg,#e8ddd5 0%,#cfc3bb 100%)}
+.p2{background:linear-gradient(160deg,#d5e8df 0%,#c0d5c8 100%)}
+.p3{background:linear-gradient(160deg,#e8d5e0 0%,#d5c0cb 100%)}
+.p4{background:linear-gradient(160deg,#e8e5d5 0%,#d5d0c0 100%)}
+.p5{background:linear-gradient(160deg,#d5dde8 0%,#c0ccda 100%)}
+.p6{background:linear-gradient(160deg,#e8ddd5 0%,#e0d5cc 100%)}
+.p7{background:linear-gradient(160deg,#f0e8d5 0%,#e0d0b8 100%)}
+.p8{background:linear-gradient(160deg,#e5d5e8 0%,#d0c0d5 100%)}
+
+/* ── EDITORIAL BANNER ── */
+.editorial{
+  margin:0 40px 80px;display:grid;
+  grid-template-columns:1fr 1fr;min-height:520px;
+}
+.editorial-img{
+  background:linear-gradient(160deg,#e8ddd5,#c8b8ae);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+}
+.editorial-img::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(to right,rgba(26,22,18,0.1),transparent);
+}
+.editorial-img span{
+  font-family:var(--serif);font-size:12px;letter-spacing:3px;
+  color:rgba(90,79,71,0.3);text-transform:uppercase;
+  position:relative;z-index:2;
+}
+.editorial-content{
+  background:var(--warm);padding:60px 50px;
+  display:flex;flex-direction:column;justify-content:center;
+}
+.editorial-tag{
+  font-size:9px;letter-spacing:4px;text-transform:uppercase;
+  color:var(--accent);margin-bottom:24px;
+  display:flex;align-items:center;gap:10px;
+}
+.editorial-tag::before{content:'';width:20px;height:0.5px;background:var(--accent)}
+.editorial-title{
+  font-family:var(--serif);font-size:clamp(32px,3.5vw,48px);
+  font-weight:300;line-height:1.1;color:var(--dark);
+  margin-bottom:20px;
+}
+.editorial-title em{font-style:italic}
+.editorial-body{
+  font-size:13px;color:var(--muted);line-height:1.9;
+  margin-bottom:36px;max-width:340px;
+}
+.editorial-links{display:flex;gap:16px;flex-wrap:wrap}
+
+/* ── LOOKBOOK STRIP ── */
+.lookbook{padding:0 40px 80px}
+.lookbook-grid{
+  display:grid;
+  grid-template-columns:2fr 1fr 1fr 1fr;
+  gap:12px;height:500px;
+}
+.look-item{
+  background:var(--warm);position:relative;overflow:hidden;
+  cursor:pointer;
+}
+.look-item:hover .look-overlay{opacity:1}
+.look-fill{width:100%;height:100%;transition:transform .4s ease}
+.look-item:hover .look-fill{transform:scale(1.04)}
+.l1{background:linear-gradient(160deg,#ddd5e8,#c8b8d5)}
+.l2{background:linear-gradient(160deg,#e8d5d5,#d5b8b8)}
+.l3{background:linear-gradient(160deg,#d5e8e0,#b8d5c8)}
+.l4{background:linear-gradient(160deg,#e8e5d5,#d5d0b8)}
+.look-overlay{
+  position:absolute;inset:0;
+  background:rgba(26,22,18,0.4);
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;transition:opacity .3s;
+}
+.look-overlay span{
+  font-family:var(--serif);font-size:20px;font-weight:400;
+  color:#fff;letter-spacing:1px;
+}
+.look-tag{
+  position:absolute;bottom:16px;left:16px;
+  font-size:9px;letter-spacing:2px;text-transform:uppercase;
+  color:rgba(255,255,255,0.8);font-family:var(--sans);
+}
+
+/* ── INSTAGRAM GRID ── */
+.instagram{padding:0 40px 80px;text-align:center}
+.insta-handle{
+  font-size:11px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--accent);margin-bottom:30px;
+}
+.insta-grid{
+  display:grid;grid-template-columns:repeat(6,1fr);gap:4px;
+  margin-bottom:32px;
+}
+.insta-item{
+  aspect-ratio:1;background:var(--warm);
+  overflow:hidden;cursor:pointer;
+}
+.insta-fill{
+  width:100%;height:100%;
+  transition:transform .3s,filter .3s;
+}
+.insta-item:hover .insta-fill{transform:scale(1.06);filter:brightness(0.85)}
+.i1{background:linear-gradient(135deg,#e8d5d5,#d5b8b8)}
+.i2{background:linear-gradient(135deg,#d5e8e0,#b8d5c8)}
+.i3{background:linear-gradient(135deg,#ddd5e8,#c8b8d5)}
+.i4{background:linear-gradient(135deg,#e8e5d5,#d5d0b8)}
+.i5{background:linear-gradient(135deg,#e8ddd5,#d5c8c0)}
+.i6{background:linear-gradient(135deg,#d5dde8,#b8ccd5)}
+
+/* ── FEATURES BAR ── */
+.features{
+  border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+  padding:40px;display:grid;grid-template-columns:repeat(4,1fr);
+  gap:0;
+}
+.feature-item{
+  text-align:center;padding:20px;
+  border-right:1px solid var(--border);
+}
+.feature-item:last-child{border:none}
+.feature-icon{
+  font-size:18px;margin-bottom:12px;
+  color:var(--accent);
+}
+.feature-title{
+  font-family:var(--serif);font-size:15px;font-weight:400;
+  color:var(--dark);margin-bottom:6px;
+}
+.feature-sub{
+  font-size:10px;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--muted);
+}
+
+/* ── NEWSLETTER ── */
+.newsletter{
+  background:linear-gradient(135deg,#ff8da1 0%,#e8607a 100%);
+  color:#fff;padding:80px 40px;text-align:center;
+}
+.nl-title{
+  font-family:var(--serif);font-size:clamp(32px,4vw,52px);
+  font-weight:300;margin-bottom:14px;line-height:1.1;color:#fff;
+}
+.nl-title em{font-style:italic;color:rgba(255,255,255,0.85)}
+.nl-sub{
+  font-size:11px;letter-spacing:2px;text-transform:uppercase;
+  color:rgba(255,255,255,0.7);margin-bottom:36px;
+}
+.nl-form{display:flex;justify-content:center;gap:0;max-width:440px;margin:0 auto}
+.nl-input{
+  flex:1;padding:14px 20px;background:rgba(255,255,255,0.18);
+  border:1px solid rgba(255,255,255,0.35);color:#fff;
+  font-size:12px;letter-spacing:1px;font-family:var(--sans);
+  outline:none;
+}
+.nl-input::placeholder{color:rgba(255,255,255,0.55);font-family:var(--sans)}
+.nl-input:focus{background:rgba(255,255,255,0.25);border-color:rgba(255,255,255,0.6)}
+.nl-btn{
+  padding:14px 24px;background:#fff;color:var(--accent);
+  border:none;cursor:pointer;
+  font-size:9px;letter-spacing:3px;text-transform:uppercase;
+  font-family:var(--sans);font-weight:600;transition:background .2s,color .2s;
+}
+.nl-btn:hover{background:var(--dark);color:#fff}
+
+/* ── FOOTER ── */
+footer{
+  background:var(--cream);border-top:1px solid var(--border);
+  padding:60px 40px 30px;
+}
+.footer-grid{
+  display:grid;grid-template-columns:2fr 1fr 1fr 1fr;
+  gap:40px;margin-bottom:50px;
+}
+.footer-brand{
+  font-family:var(--serif);font-size:24px;font-weight:400;
+  color:var(--dark);margin-bottom:16px;
+}
+.footer-tagline{
+  font-size:11px;letter-spacing:1.5px;color:var(--muted);
+  line-height:1.8;text-transform:uppercase;max-width:220px;
+}
+.footer-socials{display:flex;gap:14px;margin-top:24px}
+.social-link{
+  font-size:9px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--mid);text-decoration:none;
+  transition:color .2s;font-family:var(--sans);
+}
+.social-link:hover{color:var(--accent);text-decoration:underline;text-underline-offset:3px}
+.footer-col h4{
+  font-size:10px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--dark);margin-bottom:20px;font-weight:500;
+}
+.footer-col ul{list-style:none}
+.footer-col li{margin-bottom:10px}
+.footer-col a{
+  font-size:12px;color:var(--muted);text-decoration:none;
+  transition:color .2s;letter-spacing:0.5px;
+}
+.footer-col a:hover{color:var(--dark)}
+.footer-bottom{
+  border-top:1px solid var(--border);padding-top:24px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.footer-copy{font-size:10px;letter-spacing:1.5px;color:var(--muted);text-transform:uppercase}
+.footer-pay{display:flex;gap:10px;align-items:center}
+.pay-icon{
+  background:var(--warm);border:0.5px solid var(--border);
+  border-radius:3px;padding:4px 8px;
+  font-size:9px;letter-spacing:1px;color:var(--muted);font-family:var(--sans);
+}
+
+/* ── CART DRAWER ── */
+.cart-overlay{
+  position:fixed;inset:0;background:rgba(26,22,18,0.4);
+  z-index:200;opacity:0;pointer-events:none;transition:opacity .3s;
+}
+.cart-overlay.open{opacity:1;pointer-events:all}
+.cart-drawer{
+  position:fixed;top:0;right:0;bottom:0;width:380px;
+  background:var(--cream);z-index:201;
+  transform:translateX(100%);transition:transform .35s cubic-bezier(.4,0,.2,1);
+  display:flex;flex-direction:column;
+}
+.cart-drawer.open{transform:translateX(0)}
+.cart-head{
+  padding:24px 28px;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+}
+.cart-head h3{font-family:var(--serif);font-size:22px;font-weight:400}
+.cart-close{
+  background:none;border:none;cursor:pointer;
+  font-size:18px;color:var(--mid);line-height:1;
+}
+.cart-body{flex:1;overflow-y:auto;padding:28px}
+.cart-empty{
+  text-align:center;padding:60px 0;
+  font-family:var(--serif);font-size:18px;color:var(--muted);
+}
+.cart-item{
+  display:flex;gap:16px;margin-bottom:24px;
+  padding-bottom:24px;border-bottom:1px solid var(--border);
+}
+.cart-item-img{
+  width:80px;height:100px;flex-shrink:0;
+}
+.cart-item-img-fill{width:100%;height:100%}
+.cart-item-info{flex:1}
+.cart-item-name{font-family:var(--serif);font-size:15px;margin-bottom:4px}
+.cart-item-meta{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.cart-item-price{font-size:13px;color:var(--dark);letter-spacing:0.5px}
+.cart-qty{display:flex;align-items:center;gap:12px;margin-top:8px}
+.qty-btn{
+  background:none;border:0.5px solid var(--border);
+  width:24px;height:24px;cursor:pointer;
+  font-size:14px;color:var(--mid);
+  display:flex;align-items:center;justify-content:center;
+  transition:border-color .15s,color .15s;
+}
+.qty-btn:hover{border-color:var(--dark);color:var(--dark)}
+.qty-num{font-size:12px;min-width:16px;text-align:center}
+.cart-foot{padding:20px 28px;border-top:1px solid var(--border)}
+.cart-total{
+  display:flex;justify-content:space-between;
+  margin-bottom:20px;font-family:var(--serif);font-size:18px;
+}
+.cart-checkout{
+  display:block;width:100%;padding:16px;text-align:center;
+  background:var(--accent);color:#fff;text-decoration:none;
+  font-size:10px;letter-spacing:3px;text-transform:uppercase;
+  font-family:var(--sans);font-weight:500;border:none;cursor:pointer;
+  transition:background .2s;
+  box-shadow:0 4px 20px rgba(255,141,161,0.4);
+}
+.cart-checkout:hover{background:var(--accent-dark)}
+
+/* ── TOAST ── */
+.toast{
+  position:fixed;bottom:30px;left:50%;
+  transform:translateX(-50%) translateY(20px);
+  background:var(--accent);color:#fff;
+  padding:12px 28px;border-radius:30px;
+  font-size:10px;letter-spacing:2.5px;text-transform:uppercase;
+  font-family:var(--sans);font-weight:500;opacity:0;pointer-events:none;
+  transition:all .3s;z-index:300;
+  box-shadow:0 8px 30px rgba(255,141,161,0.5);
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* ── UTILITIES ── */
+.text-center{text-align:center}
+.mt-40{margin-top:40px}
+.view-all{
+  display:inline-flex;align-items:center;gap:10px;margin-top:40px;
+  font-size:10px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--accent);text-decoration:none;font-family:var(--sans);font-weight:500;
+  transition:gap .2s,color .2s;
+  border-bottom:1px solid var(--blush);padding-bottom:4px;
+}
+.view-all:hover{gap:16px;color:var(--accent-dark)}
+.view-all::after{content:'→';font-family:sans-serif}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+.fade-up{opacity:0;animation:fadeUp .7s ease both}
+.fade-up:nth-child(1){animation-delay:.05s}
+.fade-up:nth-child(2){animation-delay:.12s}
+.fade-up:nth-child(3){animation-delay:.19s}
+.fade-up:nth-child(4){animation-delay:.26s}
+.fade-up:nth-child(5){animation-delay:.33s}
+.fade-up:nth-child(6){animation-delay:.4s}
+.fade-up:nth-child(7){animation-delay:.47s}
+.fade-up:nth-child(8){animation-delay:.54s}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  nav{padding:0 20px}
+  .brand{font-size:18px}
+  .hero-content{padding:0 24px 60px;max-width:100%}
+  .hero-img-placeholder{display:none}
+  .hero-bg{width:100%}
+  .cat-grid{grid-template-columns:repeat(3,1fr)}
+  .product-grid{grid-template-columns:repeat(2,1fr)}
+  .editorial{grid-template-columns:1fr;margin:0 20px 60px}
+  .lookbook-grid{grid-template-columns:1fr 1fr;height:auto}
+  .lookbook-grid .look-item:first-child{grid-column:span 2;aspect-ratio:16/9}
+  .lookbook-grid .look-item:not(:first-child){aspect-ratio:1}
+  .insta-grid{grid-template-columns:repeat(3,1fr)}
+  .features{grid-template-columns:repeat(2,1fr)}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .products-section,.lookbook,.instagram,.categories,.section-header{padding-left:20px;padding-right:20px}
+  .features,.newsletter{padding-left:20px;padding-right:20px}
+  footer{padding:40px 20px 20px}
+}
+</style>
+</head>
+<body>
+
+<!-- Announcement -->
+<div class="announce">Free delivery on orders over LE 2,000 &nbsp;·&nbsp; New summer drop is live</div>
+
+<!-- Nav -->
+<nav>
+  <ul class="nav-links">
+    <li><a href="#">New In</a></li>
+    <li><a href="#">Shop</a></li>
+    <li><a href="#">Edits</a></li>
+  </ul>
+  <a href="#" class="brand">Pink Liliy Deer</a>
+  <div class="nav-right">
+    <button class="nav-icon" onclick="toggleSearch()">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg>
+    </button>
+    <button class="nav-icon" onclick="openCart()">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+      <span class="cart-count" id="cartCount">0</span>
+    </button>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-img-placeholder"><img src="img/img1.jpg" alt="Campaign" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Summer / Spring '26</div>
+    <h1 class="hero-title">The <em>softest</em><br>summer yet</h1>
+    <p class="hero-sub">Drop I · Now Available</p>
+    <a href="#products" class="btn-primary">Shop the Edit →</a>
+  </div>
+  <div class="hero-scroll">Scroll</div>
+</section>
+
+<!-- Marquee -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span>New Arrivals</span><span class="sep">✦</span>
+    <span>Summer '26</span><span class="sep">✦</span>
+    <span>Free Returns</span><span class="sep">✦</span>
+    <span>Modest Fashion</span><span class="sep">✦</span>
+    <span>New Arrivals</span><span class="sep">✦</span>
+    <span>Summer '26</span><span class="sep">✦</span>
+    <span>Free Returns</span><span class="sep">✦</span>
+    <span>Modest Fashion</span><span class="sep">✦</span>
+    <span>New Arrivals</span><span class="sep">✦</span>
+    <span>Summer '26</span><span class="sep">✦</span>
+    <span>Free Returns</span><span class="sep">✦</span>
+    <span>Modest Fashion</span><span class="sep">✦</span>
+    <span>New Arrivals</span><span class="sep">✦</span>
+    <span>Summer '26</span><span class="sep">✦</span>
+    <span>Free Returns</span><span class="sep">✦</span>
+    <span>Modest Fashion</span><span class="sep">✦</span>
+  </div>
+</div>
+
+<!-- Categories -->
+<div class="section-header">
+  <div class="section-tag">Shop by Category</div>
+  <h2 class="section-title">Find your <em>style</em></h2>
+</div>
+<section class="categories">
+  <div class="cat-grid">
+    <div class="cat-item" onclick="filterProducts('dresses')">
+      <div class="cat-img cat-img-1"><img src="img/img1.jpg" alt="Dresses" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+      <div class="cat-label"><small>Explore</small>Dresses</div>
+    </div>
+    <div class="cat-item" onclick="filterProducts('tops')">
+      <div class="cat-img cat-img-2"><img src="img/img2.jpg" alt="Tops" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+      <div class="cat-label"><small>Explore</small>Tops</div>
+    </div>
+    <div class="cat-item" onclick="filterProducts('skirts')">
+      <div class="cat-img cat-img-3"><img src="img/img3.jpg" alt="Skirts" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+      <div class="cat-label"><small>Explore</small>Skirts</div>
+    </div>
+    <div class="cat-item" onclick="filterProducts('sets')">
+      <div class="cat-img cat-img-4"><img src="img/img4.jpg" alt="Sets" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+      <div class="cat-label"><small>Explore</small>Sets</div>
+    </div>
+    <div class="cat-item" onclick="filterProducts('coats')">
+      <div class="cat-img cat-img-5"><img src="img/img5.jpg" alt="Coats" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+      <div class="cat-label"><small>Explore</small>Coats</div>
+    </div>
+  </div>
+</section>
+
+<!-- Products -->
+<div class="section-header" id="products">
+  <div class="section-tag">Summer Collection</div>
+  <h2 class="section-title">Drop <em>I</em> — Now Live</h2>
+</div>
+<section class="products-section">
+  <div class="filter-bar">
+    <ul class="filter-tabs">
+      <li class="active" onclick="setFilter(this,'all')">All</li>
+      <li onclick="setFilter(this,'new')">New In</li>
+      <li onclick="setFilter(this,'dresses')">Dresses</li>
+      <li onclick="setFilter(this,'tops')">Tops</li>
+      <li onclick="setFilter(this,'skirts')">Skirts</li>
+      <li onclick="setFilter(this,'sets')">Sets</li>
+    </ul>
+    <select class="sort-select">
+      <option>Featured</option>
+      <option>Price: Low to High</option>
+      <option>Price: High to Low</option>
+      <option>Newest</option>
+    </select>
+  </div>
+  <div class="product-grid" id="productGrid">
+    <!-- Products rendered by JS -->
+  </div>
+  <div class="text-center">
+    <a href="#" class="view-all">View All Products</a>
+  </div>
+</section>
+
+<!-- Editorial Banner -->
+<section class="editorial">
+  <div class="editorial-img"><img src="img/img6.jpg" alt="Editorial" style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0;"></div>
+  <div class="editorial-content">
+    <div class="editorial-tag">The Edit</div>
+    <h2 class="editorial-title">FW '26 —<br><em>Quiet luxury</em><br>redefined</h2>
+    <p class="editorial-body">Crafted for the modern modest woman. Each piece is designed with intention — fluid silhouettes, considered fabrics, timeless appeal.</p>
+    <div class="editorial-links">
+      <a href="#" class="btn-primary">Shop FW '26 →</a>
+      <a href="#" class="btn-outline">View Lookbook</a>
+    </div>
+  </div>
+</section>
+
+<!-- Lookbook -->
+<div class="section-header">
+  <div class="section-tag">Lookbook</div>
+  <h2 class="section-title"><em>Summer</em> Stories</h2>
+</div>
+<section class="lookbook">
+  <div class="lookbook-grid">
+    <div class="look-item">
+      <div class="look-fill l1"><img src="img/img1.jpg" alt="" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+      <div class="look-overlay"><span>The Garden Edit</span></div>
+      <div class="look-tag">Summer '26</div>
+    </div>
+    <div class="look-item">
+      <div class="look-fill l2"><img src="img/img2.jpg" alt="" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+      <div class="look-overlay"><span>Coastal</span></div>
+      <div class="look-tag">Tops</div>
+    </div>
+    <div class="look-item">
+      <div class="look-fill l3"><img src="img/img3.jpg" alt="" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+      <div class="look-overlay"><span>Evening</span></div>
+      <div class="look-tag">Dresses</div>
+    </div>
+    <div class="look-item">
+      <div class="look-fill l4"><img src="img/img4.jpg" alt="" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+      <div class="look-overlay"><span>Effortless</span></div>
+      <div class="look-tag">Sets</div>
+    </div>
+  </div>
+</section>
+
+<!-- Features -->
+<div class="features">
+  <div class="feature-item">
+    <div class="feature-icon">✦</div>
+    <div class="feature-title">Free Delivery</div>
+    <div class="feature-sub">Orders over LE 2,000</div>
+  </div>
+  <div class="feature-item">
+    <div class="feature-icon">✦</div>
+    <div class="feature-title">Easy Returns</div>
+    <div class="feature-sub">14-day return policy</div>
+  </div>
+  <div class="feature-item">
+    <div class="feature-icon">✦</div>
+    <div class="feature-title">Secure Payment</div>
+    <div class="feature-sub">100% protected</div>
+  </div>
+  <div class="feature-item">
+    <div class="feature-icon">✦</div>
+    <div class="feature-title">Customer Care</div>
+    <div class="feature-sub">Always here for you</div>
+  </div>
+</div>
+
+<!-- Instagram -->
+<section class="instagram">
+  <div class="section-header" style="padding-top:60px">
+    <div class="section-tag">Instagram</div>
+    <h2 class="section-title">Follow <em>the story</em></h2>
+  </div>
+  <div class="insta-handle">@pinkliliydeer</div>
+  <div class="insta-grid">
+    <div class="insta-item"><div class="insta-fill i1"><img src="img/img1.jpg" alt="" style="width:100%;height:100%;object-fit:cover;display:block;"></div></div>
+    <div class="insta-item"><div class="insta-fill i2"><img src="img/img2.jpg" alt="" style="width:100%;height:100%;object-fit:cover;display:block;"></div></div>
+    <div class="insta-item"><div class="insta-fill i3"><img src="img/img3.jpg" alt="" style="width:100%;height:100%;object-fit:cover;display:block;"></div></div>
+    <div class="insta-item"><div class="insta-fill i4"><img src="img/img4.jpg" alt="" style="width:100%;height:100%;object-fit:cover;display:block;"></div></div>
+    <div class="insta-item"><div class="insta-fill i5"><img src="img/img5.jpg" alt="" style="width:100%;height:100%;object-fit:cover;display:block;"></div></div>
+    <div class="insta-item"><div class="insta-fill i6"><img src="img/img6.jpg" alt="" style="width:100%;height:100%;object-fit:cover;display:block;"></div></div>
+  </div>
+  <a href="#" class="btn-outline">Follow on Instagram</a>
+</section>
+
+<!-- Newsletter -->
+<section class="newsletter">
+  <h2 class="nl-title">Join the <em>inner circle</em></h2>
+  <p class="nl-sub">Early access · Exclusive drops · Behind the scenes</p>
+  <div class="nl-form">
+    <input class="nl-input" type="email" placeholder="Your email address">
+    <button class="nl-btn">Subscribe</button>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand">Pink Liliy Deer</div>
+      <div class="footer-tagline">A local modest fashion brand. Designed with love, made to last.</div>
+      <div class="footer-socials">
+        <a href="#" class="social-link">Instagram</a>
+        <a href="#" class="social-link">TikTok</a>
+        <a href="#" class="social-link">Pinterest</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Shop</h4>
+      <ul>
+        <li><a href="#">New Arrivals</a></li>
+        <li><a href="#">Dresses</a></li>
+        <li><a href="#">Tops</a></li>
+        <li><a href="#">Skirts</a></li>
+        <li><a href="#">Sets</a></li>
+        <li><a href="#">Coats</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Help</h4>
+      <ul>
+        <li><a href="#">Sizing Guide</a></li>
+        <li><a href="#">Shipping Info</a></li>
+        <li><a href="#">Returns</a></li>
+        <li><a href="#">Track Order</a></li>
+        <li><a href="#">Contact Us</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>About</h4>
+      <ul>
+        <li><a href="#">Our Story</a></li>
+        <li><a href="#">Sustainability</a></li>
+        <li><a href="#">Press</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2026 Pink Liliy Deer. All rights reserved.</div>
+    <div class="footer-pay">
+      <div class="pay-icon">Visa</div>
+      <div class="pay-icon">Mastercard</div>
+      <div class="pay-icon">Cash on Delivery</div>
+    </div>
+  </div>
+</footer>
+
+<!-- Cart Drawer -->
+<div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+<div class="cart-drawer" id="cartDrawer">
+  <div class="cart-head">
+    <h3>Your Bag</h3>
+    <button class="cart-close" onclick="closeCart()">✕</button>
+  </div>
+  <div style="padding:10px 28px 10px;background:var(--accent-light);border-bottom:1px solid var(--blush)">
+    <div id="cartShipText" style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--mid);margin-bottom:7px;font-family:var(--sans)">Spend LE 2,000 for free shipping</div>
+    <div style="height:2px;background:var(--border);border-radius:1px"><div id="cartProgFill" style="height:100%;background:var(--accent);border-radius:1px;width:0%;transition:width .4s"></div></div>
+  </div>
+  <div class="cart-body" id="cartBody">
+    <div class="cart-empty">Your bag is empty</div>
+  </div>
+  <div class="cart-foot" id="cartFoot" style="display:none">
+    <div class="cart-total">
+      <span>Subtotal</span>
+      <span id="cartTotal">LE 0.00</span>
+    </div>
+    <p style="font-size:10px;color:var(--muted);margin-bottom:14px;font-family:var(--sans)">Taxes included · Shipping at checkout</p>
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <button class="cart-checkout" style="background:transparent;color:var(--dark);border:1.5px solid var(--dark);box-shadow:none" onclick="closeCart()">Continue Shopping</button>
+      <a href="checkout.html" class="cart-checkout" style="display:block;text-align:center;text-decoration:none">Checkout →</a>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+const PRODUCTS_DATA = [
+  {id:1,name:'Ivory Tiered Midi Dress',price:2200,priceStr:'LE 2,200',cat:'dresses',badge:'new',colors:['#f5f0e8','#e8d5c0'],sizes:['S/M','M/L'],bg:'p1',img:'img/img1.jpg'},
+  {id:2,name:'Sky Blue Linen Co-ord Set',price:2800,priceStr:'LE 2,800',cat:'sets',badge:'new',colors:['#90b8c8','#b8d5e0'],sizes:['S/M','M/L'],bg:'p5',img:'img/img2.jpg'},
+  {id:3,name:'Layered Street Look',price:3200,priceStr:'LE 3,200',cat:'sets',badge:'',colors:['#c8b090','#90a8c0'],sizes:['S/M','M/L'],bg:'p4',img:'img/img3.jpg'},
+  {id:4,name:'Sand Linen Shirt Set',price:2650,priceStr:'LE 2,650',cat:'sets',badge:'new',colors:['#c0bc98','#a8a480'],sizes:['S/M','M/L'],bg:'p7',img:'img/img4.jpg'},
+  {id:5,name:'Oatmeal Wide-Leg Trousers',price:1550,priceStr:'LE 1,550',cat:'skirts',badge:'',colors:['#d5ceb8','#bab498'],sizes:['S/M','M/L'],bg:'p4',img:'img/img5.jpg'},
+  {id:6,name:'White Notch Collar Linen Top',price:1250,priceStr:'LE 1,250',cat:'tops',badge:'',colors:['#ffffff','#f5f0e8'],sizes:['S/M','M/L','L/XL'],bg:'p3',img:'img/img6.jpg'},
+];
+
+const CART_KEY = 'pld_cart';
+const FREE_SHIP = 2000;
+
+function getCart(){return JSON.parse(localStorage.getItem(CART_KEY)||'[]')}
+function saveCart(c){localStorage.setItem(CART_KEY,JSON.stringify(c))}
+function cartTotal(c){return c.reduce((s,i)=>s+i.price*i.qty,0)}
+
+let currentFilter = 'all';
+
+function renderProducts(filter='all'){
+  const grid = document.getElementById('productGrid');
+  const filtered = filter==='all' ? PRODUCTS_DATA : PRODUCTS_DATA.filter(p=>p.cat===filter||p.badge===filter);
+  grid.innerHTML = filtered.map((p,i)=>`
+    <div class="product-card fade-up" onclick="goProduct(${p.id})">
+      <div class="product-img">
+        <div class="product-img-fill ${p.bg}">
+          <img src="${p.img}" alt="${p.name}" style="width:100%;height:100%;object-fit:cover;display:block;">
+        </div>
+        ${p.badge?`<div class="product-badge ${p.badge}">${p.badge==='new'?'New In':p.badge}</div>`:''}
+        <div class="product-actions">
+          <div class="size-chips">
+            ${p.sizes.map((s,j)=>`<div class="size-chip${j===0?' active':''}" onclick="event.stopPropagation();selectSize(this)">${s}</div>`).join('')}
+          </div>
+          <button class="btn-addcart" onclick="event.stopPropagation();addToCart(${p.id})">Add to Bag</button>
+        </div>
+      </div>
+      <div class="product-name">${p.name}</div>
+      <div class="product-price">${p.priceStr}</div>
+      <div class="product-colors">
+        ${p.colors.map((c,j)=>`<div class="color-dot${j===0?' active':''}" style="background:${c}" onclick="event.stopPropagation();this.parentNode.querySelectorAll('.color-dot').forEach(d=>d.classList.remove('active'));this.classList.add('active')"></div>`).join('')}
+      </div>
+    </div>
+  `).join('');
+}
+
+function goProduct(id){location.href='product.html?id='+id}
+
+function setFilter(el,filter){
+  document.querySelectorAll('.filter-tabs li').forEach(l=>l.classList.remove('active'));
+  el.classList.add('active');
+  currentFilter=filter;
+  renderProducts(filter);
+}
+
+function filterProducts(cat){
+  document.querySelectorAll('.filter-tabs li').forEach(l=>l.classList.remove('active'));
+  const tab = [...document.querySelectorAll('.filter-tabs li')].find(l=>l.textContent.toLowerCase()===cat);
+  if(tab)tab.classList.add('active');
+  renderProducts(cat);
+  document.getElementById('products').scrollIntoView({behavior:'smooth'});
+}
+
+function selectSize(el){
+  el.closest('.size-chips').querySelectorAll('.size-chip').forEach(s=>s.classList.remove('active'));
+  el.classList.add('active');
+}
+
+function addToCart(id){
+  const p=PRODUCTS_DATA.find(x=>x.id===id);
+  const cart=getCart();
+  const key=String(id);
+  const existing=cart.find(x=>x.key===key);
+  if(existing){existing.qty++;}
+  else{cart.push({id:p.id,key,name:p.name,price:p.price,size:p.sizes[0],img:p.img,qty:1,stock:10});}
+  saveCart(cart);
+  updateCartUI();
+  showToast('Added to bag ✦');
+}
+
+function updateCartUI(){
+  const cart=getCart();
+  const count=cart.reduce((s,i)=>s+i.qty,0);
+  const total=cartTotal(cart);
+  document.getElementById('cartCount').textContent=count;
+
+  /* shipping progress */
+  const remaining=Math.max(0,FREE_SHIP-total);
+  const pct=Math.min(100,(total/FREE_SHIP)*100);
+  const progFill=document.getElementById('cartProgFill');
+  const shipText=document.getElementById('cartShipText');
+  if(progFill) progFill.style.width=pct+'%';
+  if(shipText) shipText.textContent=remaining>0?`Spend LE ${remaining.toLocaleString()} more for free shipping`:'You\'ve unlocked free shipping! 🎉';
+
+  const body=document.getElementById('cartBody');
+  const foot=document.getElementById('cartFoot');
+  if(!cart.length){
+    body.innerHTML='<div class="cart-empty">Your bag is empty</div>';
+    foot.style.display='none';
+    return;
+  }
+  body.innerHTML=cart.map(item=>`
+    <div class="cart-item">
+      <div class="cart-item-img">
+        <div class="cart-item-img-fill" style="overflow:hidden;width:100%;height:100%;">
+          <img src="${item.img}" alt="${item.name}" style="width:100%;height:100%;object-fit:cover;display:block;">
+        </div>
+      </div>
+      <div class="cart-item-info">
+        <div class="cart-item-name">${item.name}</div>
+        <div class="cart-item-meta">Size: ${item.size}</div>
+        <div class="cart-item-price">LE ${(item.price*item.qty).toLocaleString()}.00</div>
+        <div class="cart-qty">
+          <button class="qty-btn" onclick="changeQty('${item.key}',-1)">−</button>
+          <span class="qty-num">${item.qty}</span>
+          <button class="qty-btn" onclick="changeQty('${item.key}',1)">+</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+  document.getElementById('cartTotal').textContent=`LE ${total.toLocaleString()}.00`;
+  foot.style.display='block';
+}
+
+function changeQty(key,delta){
+  let cart=getCart();
+  const item=cart.find(x=>x.key===key);
+  if(!item)return;
+  item.qty+=delta;
+  if(item.qty<=0)cart=cart.filter(x=>x.key!==key);
+  saveCart(cart);
+  updateCartUI();
+}
+
+function openCart(){
+  document.getElementById('cartOverlay').classList.add('open');
+  document.getElementById('cartDrawer').classList.add('open');
+}
+function closeCart(){
+  document.getElementById('cartOverlay').classList.remove('open');
+  document.getElementById('cartDrawer').classList.remove('open');
+}
+
+let toastTimer;
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer=setTimeout(()=>t.classList.remove('show'),2400);
+}
+
+function toggleSearch(){showToast('Search coming soon ✦')}
+
+renderProducts();
+updateCartUI();
+</script>
+</body>
+</html>
