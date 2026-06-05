@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -72,7 +72,6 @@ body{background:var(--cream);color:var(--dark);font-family:var(--sans);font-weig
 .ship-option.selected{border-color:var(--accent);background:var(--accent-light)}
 .ship-option-left{display:flex;align-items:center;gap:12px}
 .ship-radio{width:16px;height:16px;accent-color:var(--accent)}
-.ship-info{}
 .ship-name{font-size:12px;color:var(--dark);font-weight:400;letter-spacing:.5px}
 .ship-eta{font-size:10px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-top:2px}
 .ship-price{font-size:13px;color:var(--dark);font-family:var(--serif)}
@@ -94,7 +93,7 @@ body{background:var(--cream);color:var(--dark);font-family:var(--sans);font-weig
 
 /* PLACE ORDER */
 .co-submit{margin-top:32px}
-.btn-place-order{width:100%;padding:18px;background:var(--accent);color:#fff;border:none;cursor:pointer;font-size:11px;letter-spacing:3px;text-transform:uppercase;font-family:var(--sans);font-weight:500;transition:background .25s;box-shadow:0 4px 24px rgba(220,118,140,.4)}
+.btn-place-order{ border-radius: 50px; width:100%;padding:18px;background:var(--accent);color:#fff;border:none;cursor:pointer;font-size:11px;letter-spacing:3px;text-transform:uppercase;font-family:var(--sans);font-weight:500;transition:background .25s;box-shadow:0 4px 24px rgba(220,118,140,.4)}
 .btn-place-order:hover{background:var(--accent-dark)}
 .return-link{display:flex;align-items:center;justify-content:center;margin-top:18px;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted)}
 .return-link a{color:var(--muted);text-decoration:none;display:flex;align-items:center;gap:6px;transition:color .2s}
@@ -135,7 +134,17 @@ body{background:var(--cream);color:var(--dark);font-family:var(--sans);font-weig
 .s-total-currency{font-size:11px;color:var(--muted);margin-right:4px}
 .s-total-amount{font-family:var(--serif);font-size:24px;font-weight:400;color:var(--dark)}
 .s-tax-note{font-size:10px;color:var(--muted);margin-top:12px;text-align:right}
-
+@media(max-width:900px){
+  nav{padding:0 20px}
+  .brand{font-size:18px}
+  .brand img{height:24px}}
+  .brand{
+  font-family:var(--serif);font-size:22px;font-weight:400;
+  letter-spacing:1px;color:var(--dark);text-decoration:none;
+  position:absolute;left:50%;transform:translateX(-50%);
+  white-space:nowrap;
+}
+.brand img{height:36px;width:auto;display:block}
 /* SUCCESS OVERLAY */
 .success-overlay{position:fixed;inset:0;background:rgba(26,22,18,.5);z-index:500;display:none;align-items:center;justify-content:center}
 .success-overlay.show{display:flex}
@@ -165,7 +174,7 @@ body{background:var(--cream);color:var(--dark);font-family:var(--sans);font-weig
 
 <!-- Header -->
 <header class="co-header">
-  <a href="shop.html" class="co-brand">Pink Liliy Deer</a>
+  <a href="#" class="brand"><img src="img/logo2.svg" alt="Pink Liliy Deer"></a>
   <button class="co-cart-icon" onclick="showToast('Update your cart from the shop')">
     <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
     <span class="co-cart-badge" id="coCartCount">0</span>
@@ -347,26 +356,6 @@ body{background:var(--cream);color:var(--dark);font-family:var(--sans);font-weig
         <div class="pay-body">Pay with cash when your order arrives.</div>
       </div>
 
-      <div class="pay-option" id="pay-card">
-        <div class="pay-option-head" onclick="selectPayment('card')">
-          <input type="radio" name="payment" value="card">
-          <label>Credit / Debit Card</label>
-          <div class="pay-icons">
-            <span class="pay-icon-tag">Visa</span>
-            <span class="pay-icon-tag">MC</span>
-          </div>
-        </div>
-        <div class="pay-body" id="cardBody" style="display:none">
-          <div class="card-fields">
-            <input class="card-field" type="text" placeholder="Card number" maxlength="19" oninput="formatCard(this)">
-            <div class="card-row">
-              <input class="card-field" type="text" placeholder="MM / YY" maxlength="7" oninput="formatExpiry(this)">
-              <input class="card-field" type="text" placeholder="CVV" maxlength="4">
-            </div>
-            <input class="card-field" type="text" placeholder="Name on card">
-          </div>
-        </div>
-      </div>
     </div>
 
     <!-- Submit -->
@@ -440,6 +429,7 @@ body{background:var(--cream);color:var(--dark);font-family:var(--sans);font-weig
 <script>
 const CART_KEY = 'pld_cart';
 const FREE_SHIP = 2000;
+const IS_BUYNOW = new URLSearchParams(location.search).get('mode') === 'buynow';
 let shippingFee = 90;
 let paymentMethod = 'cod';
 let discountAmount = 0;
@@ -447,9 +437,16 @@ let discountAmount = 0;
 function getCart(){return JSON.parse(localStorage.getItem(CART_KEY)||'[]')}
 function saveCart(c){localStorage.setItem(CART_KEY,JSON.stringify(c))}
 function cartSubtotal(c){return c.reduce((s,i)=>s+i.price*i.qty,0)}
+function getCheckoutItems(){
+  if(IS_BUYNOW){
+    const item=JSON.parse(sessionStorage.getItem('pld_buynow')||'null');
+    return item?[item]:[];
+  }
+  return getCart();
+}
 
 function renderSummary(){
-  const cart=getCart();
+  const cart=getCheckoutItems();
   const sub=cartSubtotal(cart);
   document.getElementById('coCartCount').textContent=cart.reduce((s,i)=>s+i.qty,0);
 
@@ -593,17 +590,18 @@ function buildItemsHtml(cart){
 }
 
 function showSuccess(orderNum){
-  saveCart([]);
+  if(IS_BUYNOW) sessionStorage.removeItem('pld_buynow');
+  else saveCart([]);
   document.getElementById('successOrderNum').textContent = 'Order #' + orderNum;
   document.getElementById('successOverlay').classList.add('show');
   document.body.style.overflow = 'hidden';
 }
 
 function placeOrder(){
-  if(!getCart().length){showToast('Your cart is empty');return;}
+  if(!getCheckoutItems().length){showToast('Your cart is empty');return;}
   if(!validateForm()){showToast('Please fill all required fields');return;}
 
-  const cart       = getCart();
+  const cart       = getCheckoutItems();
   const orderNum   = 'PLD-' + Date.now().toString().slice(-6);
   const orderDate  = new Date().toLocaleDateString('en-GB',{day:'2-digit',month:'long',year:'numeric',hour:'2-digit',minute:'2-digit'});
   const sub        = cartSubtotal(cart);

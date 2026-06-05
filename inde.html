@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coming Soon — Pink Lilyi Deer</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --cream:#fff5f7;--warm:#fdeef2;--blush:#f9c8d0;
+  --dark:#1a1218;--mid:#5a3040;--muted:#9c7885;--border:#f5d5db;
+  --accent:#dc768c;--accent-dark:#c0284a;--accent-light:#fde8ec;
+  --serif:'Cormorant Garamond',Georgia,serif;--sans:'Jost',sans-serif;
+}
+html,body{height:100%}
+body{
+  background:var(--cream);color:var(--dark);
+  font-family:var(--sans);font-weight:300;
+  min-height:100vh;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  overflow-x:hidden;position:relative;
+}
+
+/* ── BACKGROUND ── */
+.bg{
+  position:fixed;inset:0;z-index:0;
+  background:
+    radial-gradient(ellipse at 50% -10%,rgba(255,141,161,.18) 0%,transparent 55%),
+    radial-gradient(ellipse at 100% 100%,rgba(255,141,161,.12) 0%,transparent 50%),
+    radial-gradient(ellipse at 0% 80%,rgba(255,214,222,.2) 0%,transparent 50%),
+    linear-gradient(180deg,#fff9fb 0%,#fef0f3 100%);
+}
+
+/* ── FLOATING PETALS ── */
+.petal{
+  position:fixed;border-radius:50% 0 50% 0;
+  animation:floatPetal linear infinite;z-index:1;pointer-events:none;
+}
+@keyframes floatPetal{
+  0%{transform:translateY(-30px) rotate(0deg) scale(.8);opacity:0}
+  10%{opacity:1}
+  90%{opacity:.4}
+  100%{transform:translateY(110vh) rotate(540deg) scale(1.2);opacity:0}
+}
+
+/* ── CONTENT ── */
+.content{
+  position:relative;z-index:10;
+  text-align:center;
+  padding:48px 24px 56px;
+  max-width:580px;width:100%;
+}
+
+/* ── LOGO ── */
+.logo-wrap{margin-bottom:28px;animation:fadeDown .8s ease both}
+.logo-img{
+  width:164px;height:164px;border-radius:50%;object-fit:cover;
+  box-shadow:0 12px 48px rgba(255,141,161,.35),0 4px 16px rgba(255,141,161,.2);
+  display:block;margin:0 auto;
+}
+.logo-fallback{
+  width:164px;height:164px;border-radius:50%;
+  background:linear-gradient(135deg,var(--accent),var(--accent-dark));
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--serif);font-size:40px;color:#fff;
+  margin:0 auto;box-shadow:0 12px 48px rgba(255,141,161,.35);
+  display:none;
+}
+
+/* ── BRAND NAME ── */
+.brand-name{
+  font-family:var(--serif);font-size:clamp(26px,5vw,40px);
+  font-weight:400;letter-spacing:2px;color:var(--dark);
+  margin-bottom:0;animation:fadeUp .8s .1s ease both;
+}
+
+/* ── DIVIDER ── */
+.deco-divider{
+  display:flex;align-items:center;justify-content:center;
+  gap:14px;margin:18px 0;
+  animation:fadeUp .8s .15s ease both;
+}
+.deco-divider::before,.deco-divider::after{
+  content:'';flex:0 0 44px;height:.5px;background:var(--accent);
+}
+.deco-star{font-size:10px;color:var(--accent)}
+
+/* ── COMING SOON ── */
+.heading{
+  font-family:var(--serif);font-size:clamp(52px,12vw,88px);
+  font-weight:300;line-height:.95;letter-spacing:-1px;
+  color:var(--dark);margin-bottom:12px;
+  animation:fadeUp .8s .2s ease both;
+}
+.heading em{font-style:italic;color:var(--accent)}
+.subtitle{
+  font-size:10px;letter-spacing:3.5px;text-transform:uppercase;
+  color:var(--muted);margin-bottom:40px;
+  animation:fadeUp .8s .25s ease both;
+}
+
+/* ── COUNTDOWN ── */
+.countdown{
+  display:flex;justify-content:center;gap:12px;
+  margin-bottom:44px;animation:fadeUp .8s .35s ease both;
+}
+.cu{text-align:center}
+.cu-box{
+  background:#fff;border:1px solid var(--border);
+  padding:18px 10px 14px;min-width:76px;
+  box-shadow:0 2px 20px rgba(255,141,161,.1);
+  margin-bottom:8px;
+}
+.cu-num{
+  font-family:var(--serif);font-size:clamp(30px,6vw,42px);
+  font-weight:400;color:var(--dark);line-height:1;display:block;
+}
+.cu-label{
+  font-size:8px;letter-spacing:2.5px;text-transform:uppercase;
+  color:var(--muted);font-family:var(--sans);
+}
+
+/* ── EMAIL FORM ── */
+.email-wrap{max-width:420px;margin:0 auto 12px;animation:fadeUp .8s .45s ease both}
+.email-form{display:flex}
+.email-input{
+  flex:1;padding:14px 18px;border:1px solid var(--border);
+  border-right:none;background:#fff;
+  font-size:12px;font-family:var(--sans);color:var(--dark);
+  outline:none;transition:border-color .2s;min-width:0;
+}
+.email-input:focus{border-color:var(--accent)}
+.email-input::placeholder{color:var(--muted)}
+.email-btn{
+  padding:14px 22px;background:var(--accent);color:#fff;border:none;
+  font-size:9px;letter-spacing:2.5px;text-transform:uppercase;
+  font-family:var(--sans);font-weight:500;cursor:pointer;
+  transition:background .2s;white-space:nowrap;flex-shrink:0;
+}
+.email-btn:hover{background:var(--accent-dark)}
+.email-note{
+  font-size:10px;color:var(--muted);margin-bottom:32px;
+  animation:fadeUp .8s .45s ease both;
+}
+
+/* ── SHOP LINK ── */
+.shop-link{
+  display:inline-flex;align-items:center;gap:9px;
+  font-size:10px;letter-spacing:2.5px;text-transform:uppercase;
+  color:var(--accent);text-decoration:none;
+  border-bottom:1px solid var(--blush);padding-bottom:3px;
+  margin-bottom:36px;
+  transition:gap .2s,color .2s;
+  animation:fadeUp .8s .55s ease both;
+}
+.shop-link:hover{gap:16px;color:var(--accent-dark)}
+
+/* ── SOCIAL ── */
+.social{
+  display:flex;justify-content:center;gap:28px;
+  animation:fadeUp .8s .6s ease both;
+}
+.social a{
+  font-size:9px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--muted);text-decoration:none;
+  transition:color .2s;font-family:var(--sans);
+}
+.social a:hover{color:var(--accent)}
+
+/* ── ENTER SHOP BUTTON ── */
+.enter-shop-btn{
+  position:fixed;bottom:28px;left:50%;
+  transform:translateX(-50%);
+  display:inline-flex;align-items:center;gap:10px;
+  background:var(--accent);color:#fff;
+  padding:14px 36px;text-decoration:none;
+  font-size:10px;letter-spacing:3px;text-transform:uppercase;
+  font-family:var(--sans);font-weight:500;
+  box-shadow:0 4px 24px rgba(255,141,161,.5);
+  transition:background .25s,gap .2s;
+  z-index:50;white-space:nowrap;
+  animation:fadeUp .8s .6s ease both;
+}
+.enter-shop-btn:hover{background:var(--accent-dark);gap:16px}
+
+/* ── TOAST ── */
+.toast{
+  position:fixed;bottom:30px;left:50%;
+  transform:translateX(-50%) translateY(20px);
+  background:var(--accent);color:#fff;
+  padding:12px 28px;border-radius:30px;
+  font-size:10px;letter-spacing:2.5px;text-transform:uppercase;
+  font-family:var(--sans);font-weight:500;
+  opacity:0;pointer-events:none;transition:all .3s;
+  z-index:300;box-shadow:0 8px 30px rgba(255,141,161,.5);white-space:nowrap;
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeDown{from{opacity:0;transform:translateY(-24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── BOTTOM NAV (mobile only) ── */
+.bottom-nav{display:none}
+@media(max-width:768px){
+  .bottom-nav{
+    display:flex;position:fixed;bottom:0;left:0;right:0;
+    background:#fff;border-top:1px solid var(--border);
+    z-index:200;padding:8px 0 calc(8px + env(safe-area-inset-bottom));
+  }
+  .bottom-nav a{
+    flex:1;display:flex;flex-direction:column;align-items:center;
+    gap:4px;text-decoration:none;color:var(--muted);
+    font-family:var(--sans);font-size:9px;letter-spacing:1.5px;
+    text-transform:uppercase;transition:color .2s;
+  }
+  .bottom-nav a:hover,.bottom-nav a.active{color:var(--accent)}
+  .bottom-nav svg{width:22px;height:22px;stroke-width:1.5}
+  .content{padding-bottom:90px}
+}
+
+/* ── MOBILE ── */
+@media(max-width:480px){
+  .content{padding:36px 20px 90px}
+  .logo-img,.logo-fallback{width:128px;height:128px}
+  .logo-fallback{font-size:32px}
+  .cu-box{min-width:62px;padding:14px 6px 10px}
+  .countdown{gap:8px}
+  .email-form{flex-direction:column}
+  .email-input{border-right:1px solid var(--border);border-bottom:none}
+  .email-btn{padding:13px;border:none}
+  .deco-divider::before,.deco-divider::after{flex:0 0 28px}
+}
+@media(max-width:360px){
+  .cu-box{min-width:52px;padding:12px 4px 8px}
+  .countdown{gap:6px}
+}
+</style>
+</head>
+<body>
+<div class="bg"></div>
+
+<div class="content">
+
+  <!-- Logo -->
+  <div class="logo-wrap">
+    <img class="logo-img" src="img/logo.png" alt="Pink Lily Deer"
+         onerror="this.style.display='none';document.getElementById('logoFallback').style.display='flex'">
+    <div class="logo-fallback" id="logoFallback">PLD</div>
+  </div>
+
+  <!-- Brand -->
+  <h1 class="brand-name">Pink Lily Deer</h1>
+
+  <!-- Divider -->
+  <div class="deco-divider"><span class="deco-star">✦</span></div>
+
+  <!-- Heading -->
+  <h2 class="heading">Coming <em>Soon</em></h2>
+  <p class="subtitle">Summer Collection &nbsp;·&nbsp; Drop I &nbsp;·&nbsp; 2026</p>
+
+  <!-- Countdown -->
+  <div class="countdown">
+    <div class="cu">
+      <div class="cu-box"><span class="cu-num" id="cdays">00</span></div>
+      <span class="cu-label">Days</span>
+    </div>
+    <div class="cu">
+      <div class="cu-box"><span class="cu-num" id="chours">00</span></div>
+      <span class="cu-label">Hours</span>
+    </div>
+    <div class="cu">
+      <div class="cu-box"><span class="cu-num" id="cmins">00</span></div>
+      <span class="cu-label">Minutes</span>
+    </div>
+    <div class="cu">
+      <div class="cu-box"><span class="cu-num" id="csecs">00</span></div>
+      <span class="cu-label">Seconds</span>
+    </div>
+  </div>
+
+  <!-- Email -->
+  <div class="email-wrap">
+    <div class="email-form">
+      <input class="email-input" type="email" id="emailInput" placeholder="Your email — get early access">
+      <button class="email-btn" onclick="subscribe()">Notify Me</button>
+    </div>
+  </div>
+  <p class="email-note">Be the first to shop. No spam, ever.</p>
+
+
+</div>
+
+
+<div class="toast" id="toast"></div>
+
+<!-- Bottom nav — mobile only -->
+<nav class="bottom-nav">
+  <a href="shop.html">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/>
+      <rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>
+    </svg>
+    Shop
+  </a>
+  <a href="checkout.html">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+      <line x1="3" y1="6" x2="21" y2="6" stroke-linecap="round"/>
+      <path stroke-linecap="round" stroke-linejoin="round" d="M16 10a4 4 0 0 1-8 0"/>
+    </svg>
+    Cart
+  </a>
+  <a href="#">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+      <circle cx="12" cy="7" r="4"/>
+    </svg>
+    Account
+  </a>
+  <a href="#">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <circle cx="11" cy="11" r="8"/>
+      <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-4.35-4.35"/>
+    </svg>
+    Search
+  </a>
+</nav>
+
+<script>
+// Floating petals
+for(let i=0;i<14;i++){
+  const p=document.createElement('div');
+  const size=4+Math.random()*8;
+  p.className='petal';
+  p.style.cssText=`left:${Math.random()*100}%;width:${size}px;height:${size}px;background:rgba(255,141,161,${.15+Math.random()*.2});animation-duration:${10+Math.random()*14}s;animation-delay:${Math.random()*12}s`;
+  document.body.appendChild(p);
+}
+
+// Countdown — change this date to your real launch date
+const LAUNCH = new Date('2026-06-15T00:00:00');
+
+function tick(){
+  const diff = LAUNCH - new Date();
+  if(diff <= 0){
+    ['cdays','chours','cmins','csecs'].forEach(id=>document.getElementById(id).textContent='00');
+    return;
+  }
+  const pad = n => String(Math.floor(n)).padStart(2,'0');
+  document.getElementById('cdays').textContent  = pad(diff/864e5);
+  document.getElementById('chours').textContent = pad((diff%864e5)/36e5);
+  document.getElementById('cmins').textContent  = pad((diff%36e5)/6e4);
+  document.getElementById('csecs').textContent  = pad((diff%6e4)/1e3);
+}
+tick();
+setInterval(tick,1000);
+
+// Email subscribe
+function subscribe(){
+  const v=document.getElementById('emailInput').value.trim();
+  if(!v||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)){showToast('Please enter a valid email');return;}
+  document.getElementById('emailInput').value='';
+  showToast('You\'re on the list ✦');
+}
+document.getElementById('emailInput').addEventListener('keypress',e=>{if(e.key==='Enter')subscribe()});
+
+let tt;
+function showToast(m){
+  const t=document.getElementById('toast');
+  t.textContent=m;t.classList.add('show');
+  clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('show'),2600);
+}
+</script>
+</body>
+</html>
