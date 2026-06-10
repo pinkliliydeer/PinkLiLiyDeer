@@ -195,10 +195,8 @@ nav{position:sticky;top:0;z-index:100;background:var(--cream);border-bottom:1px 
 
 <nav>
   <ul class="nav-links">
-    <li><a href="shop.html">New In</a></li>
-    <li><a href="shop.html">Shop</a></li>
-
-
+    <li><a href="index.html">New In</a></li>
+    <li><a href="index.html">Shop</a></li>
   </ul>
   <a href="index.html" class="brand"><img src="img/logo2.svg" alt="Pink Liliy Deer"></a>
   <div class="nav-right">
@@ -213,9 +211,9 @@ nav{position:sticky;top:0;z-index:100;background:var(--cream);border-bottom:1px 
 </nav>
 
 <div class="breadcrumb">
-  <a href="shop.html">Home</a>
+  <a href="index.html">Home</a>
   <span style="color:var(--border)">/</span>
-  <a href="shop.html" id="bcCat">Shop</a>
+  <a href="index.html" id="bcCat">Shop</a>
   <span style="color:var(--border)">/</span>
   <span id="bcName" style="color:var(--dark)">Product</span>
 </div>
@@ -258,60 +256,60 @@ nav{position:sticky;top:0;z-index:100;background:var(--cream);border-bottom:1px 
 
 <script>
 const PRODUCTS = [
-  {id:1,name:'Ivory Tiered Midi Dress',price:2200,cat:'Dresses',badge:'new',stock:3,
-   sizes:['S/M','M/L'],
-   images:['img/img1.jpg','img/img2.jpg','img/img3.jpg','img/img4.jpg'],
-   descShort:'Experience effortless elegance with our Ivory Tiered Midi Dress. Crafted from premium linen fabric that allows skin to breathe during warm weather, this ensemble combines practicality with sophisticated style.',
-   desc:'Experience effortless elegance with our Ivory Tiered Midi Dress. Crafted from premium linen fabric that allows skin to breathe during warm weather, this ensemble combines practicality with sophisticated style. The lightweight construction ensures comfort throughout the day, while the crisp ivory hue offers versatile styling options for the discerning wearer seeking both functionality and refined aesthetics in summer attire.',
-   designNotes:'Flowing midi length with tiered skirt detail. Relaxed silhouette with wide sleeves and a modest neckline. Tie detail at front waist.',
-   fitNotes:'Our model is 170cm tall and wearing size S/M. This style runs true to size. We recommend sizing up if between sizes.',
-   fabricCare:'95% Linen, 5% Cotton. Hand wash cold or gentle machine wash. Lay flat to dry. Do not bleach or tumble dry.',
-   sizeChart:'S/M: fits UK 8–12 / US 4–8 / EU 36–40\nM/L: fits UK 12–16 / US 8–12 / EU 40–44'},
-  {id:2,name:'Sky Blue Linen Co-ord Set',price:2800,cat:'Sets',badge:'new',stock:5,
-   sizes:['S/M','M/L'],
-   images:['img/img2.jpg','img/img3.jpg','img/img4.jpg','img/img5.jpg'],
-   descShort:'Effortlessly chic, our Sky Blue Linen Co-ord Set features a relaxed wide-leg trouser and a flowing top with delicate tie details. Perfect for summer outings.',
-   desc:'Effortlessly chic, our Sky Blue Linen Co-ord Set features a relaxed wide-leg trouser and a flowing top with delicate tie details. Perfect for summer outings, this set moves beautifully and keeps you cool. The matching fabric creates a cohesive look that is effortlessly put-together.',
-   designNotes:'Matching set with wide-leg trousers and boxy top. Tie waist detail on top. Side pockets on trousers.',
-   fitNotes:'Our model is 170cm tall and wearing size S/M. True to size.',
-   fabricCare:'100% Linen. Machine wash cold, gentle cycle. Hang to dry.',
-   sizeChart:'S/M: fits UK 8–12\nM/L: fits UK 12–16'},
-  {id:3,name:'Layered Street Look',price:3200,cat:'Sets',badge:'',stock:2,
-   sizes:['S/M','M/L'],
-   images:['img/img3.jpg','img/img4.jpg','img/img5.jpg','img/img6.jpg'],
-   descShort:'Make a statement with our Layered Street Look — a curated ensemble designed for the modern modest fashionista.',
-   desc:'Make a statement with our Layered Street Look — a curated ensemble designed for the modern modest fashionista. Mix-and-match pieces for endless styling possibilities. Each layer adds depth and dimension to your look.',
-   designNotes:'Three-piece set: inner layer, outer drape, and wide-leg trousers. Versatile pieces that can be worn separately.',
-   fitNotes:'Oversized silhouette. Model wears S/M. Can be styled loose or belted.',
-   fabricCare:'100% Cotton Gauze. Hand wash cold. Line dry.',
-   sizeChart:'S/M: fits UK 8–14\nM/L: fits UK 14–18'},
-  {id:4,name:'Sand Linen Shirt Set',price:2650,cat:'Sets',badge:'new',stock:6,
-   sizes:['S/M','M/L'],
-   images:['img/img4.jpg','img/img5.jpg','img/img6.jpg','img/img1.jpg'],
-   descShort:'Our Sand Linen Shirt Set combines the comfort of natural fibres with a refined tailored aesthetic.',
-   desc:'Our Sand Linen Shirt Set combines the comfort of natural fibres with a refined tailored aesthetic. Perfect for both casual and semi-formal occasions, this matching set is a wardrobe staple for the modern modest woman.',
-   designNotes:'Button-front shirt with relaxed collar paired with wide-leg trousers. Matching fabric throughout.',
-   fitNotes:'True to size. Model wears S/M. Classic tailored fit with comfortable allowance.',
-   fabricCare:'55% Linen, 45% Viscose. Dry clean recommended. Can hand wash cold.',
-   sizeChart:'S/M: fits UK 8–12\nM/L: fits UK 12–16'},
-  {id:5,name:'Oatmeal Wide-Leg Trousers',price:1550,cat:'Trousers',badge:'',stock:8,
-   sizes:['S/M','M/L'],
-   images:['img/img5.jpg','img/img6.jpg','img/img1.jpg','img/img2.jpg'],
-   descShort:'A wardrobe essential. Our Oatmeal Wide-Leg Trousers offer the perfect balance of comfort and sophistication.',
-   desc:'A wardrobe essential. Our Oatmeal Wide-Leg Trousers offer the perfect balance of comfort and sophistication. High-waisted silhouette with a relaxed wide leg, crafted in breathable natural fabric.',
-   designNotes:'High-waist construction. Wide, flowing leg. Elasticated back waistband for comfort. Side pockets.',
-   fitNotes:'Model wears S/M. True to size. High-rise waist provides excellent coverage.',
-   fabricCare:'100% Linen. Machine wash cold. Hang dry. Iron while slightly damp.',
-   sizeChart:'S/M: fits UK 8–12 / waist 26"–30"\nM/L: fits UK 12–16 / waist 30"–34"'},
-  {id:6,name:'White Notch Collar Linen Top',price:1250,cat:'Tops',badge:'',stock:10,
-   sizes:['S/M','M/L','L/XL'],
-   images:['img/img6.jpg','img/img1.jpg','img/img2.jpg','img/img3.jpg'],
-   descShort:'The perfect foundation piece. Our White Notch Collar Linen Top features a classic notch collar, relaxed fit, and elegant tie-front detail.',
-   desc:'The perfect foundation piece. Our White Notch Collar Linen Top features a classic notch collar, relaxed fit, and elegant tie-front detail. Pairs beautifully with any bottom — wide-leg trousers, midi skirts, or tailored sets.',
-   designNotes:'Notch collar with button closure. Tie front detail. 3/4 sleeve length. Relaxed, modest silhouette.',
-   fitNotes:'True to size. Model wears S/M. Lightweight and breathable.',
+  {id:5,name:'Everyday Linen Pant',price:1550,cat:'Pants',badge:'new',stock:8,
+   sizes:['One Size'],
+   images:['img/img5.jpg','img/img4.jpg','img/img2.jpg','img/img3.jpg'],
+   descShort:'Elevated comfort meets refined simplicity. The Everyday Linen Pant pairs flawlessly with any top in our collection. A wide relaxed cut and soft linen blend.',
+   desc:'Elevated comfort meets refined simplicity. The Everyday Linen Pant pairs flawlessly with any top in our collection. A wide relaxed cut and soft linen blend ensure you look polished without trying. High-waisted silhouette with a relaxed wide leg, crafted in breathable natural fabric that keeps you cool all day.',
+   designNotes:'Wide-leg silhouette with a relaxed, flowing fit. Elasticated waistband for comfort. Two side pockets.',
+   fitNotes:'One Size fits UK 8–18. Our model is 170cm and wears One Size.',
+   fabricCare:'100% Linen. Machine wash cold, gentle cycle. Hang to dry. Iron while slightly damp.',
+   sizeChart:'One Size: fits UK 8–18 / waist 26"–38"'},
+  {id:6,name:'White Notch Collar Linen Top',price:1250,cat:'Blouses',badge:'new',stock:10,
+   sizes:['One Size'],
+   images:['img/img6.jpg','img/img5.jpg','img/img3.jpg','img/img1.jpg'],
+   descShort:'The perfect foundation piece. Features a classic notch collar, relaxed fit, and elegant styling — designed to pair beautifully with any bottom in our collection.',
+   desc:'The perfect foundation piece. Our White Notch Collar Linen Top features a classic notch collar, relaxed fit, and elegant styling. Pairs beautifully with any bottom — wide-leg trousers or our linen pants. Crafted in 100% breathable linen for effortless all-day comfort.',
+   designNotes:'Notch collar with button closure. Relaxed, modest silhouette. Long sleeves with cuffed detail.',
+   fitNotes:'True to size. Model wears One Size. Lightweight and breathable.',
    fabricCare:'100% Linen. Machine wash cold, gentle cycle. Hang to dry. Iron on medium.',
-   sizeChart:'S/M: fits UK 8–12\nM/L: fits UK 12–16\nL/XL: fits UK 16–20'},
+   sizeChart:'One Size: fits UK 8–20'},
+  {id:7,name:'Lily Blouse',price:1450,cat:'Blouses',badge:'',stock:7,
+   sizes:['One Size'],
+   images:['img/img2.jpg','img/img6.jpg','img/img3.jpg','img/img5.jpg'],
+   descShort:'Light as air and graceful in every movement — the Lily Blouse is designed for effortless all-day elegance. Delicate draping and a relaxed silhouette.',
+   desc:'Light as air and graceful in every movement — the Lily Blouse is designed for effortless all-day elegance. Delicate draping, a relaxed silhouette, and premium breathable linen fabric make it perfect for brunches, garden outings, and beyond. Available in multiple soft seasonal tones.',
+   designNotes:'Relaxed silhouette with soft draping. Modest neckline. Long sleeves with delicate cuffs.',
+   fitNotes:'One Size. True to size. Our model is 170cm and wears One Size.',
+   fabricCare:'100% Linen. Machine wash cold. Hang to dry. Iron on medium heat.',
+   sizeChart:'One Size: fits UK 8–18'},
+  {id:8,name:'Cream Wide-Leg Pants',price:1650,cat:'Pants',badge:'',stock:6,
+   sizes:['One Size'],
+   images:['img/img4.jpg','img/img5.jpg','img/img1.jpg','img/img2.jpg'],
+   descShort:'A wardrobe essential. Our Cream Wide-Leg Pants offer the perfect balance of comfort and sophistication with a flowing, high-waisted silhouette.',
+   desc:'A wardrobe essential. Our Cream Wide-Leg Pants offer the perfect balance of comfort and sophistication. High-waisted silhouette with a relaxed wide leg, crafted in breathable natural fabric. The cream tone pairs effortlessly with every blouse and top in our collection.',
+   designNotes:'High-waist construction. Wide, flowing leg. Elasticated back waistband. Side pockets.',
+   fitNotes:'True to size. Model wears One Size. High-rise waist provides excellent coverage.',
+   fabricCare:'100% Linen. Machine wash cold. Hang dry. Iron while slightly damp.',
+   sizeChart:'One Size: fits UK 8–18 / waist 26"–36"'},
+  {id:9,name:'Basic Long Shirt',price:1350,cat:'Long Shirts',badge:'new',stock:9,
+   sizes:['One Size'],
+   images:['img/img3.jpg','img/img2.jpg','img/img4.jpg','img/img6.jpg'],
+   descShort:'The ultimate layering piece — our Basic Long Shirt moves seamlessly from casual to polished. Clean lines and a relaxed drape for effortless everyday wear.',
+   desc:'The ultimate layering piece — our Basic Long Shirt moves seamlessly from casual to polished. Clean lines, a relaxed drape, and a versatile palette make it a true wardrobe essential. Can be styled as a standalone dress or layered effortlessly over our wide-leg trousers.',
+   designNotes:'Longline silhouette falling below the knee. Classic collar with full button placket. Long sleeves. Relaxed, straight-cut body.',
+   fitNotes:'Our model is 170cm and wears One Size. Designed with a relaxed, straight fit — true to size.',
+   fabricCare:'100% Linen. Machine wash cold, gentle cycle. Hang to dry. Iron on medium heat.',
+   sizeChart:'One Size: fits UK 8–20 / bust 86–116cm'},
+  {id:10,name:'Ivory Linen Long Shirt',price:1250,cat:'Long Shirts',badge:'',stock:5,
+   sizes:['One Size'],
+   images:['img/img1.jpg','img/img3.jpg','img/img5.jpg','img/img6.jpg'],
+   descShort:'Effortless and refined, the Ivory Linen Long Shirt is a versatile piece designed for graceful all-day wear in warm, natural tones.',
+   desc:'Effortless and refined, the Ivory Linen Long Shirt is a versatile piece designed for graceful all-day wear. The classic ivory hue and relaxed silhouette make it endlessly versatile — layer it over trousers or wear it as a light dress for sunny outings. 100% breathable linen for lasting comfort.',
+   designNotes:'Longline cut with relaxed fit. Button front placket. Classic collar. Long sleeves with button cuffs.',
+   fitNotes:'True to size. Model wears One Size. Lightweight 100% linen.',
+   fabricCare:'100% Linen. Machine wash cold. Hang to dry. Iron on medium heat while slightly damp.',
+   sizeChart:'One Size: fits UK 8–20'},
 ];
 
 const CART_KEY = 'pld_cart';
@@ -339,7 +337,9 @@ function renderProduct(){
   currentProduct=p;
   selectedSize=p.sizes[0];
   document.title=p.name+' — Pink Liliy Deer';
-  document.getElementById('bcCat').textContent=p.cat;
+  const bcCat=document.getElementById('bcCat');
+  bcCat.textContent=p.cat;
+  bcCat.href='index.html';
   document.getElementById('bcName').textContent=p.name;
 
   document.getElementById('gallery').innerHTML=`

@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Coming Soon — Pink Lilyi Deer</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -168,6 +169,45 @@ body{
 }
 .social a:hover{color:var(--accent)}
 
+/* ── DISCOUNT REVEAL ── */
+.code-reveal{
+  display:none;margin-bottom:32px;
+  animation:fadeUp .6s ease both;
+}
+.code-reveal.show{display:block}
+.code-box{
+  background:#fff;border:1.5px dashed var(--blush);
+  border-radius:16px;padding:28px 24px 22px;
+  box-shadow:0 4px 28px rgba(220,118,140,.12);
+  margin-bottom:10px;
+}
+.code-eyebrow{
+  font-size:9px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--accent);margin-bottom:10px;font-family:var(--sans);
+}
+.code-value{
+  font-family:var(--serif);font-size:clamp(28px,8vw,42px);
+  font-weight:400;color:var(--dark);letter-spacing:6px;
+  margin-bottom:6px;cursor:pointer;transition:color .2s;
+}
+.code-value:hover{color:var(--accent)}
+.code-sub{
+  font-size:10px;color:var(--muted);letter-spacing:1.5px;
+  text-transform:uppercase;margin-bottom:16px;font-family:var(--sans);
+}
+.code-copy-btn{
+  display:inline-flex;align-items:center;gap:7px;
+  background:var(--accent);color:#fff;border:none;cursor:pointer;
+  padding:9px 20px;font-size:9px;letter-spacing:2px;text-transform:uppercase;
+  font-family:var(--sans);font-weight:500;border-radius:50px;
+  transition:background .2s;
+}
+.code-copy-btn:hover{background:var(--accent-dark)}
+.code-note{
+  font-size:10px;color:var(--muted);letter-spacing:1px;
+  font-family:var(--sans);
+}
+
 /* ── ENTER SHOP BUTTON ── */
 .enter-shop-btn{
   position:fixed;bottom:28px;left:50%;
@@ -203,22 +243,6 @@ body{
 
 /* ── BOTTOM NAV (mobile only) ── */
 .bottom-nav{display:none}
-@media(max-width:768px){
-  .bottom-nav{
-    display:flex;position:fixed;bottom:0;left:0;right:0;
-    background:#fff;border-top:1px solid var(--border);
-    z-index:200;padding:8px 0 calc(8px + env(safe-area-inset-bottom));
-  }
-  .bottom-nav a{
-    flex:1;display:flex;flex-direction:column;align-items:center;
-    gap:4px;text-decoration:none;color:var(--muted);
-    font-family:var(--sans);font-size:9px;letter-spacing:1.5px;
-    text-transform:uppercase;transition:color .2s;
-  }
-  .bottom-nav a:hover,.bottom-nav a.active{color:var(--accent)}
-  .bottom-nav svg{width:22px;height:22px;stroke-width:1.5}
-  .content{padding-bottom:90px}
-}
 
 /* ── MOBILE ── */
 @media(max-width:480px){
@@ -250,8 +274,7 @@ body{
     <div class="logo-fallback" id="logoFallback">PLD</div>
   </div>
 
-  <!-- Brand -->
-  <h1 class="brand-name">Pink Lily Deer</h1>
+
 
   <!-- Divider -->
   <div class="deco-divider"><span class="deco-star">✦</span></div>
@@ -280,14 +303,28 @@ body{
     </div>
   </div>
 
-  <!-- Email -->
-  <div class="email-wrap">
+  <!-- Email form -->
+  <div class="email-wrap" id="emailWrap">
     <div class="email-form">
       <input class="email-input" type="email" id="emailInput" placeholder="Your email — get early access">
-      <button class="email-btn" onclick="subscribe()">Notify Me</button>
+      <button type="button" class="email-btn" id="emailBtn" onclick="subscribe()">Notify Me</button>
     </div>
   </div>
-  <p class="email-note">Be the first to shop. No spam, ever.</p>
+  <p class="email-note" id="emailNote">Be the first to shop. No spam, ever.</p>
+
+  <!-- Discount code reveal (shown after subscribe) -->
+  <div class="code-reveal" id="codeReveal">
+    <div class="code-box">
+      <div class="code-eyebrow">Your Early Access Discount</div>
+      <div class="code-value" id="codeValue" onclick="copyCode()">SUMMER10</div>
+      <div class="code-sub">10% off your entire order &nbsp;·&nbsp; Applied at checkout</div>
+      <button type="button" class="code-copy-btn" onclick="copyCode()">
+        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        Copy Code
+      </button>
+    </div>
+    <p class="code-note">Save this code — use it when you shop on launch day ✦</p>
+  </div>
 
 
 </div>
@@ -338,8 +375,7 @@ for(let i=0;i<14;i++){
   document.body.appendChild(p);
 }
 
-// Countdown — change this date to your real launch date
-const LAUNCH = new Date('2026-06-15T00:00:00');
+const LAUNCH = new Date('2026-06-16T00:00:00');
 
 function tick(){
   const diff = LAUNCH - new Date();
@@ -356,14 +392,67 @@ function tick(){
 tick();
 setInterval(tick,1000);
 
-// Email subscribe
+emailjs.init('6LRRvq-ENdWBck1yH');
+const EJ_SERVICE       = 'service_b5kh73h';
+const EJ_OWNER_TPL     = 'template_mgrowk2'; // existing owner-notification template
+const DISCOUNT_CODE    = 'SUMMER10';
+
 function subscribe(){
-  const v=document.getElementById('emailInput').value.trim();
-  if(!v||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)){showToast('Please enter a valid email');return;}
-  document.getElementById('emailInput').value='';
-  showToast('You\'re on the list ✦');
+  const input = document.getElementById('emailInput');
+  const btn   = document.getElementById('emailBtn');
+  const v = input.value.trim();
+  if(!v || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)){
+    showToast('Please enter a valid email');
+    return;
+  }
+
+  btn.textContent = '...';
+  btn.disabled = true;
+
+  // Notify owner via existing template — no new template needed
+  emailjs.send(EJ_SERVICE, EJ_OWNER_TPL, {
+    order_num:        'EARLY-ACCESS',
+    order_date:       new Date().toLocaleDateString('en-GB',{day:'2-digit',month:'long',year:'numeric',hour:'2-digit',minute:'2-digit'}),
+    customer_name:    'Early Access Subscriber',
+    customer_email:   v,
+    customer_phone:   '—',
+    customer_address: '—',
+    customer_city:    '—',
+    customer_gov:     '—',
+    order_items_html: `<p style="font-family:sans-serif;color:#5a3040">New early access subscriber:<br><strong>${v}</strong><br>Discount code sent: <strong>${DISCOUNT_CODE}</strong></p>`,
+    subtotal:         '—',
+    shipping:         '—',
+    total:            '—',
+    payment_method:   '—',
+  }).catch(()=>{}); // silent — owner notification is secondary
+
+  // Reveal code on screen immediately
+  revealCode();
+
+  btn.textContent = 'Notify Me';
+  btn.disabled = false;
 }
-document.getElementById('emailInput').addEventListener('keypress',e=>{if(e.key==='Enter')subscribe()});
+
+function revealCode(){
+  document.getElementById('emailWrap').style.display = 'none';
+  document.getElementById('emailNote').style.display = 'none';
+  const reveal = document.getElementById('codeReveal');
+  reveal.classList.add('show');
+  reveal.scrollIntoView({behavior:'smooth', block:'center'});
+}
+
+function copyCode(){
+  navigator.clipboard.writeText(DISCOUNT_CODE).then(()=>{
+    showToast('Code copied ✦');
+    const btn = document.querySelector('.code-copy-btn');
+    btn.textContent = '✓ Copied!';
+    setTimeout(()=>{ btn.innerHTML = `<svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy Code`; }, 2000);
+  }).catch(()=>{
+    showToast('Code: ' + DISCOUNT_CODE);
+  });
+}
+
+document.getElementById('emailInput').addEventListener('keypress', e => { if(e.key==='Enter') subscribe(); });
 
 let tt;
 function showToast(m){

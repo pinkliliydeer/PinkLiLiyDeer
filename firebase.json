@@ -1,0 +1,12 @@
+{
+  "hosting": {
+    "public": "lib",
+    "ignore": [
+      "firebase.json",
+      ".firebaserc",
+      ".claude",
+      ".vscode",
+      "node_modules"
+    ]
+  }
+}

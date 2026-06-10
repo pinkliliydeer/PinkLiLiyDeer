@@ -5,11 +5,10 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Launch Chrome",
+            "command": "npm start",
+            "name": "Run npm start",
             "request": "launch",
-            "type": "chrome",
-            "url": "http://localhost:8080",
-            "webRoot": "${workspaceFolder}"
+            "type": "node-terminal"
         },
         {
             "type": "chrome",

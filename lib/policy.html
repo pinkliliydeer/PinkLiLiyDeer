@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Policies — Pink Liliy Deer</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --cream:#fff5f7;--warm:#fdeef2;--blush:#f9c8d0;
+  --dark:#1a1218;--mid:#5a3040;--muted:#9c7885;--border:#f5d5db;
+  --accent:#dc768c;--accent-dark:#c0284a;--accent-light:#fde8ec;
+  --serif:'Cormorant Garamond',Georgia,serif;--sans:'Jost',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--cream);color:var(--dark);font-family:var(--sans);font-weight:300;min-height:100vh}
+
+/* ── NAV ── */
+.announce{background:var(--accent);color:#fff;text-align:center;padding:11px;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-family:var(--sans);font-weight:500}
+nav{position:sticky;top:0;z-index:100;background:var(--cream);border-bottom:1px solid var(--border);padding:0 40px;display:flex;align-items:center;justify-content:space-between;height:64px}
+.brand img{height:36px;width:auto;display:block}
+.back-link{display:flex;align-items:center;gap:8px;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--mid);text-decoration:none;font-family:var(--sans);transition:color .2s}
+.back-link:hover{color:var(--dark)}
+.nav-placeholder{width:60px}
+
+/* ── PAGE HEADER ── */
+.page-header{
+  text-align:center;padding:64px 40px 48px;
+  border-bottom:1px solid var(--border);
+  background:var(--cream);
+}
+.page-title{
+  font-family:var(--serif);font-size:clamp(38px,5vw,60px);
+  font-weight:300;color:var(--dark);letter-spacing:-0.5px;
+  margin-bottom:12px;
+}
+.page-subtitle{
+  font-size:10px;letter-spacing:4px;text-transform:uppercase;
+  color:var(--accent);font-family:var(--sans);font-weight:500;
+}
+
+/* ── TAB NAV ── */
+.tab-nav{
+  display:flex;justify-content:center;gap:0;
+  border-bottom:1px solid var(--border);
+  background:var(--cream);
+  position:sticky;top:64px;z-index:90;
+}
+.tab-btn{
+  padding:16px 36px;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;
+  font-family:var(--sans);font-weight:500;
+  color:var(--muted);background:none;border:none;cursor:pointer;
+  border-bottom:2px solid transparent;margin-bottom:-1px;
+  transition:color .2s,border-color .2s;
+}
+.tab-btn.active{color:var(--dark);border-bottom-color:var(--accent)}
+.tab-btn:hover{color:var(--dark)}
+
+/* ── CONTENT WRAPPER ── */
+.policy-content{max-width:800px;margin:0 auto;padding:60px 40px 100px}
+
+/* Tab sections */
+.tab-section{display:none}
+.tab-section.active{display:block}
+
+/* ── LANG BLOCK ── */
+.lang-block{
+  margin-bottom:28px;
+  padding:40px 44px;
+  background:#fff;
+  border-radius:16px;
+  border:1px solid var(--border);
+  box-shadow:0 2px 16px rgba(220,118,140,0.06);
+}
+.lang-label{
+  font-size:10px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--accent);font-family:var(--sans);font-weight:600;
+  margin-bottom:28px;
+  display:flex;align-items:center;gap:10px;
+}
+.lang-label::before{content:'';width:24px;height:1px;background:var(--accent)}
+
+/* ── ARABIC BLOCK ── */
+.lang-ar{direction:rtl;text-align:right}
+.lang-ar .policy-item{
+  padding-bottom:24px;margin-bottom:24px;
+  border-bottom:1px solid var(--border);
+}
+.lang-ar .policy-item:last-child{padding-bottom:0;margin-bottom:0;border-bottom:none}
+.lang-ar .policy-item-title{
+  font-weight:700;font-size:18px;color:var(--dark);
+  font-family:var(--sans);margin-bottom:10px;letter-spacing:0.3px;
+}
+.lang-ar .policy-item-body{
+  font-size:16px;color:var(--mid);line-height:2;font-family:var(--sans);font-weight:400;
+}
+.lang-ar .policy-note{
+  display:flex;justify-content:flex-end;gap:10px;
+  margin-bottom:10px;font-size:15px;color:var(--mid);line-height:1.9;font-family:var(--sans);font-weight:400;
+}
+.lang-ar .policy-note::after{content:'✦';color:var(--accent);font-size:11px;flex-shrink:0;margin-top:5px}
+
+/* ── ENGLISH BLOCK ── */
+.lang-en{}
+.lang-en .policy-item{
+  padding-bottom:24px;margin-bottom:24px;
+  border-bottom:1px solid var(--border);
+}
+.lang-en .policy-item:last-child{padding-bottom:0;margin-bottom:0;border-bottom:none}
+.lang-en .policy-item-title{
+  font-weight:700;font-size:18px;color:var(--dark);
+  font-family:var(--sans);margin-bottom:10px;letter-spacing:0.2px;
+}
+.lang-en .policy-item-body{
+  font-size:16px;color:var(--mid);line-height:2;font-family:var(--sans);font-weight:400;
+}
+.lang-en .policy-note{
+  display:flex;gap:10px;
+  margin-bottom:10px;font-size:15px;color:var(--mid);line-height:1.9;font-family:var(--sans);font-weight:400;
+}
+.lang-en .policy-note::before{content:'✦';color:var(--accent);font-size:11px;flex-shrink:0;margin-top:5px}
+
+/* ── FOOTER ── */
+.policy-footer{
+  border-top:1px solid var(--border);padding:24px 40px;
+  display:flex;align-items:center;justify-content:space-between;
+  background:var(--cream);
+}
+.policy-footer-copy{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted)}
+.policy-footer-back{
+  font-size:10px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--accent);text-decoration:none;transition:color .2s;
+  display:flex;align-items:center;gap:6px;
+}
+.policy-footer-back:hover{color:var(--accent-dark)}
+
+@media(max-width:768px){
+  nav{padding:0 20px}
+  .brand img{height:26px}
+  .tab-btn{padding:14px 18px;font-size:9px}
+  .page-header{padding:40px 20px 32px}
+  .policy-content{padding:32px 16px 80px}
+  .lang-block{padding:20px}
+  .policy-footer{padding:20px}
+}
+</style>
+</head>
+<body>
+
+<div class="announce">Free delivery on orders over LE 2,000 &nbsp;·&nbsp; New summer drop is live</div>
+
+<nav>
+  <a href="index.html" class="back-link">
+    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+    Back
+  </a>
+  <a href="index.html" class="brand"><img src="img/logo2.svg" alt="Pink Liliy Deer"></a>
+  <div class="nav-placeholder"></div>
+</nav>
+
+<!-- Page Header -->
+<div class="page-header">
+  <h1 class="page-title">Our Policies</h1>
+  <div class="page-subtitle">Transparency &amp; Care</div>
+</div>
+
+<!-- Tab Navigation -->
+<div class="tab-nav">
+  <button type="button" class="tab-btn active" onclick="switchTab('shipping',this)">Shipping Policy</button>
+  <button type="button" class="tab-btn" onclick="switchTab('returns',this)">Return &amp; Exchange</button>
+</div>
+
+<!-- Content -->
+<div class="policy-content">
+
+  <!-- ═══ SHIPPING POLICY ═══ -->
+  <div class="tab-section active" id="tab-shipping">
+
+    <!-- Arabic -->
+    <div class="lang-block lang-ar">
+      <div class="lang-label">سياسة الشحن</div>
+
+      <div class="policy-item">
+        <div class="policy-item-title">مناطق التوصيل</div>
+        <div class="policy-item-body">الشحن متاح لجميع محافظات مصر</div>
+      </div>
+
+      <div class="policy-item">
+        <div class="policy-item-title">مدة الشحن</div>
+        <div class="policy-item-body">يتم توصيل الطلب خلال 3 ل 7 أيام عمل</div>
+      </div>
+
+      <div class="policy-item">
+        <div class="policy-item-title">رسوم الشحن</div>
+        <div class="policy-item-body">رسوم الشحن تختلف حسب المحافظة، وسيتم تحديد التكلفة النهائية أثناء تأكيد الأوردر.</div>
+      </div>
+
+      <div class="policy-item">
+        <div class="policy-item-title">معاينة الطلب عند الاستلام</div>
+        <div class="policy-item-body">يمكن للعميل معاينة الطلب عند وصول المندوب حتى 10 دقائق</div>
+      </div>
+
+      <div class="policy-item">
+        <div class="policy-item-title">ملاحظات مهمة</div>
+        <div class="policy-note">بعد مغادرة المندوب لا يمكن طلب تغييرات في الطلب أو استرجاع</div>
+        <div class="policy-note">غير متاح استلام جزئي للأوردر. الاستلام للأوردر بالكامل أو استرجاعه بالكامل مع دفع مصاريف الشحن</div>
+        <div class="policy-note">سيتم إعلام العميل فورًا في حال حدوث أي تأخير خارج عن سيطرة Pink Liliy Deer</div>
+      </div>
+    </div>
+
+    <!-- English -->
+    <div class="lang-block lang-en">
+      <div class="lang-label">Shipping Policy</div>
+
+      <div class="policy-item">
+        <div class="policy-item-title">Delivery Areas</div>
+        <div class="policy-item-body">Shipping is available to all governorates in Egypt.</div>
+      </div>
+
+      <div class="policy-item">
+        <div class="policy-item-title">Shipping Time</div>
+        <div class="policy-item-body">Orders are delivered within 3–7 business days depending on the governorate.</div>
+      </div>
+
+      <div class="policy-item">
+        <div class="policy-item-title">Shipping Fees</div>
+        <div class="policy-item-body">Shipping costs depend on your location and will be confirmed at the time of order.</div>
+      </div>
+
+      <div class="policy-item">
+        <div class="policy-item-title">Order Inspection Upon Delivery</div>
+        <div class="policy-item-body">Customers can inspect their order upon delivery for up to 10 minutes.</div>
+      </div>
+
+      <div class="policy-item">
+        <div class="policy-item-title">Important Notes</div>
+        <div class="policy-note">No changes or returns are accepted after the delivery person leaves.</div>
+        <div class="policy-note">Partial delivery is not available. The order must be received in full or returned in full, with shipping fees to be paid.</div>
+        <div class="policy-note">In case of any delays beyond Pink Liliy Deer's control, customers will be notified immediately.</div>
+      </div>
+    </div>
+
+  </div><!-- /tab-shipping -->
+
+  <!-- ═══ RETURN & EXCHANGE ═══ -->
+  <div class="tab-section" id="tab-returns">
+
+    <!-- Arabic -->
+    <div class="lang-block lang-ar">
+      <div class="lang-label">سياسة الاسترجاع والتبديل</div>
+
+      <div class="policy-item">
+        <div class="policy-item-body">عميلتنا العزيزة، أولويتنا القصوى هي رضاكِ وسعادتكِ بمنتجاتنا. إليكِ سياسة الاسترجاع والتبديل لضمان تجربة تسوق سلسة:</div>
+      </div>
+
+      <div class="policy-item">
+        <div class="policy-item-title">تأكيد الطلب</div>
+        <div class="policy-item-body">يرجى تصوير العناصر المختارة لتأكيد تضمينها في طلبك.</div>
+      </div>
+
+      <div class="policy-item">
+        <div class="policy-item-title">المعاينة عند الاستلام</div>
+        <div class="policy-item-body">قبل الدفع، قومي بمراجعة القطع وتجربتها بحضور المندوب.</div>
+      </div>
+
+      <div class="policy-item">
+        <div class="policy-item-title">الاسترجاع</div>
+        <div class="policy-item-body">أي قطعة تريدين إرجاعها يجب تسليمها للمندوب قبل مغادرته.</div>
+      </div>
+
+      <div class="policy-item">
+        <div class="policy-item-title">بعد مغادرة المندوب</div>
+        <div class="policy-item-body">لا يمكن الاسترجاع أو التبديل بعد مغادرة المندوب من موقعك.</div>
+      </div>
+    </div>
+
+    <!-- English -->
+    <div class="lang-block lang-en">
+      <div class="lang-label">Return &amp; Exchange Policy</div>
+
+      <div class="policy-item">
+        <div class="policy-item-body">Dear Customer, our top priority is your satisfaction and happiness with our products. Here's our return and exchange policy to ensure a smooth shopping experience:</div>
+      </div>
+
+      <div class="policy-item">
+        <div class="policy-item-title">Order Confirmation</div>
+        <div class="policy-item-body">Please screenshot your selected items to confirm their inclusion in your order.</div>
+      </div>
+
+      <div class="policy-item">
+        <div class="policy-item-title">Inspection on Delivery</div>
+        <div class="policy-item-body">Before paying, carefully review and try on your items with the courier present.</div>
+      </div>
+
+      <div class="policy-item">
+        <div class="policy-item-title">Returns</div>
+        <div class="policy-item-body">Any items you wish to return must be handed back to the courier before they leave.</div>
+      </div>
+
+      <div class="policy-item">
+        <div class="policy-item-title">After Courier Leaves</div>
+        <div class="policy-item-body">No exchanges or refunds are possible once the courier has departed from your address.</div>
+      </div>
+    </div>
+
+  </div><!-- /tab-returns -->
+
+</div><!-- /policy-content -->
+
+<div class="policy-footer">
+  <span class="policy-footer-copy">© 2026 Pink Liliy Deer</span>
+  <a href="index.html" class="policy-footer-back">
+    <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+    Return to Shop
+  </a>
+</div>
+
+<script>
+function switchTab(name, btn) {
+  document.querySelectorAll('.tab-section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  btn.classList.add('active');
+}
+</script>
+
+</body>
+</html>
