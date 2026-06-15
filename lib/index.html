@@ -764,6 +764,27 @@ footer{
 .cart-checkout-outline:hover{background:var(--accent-dark);color:#fff;border-color:var(--accent-dark);box-shadow:0 4px 20px rgba(220,118,140,.35)}
 .cart-checkout-outline:active{background:var(--accent);border-color:var(--accent);box-shadow:none;transform:scale(0.99)}
 
+/* ── SEARCH ── */
+.search-overlay{position:fixed;inset:0;background:rgba(255,245,247,.97);z-index:400;opacity:0;pointer-events:none;transition:opacity .25s;backdrop-filter:blur(6px)}
+.search-overlay.open{opacity:1;pointer-events:all}
+.search-box{max-width:660px;margin:0 auto;padding:60px 24px 32px}
+.search-bar{display:flex;align-items:center;gap:14px;border-bottom:1.5px solid var(--border);padding-bottom:14px;margin-bottom:28px}
+.search-bar svg{color:var(--muted);flex-shrink:0}
+.search-input{flex:1;border:none;background:transparent;font-size:22px;font-family:var(--serif);color:var(--dark);outline:none;min-width:0}
+.search-input::placeholder{color:var(--muted)}
+.search-close-btn{background:none;border:none;cursor:pointer;font-size:22px;color:var(--muted);line-height:1;transition:color .2s;flex-shrink:0;padding:0}
+.search-close-btn:hover{color:var(--dark)}
+.search-results{display:flex;flex-direction:column;gap:4px;max-height:60vh;overflow-y:auto}
+.sr-item{display:flex;align-items:center;gap:16px;padding:12px;border-radius:12px;cursor:pointer;transition:background .15s;border:none;background:none;width:100%;text-align:left}
+.sr-item:hover{background:var(--warm)}
+.sr-img{width:58px;height:72px;flex-shrink:0;overflow:hidden;border-radius:10px;background:var(--warm)}
+.sr-img img{width:100%;height:100%;object-fit:cover;display:block}
+.sr-name{font-family:var(--serif);font-size:16px;color:var(--dark);margin-bottom:4px}
+.sr-price{font-size:12px;color:var(--muted);font-family:var(--sans)}
+.sr-save{color:var(--accent)}
+.search-empty{text-align:center;padding:48px 0;font-family:var(--serif);font-size:20px;color:var(--muted)}
+.search-hint{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);font-family:var(--sans);margin-bottom:16px}
+
 /* ── TOAST ── */
 .toast{
   position:fixed;bottom:30px;left:50%;
@@ -932,7 +953,7 @@ footer{
 }
 .featured-drop-inner{
   display:grid;grid-template-columns:50% 50%;
-  height:400px;
+  height:580px;
   position:relative;
 }
 .featured-drop-img-side{
@@ -1319,7 +1340,7 @@ footer{
   .products-section,.lookbook,.instagram,.categories,.section-header{padding-left:20px;padding-right:20px}
   .features,.newsletter{padding-left:20px;padding-right:20px}
   .insta-follow{padding:48px 20px 56px;flex-direction:column;gap:32px}
-  .insta-follow-left{max-width:100%}
+  .insta-follow-left{max-width:100%;text-align:center}
   .footer-main{padding:48px 20px 28px}
   .footer-main-grid{grid-template-columns:1fr;gap:32px}
 }
@@ -1656,7 +1677,6 @@ footer{
       <h4>Information</h4>
       <ul class="footer-info-links">
         <li><a href="#">Search</a></li>
-        <li><a href="#">Contact Information</a></li>
         <li><a href="policy.html">Privacy Policy</a></li>
         <li><a href="policy.html">Refund Policy</a></li>
         <li><a href="policy.html">Shipping Policy</a></li>
@@ -1666,6 +1686,7 @@ footer{
     <div class="footer-contact-col">
       <h4>Need to Get in Touch?</h4>
       <a href="mailto:pinkliliydeer@gmail.com" class="footer-contact-email">pinkliliydeer@gmail.com</a>
+      <a href="tel:+201114909807" class="footer-contact-email">01114909807</a>
       <a href="https://www.instagram.com/pinkliliydeer.eg/" target="_blank" rel="noopener" class="footer-contact-ig">@pinkliliydeer.eg</a>
     </div>
   </div>
@@ -1745,6 +1766,19 @@ footer{
 
 <!-- Toast -->
 <div class="toast" id="toast"></div>
+
+<!-- SEARCH OVERLAY -->
+<div class="search-overlay" id="searchOverlay">
+  <div class="search-box">
+    <div class="search-bar">
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg>
+      <input class="search-input" id="searchInput" type="text" placeholder="Search products…" oninput="handleSearch(this.value)" autocomplete="off">
+      <button class="search-close-btn" onclick="toggleSearch()">✕</button>
+    </div>
+    <div class="search-hint" id="searchHint">Start typing to search</div>
+    <div class="search-results" id="searchResults"></div>
+  </div>
+</div>
 
 <!-- Bottom nav — mobile only -->
 <div class="bottom-nav">
@@ -1988,7 +2022,54 @@ function showToast(msg){
   toastTimer=setTimeout(()=>t.classList.remove('show'),2400);
 }
 
-function toggleSearch(){showToast('Search coming soon ✦')}
+function toggleSearch(){
+  const ov=document.getElementById('searchOverlay');
+  const inp=document.getElementById('searchInput');
+  const open=ov.classList.toggle('open');
+  if(open){
+    inp.value='';
+    document.getElementById('searchResults').innerHTML='';
+    document.getElementById('searchHint').style.display='block';
+    setTimeout(()=>inp.focus(),60);
+    document.body.style.overflow='hidden';
+  } else {
+    document.body.style.overflow='';
+  }
+}
+
+function handleSearch(val){
+  const q=val.trim().toLowerCase();
+  const results=document.getElementById('searchResults');
+  const hint=document.getElementById('searchHint');
+  if(!q){results.innerHTML='';hint.style.display='block';return;}
+  hint.style.display='none';
+  const seen=new Set();
+  const matches=PRODUCTS_DATA.filter(p=>{
+    const id=p.linkId||p.id;
+    if(seen.has(id))return false;
+    seen.add(id);
+    return p.name.toLowerCase().includes(q)||p.cat.toLowerCase().replace('-',' ').includes(q);
+  });
+  if(!matches.length){
+    results.innerHTML=`<div class="search-empty">No results for "<em>${val}</em>"</div>`;
+    return;
+  }
+  results.innerHTML=matches.map(p=>{
+    const id=p.linkId||p.id;
+    const save=p.originalPrice?Math.round((1-p.price/p.originalPrice)*100):0;
+    return `<button class="sr-item" onclick="toggleSearch();goProduct(${id})">
+      <div class="sr-img"><img src="${p.img}" alt="${p.name}"></div>
+      <div>
+        <div class="sr-name">${p.name}</div>
+        <div class="sr-price">LE ${p.price.toLocaleString()}.00${save?` <span class="sr-save">· Save ${save}%</span>`:''}</div>
+      </div>
+    </button>`;
+  }).join('');
+}
+
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'&&document.getElementById('searchOverlay').classList.contains('open')) toggleSearch();
+});
 
 function openMenu(){
   document.getElementById('menuOverlay').classList.add('open');
@@ -2079,6 +2160,7 @@ function hideMenuSub(){
 
 renderProducts();
 updateCartUI();
+if(location.hash==='#search') toggleSearch();
 </script>
 </body>
 </html>
