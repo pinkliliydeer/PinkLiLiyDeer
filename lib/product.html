@@ -178,11 +178,12 @@ nav{position:sticky;top:0;z-index:100;background:var(--cream);border-bottom:1px 
   nav{padding:0 20px}
   .brand{font-size:18px}
   .brand img{height:24px}
-  .brand img{height:24px}
   .product-layout{grid-template-columns:1fr}
   .product-panel{position:static;height:auto;border-left:none;border-top:1px solid var(--border);padding:32px 20px 48px}
   .breadcrumb{padding:12px 20px}
   .gallery{padding:0}
+  .gallery-main{height:420px !important;aspect-ratio:unset !important;background:#f5eef0}
+  .gallery-main img{object-fit:cover !important;object-position:center 35%;width:100%;height:100%}
   .gallery-thumb{width:60px;height:75px}
   .related{padding:40px 20px}
   .related-grid{grid-template-columns:repeat(2,1fr)}
@@ -256,60 +257,33 @@ nav{position:sticky;top:0;z-index:100;background:var(--cream);border-bottom:1px 
 
 <script>
 const PRODUCTS = [
-  {id:5,name:'Everyday Linen Pant',price:1550,cat:'Pants',badge:'new',stock:8,
-   sizes:['One Size'],
-   images:['img/img5.jpg','img/img4.jpg','img/img2.jpg','img/img3.jpg'],
+  {id:5,name:'Everyday Linen Pant',price:900,originalPrice:1000,cat:'Pants',badge:'new',stock:8,
+   sizes:['S-M','L-XL'],
+   images:['img/pant1.JPG','img/pant2.JPG','img/pant3.JPG','img/pant4.JPG'],
    descShort:'Elevated comfort meets refined simplicity. The Everyday Linen Pant pairs flawlessly with any top in our collection. A wide relaxed cut and soft linen blend.',
    desc:'Elevated comfort meets refined simplicity. The Everyday Linen Pant pairs flawlessly with any top in our collection. A wide relaxed cut and soft linen blend ensure you look polished without trying. High-waisted silhouette with a relaxed wide leg, crafted in breathable natural fabric that keeps you cool all day.',
    designNotes:'Wide-leg silhouette with a relaxed, flowing fit. Elasticated waistband for comfort. Two side pockets.',
    fitNotes:'One Size fits UK 8–18. Our model is 170cm and wears One Size.',
-   fabricCare:'100% Linen. Machine wash cold, gentle cycle. Hang to dry. Iron while slightly damp.',
+   fabricCare:'Pure Linen. Machine wash cold, gentle cycle. Hang to dry. Iron while slightly damp.',
    sizeChart:'One Size: fits UK 8–18 / waist 26"–38"'},
-  {id:6,name:'White Notch Collar Linen Top',price:1250,cat:'Blouses',badge:'new',stock:10,
+  {id:7,name:'Lily Blouse',price:800,originalPrice:950,cat:'Blouses',badge:'',stock:7,
    sizes:['One Size'],
-   images:['img/img6.jpg','img/img5.jpg','img/img3.jpg','img/img1.jpg'],
-   descShort:'The perfect foundation piece. Features a classic notch collar, relaxed fit, and elegant styling — designed to pair beautifully with any bottom in our collection.',
-   desc:'The perfect foundation piece. Our White Notch Collar Linen Top features a classic notch collar, relaxed fit, and elegant styling. Pairs beautifully with any bottom — wide-leg trousers or our linen pants. Crafted in 100% breathable linen for effortless all-day comfort.',
-   designNotes:'Notch collar with button closure. Relaxed, modest silhouette. Long sleeves with cuffed detail.',
-   fitNotes:'True to size. Model wears One Size. Lightweight and breathable.',
-   fabricCare:'100% Linen. Machine wash cold, gentle cycle. Hang to dry. Iron on medium.',
-   sizeChart:'One Size: fits UK 8–20'},
-  {id:7,name:'Lily Blouse',price:1450,cat:'Blouses',badge:'',stock:7,
-   sizes:['One Size'],
-   images:['img/img2.jpg','img/img6.jpg','img/img3.jpg','img/img5.jpg'],
+   images:['img/liliyorange5.JPG','img/liliycoffe1.JPG','img/liliycoffe3.JPG','img/liliyorange1.JPG','img/liliyorange2.JPG','img/liliymint1.JPG','img/liliymint2.JPG'],
    descShort:'Light as air and graceful in every movement — the Lily Blouse is designed for effortless all-day elegance. Delicate draping and a relaxed silhouette.',
    desc:'Light as air and graceful in every movement — the Lily Blouse is designed for effortless all-day elegance. Delicate draping, a relaxed silhouette, and premium breathable linen fabric make it perfect for brunches, garden outings, and beyond. Available in multiple soft seasonal tones.',
    designNotes:'Relaxed silhouette with soft draping. Modest neckline. Long sleeves with delicate cuffs.',
    fitNotes:'One Size. True to size. Our model is 170cm and wears One Size.',
-   fabricCare:'100% Linen. Machine wash cold. Hang to dry. Iron on medium heat.',
+   fabricCare:'Soft Linen. Machine wash cold. Hang to dry. Iron on medium heat.',
    sizeChart:'One Size: fits UK 8–18'},
-  {id:8,name:'Cream Wide-Leg Pants',price:1650,cat:'Pants',badge:'',stock:6,
+  {id:9,name:'Basic Long Shirt',price:950,originalPrice:1100,cat:'Long Shirts',badge:'new',stock:9,
    sizes:['One Size'],
-   images:['img/img4.jpg','img/img5.jpg','img/img1.jpg','img/img2.jpg'],
-   descShort:'A wardrobe essential. Our Cream Wide-Leg Pants offer the perfect balance of comfort and sophistication with a flowing, high-waisted silhouette.',
-   desc:'A wardrobe essential. Our Cream Wide-Leg Pants offer the perfect balance of comfort and sophistication. High-waisted silhouette with a relaxed wide leg, crafted in breathable natural fabric. The cream tone pairs effortlessly with every blouse and top in our collection.',
-   designNotes:'High-waist construction. Wide, flowing leg. Elasticated back waistband. Side pockets.',
-   fitNotes:'True to size. Model wears One Size. High-rise waist provides excellent coverage.',
-   fabricCare:'100% Linen. Machine wash cold. Hang dry. Iron while slightly damp.',
-   sizeChart:'One Size: fits UK 8–18 / waist 26"–36"'},
-  {id:9,name:'Basic Long Shirt',price:1350,cat:'Long Shirts',badge:'new',stock:9,
-   sizes:['One Size'],
-   images:['img/img3.jpg','img/img2.jpg','img/img4.jpg','img/img6.jpg'],
+   images:['img/pinkshirt5.JPG','img/limeshirt1.JPG','img/limeshirt2.JPG','img/limeshirt3.JPG','img/limeshirt4.JPG','img/limeshirt5.JPG','img/limeshirt6.JPG','img/limeshirt7.JPG','img/limeshirt8.JPG','img/limeshirt9.JPG','img/pinkshirt1.JPG','img/pinkshirt2.JPG','img/pinkshirt3.JPG','img/pinkshirt4.JPG','img/pinkshirt6.JPG','img/pinkshirt7.JPG','img/pinkshirt8.JPG','img/purpleshirt1.JPG','img/purpleshirt2.JPG','img/purpleshirt3.JPG','img/purpleshirt4.JPG','img/purpleshirt5.JPG','img/purpleshirt6.JPG','img/purpleshirt7.JPG','img/purpleshirt8.JPG'],
    descShort:'The ultimate layering piece — our Basic Long Shirt moves seamlessly from casual to polished. Clean lines and a relaxed drape for effortless everyday wear.',
    desc:'The ultimate layering piece — our Basic Long Shirt moves seamlessly from casual to polished. Clean lines, a relaxed drape, and a versatile palette make it a true wardrobe essential. Can be styled as a standalone dress or layered effortlessly over our wide-leg trousers.',
    designNotes:'Longline silhouette falling below the knee. Classic collar with full button placket. Long sleeves. Relaxed, straight-cut body.',
    fitNotes:'Our model is 170cm and wears One Size. Designed with a relaxed, straight fit — true to size.',
-   fabricCare:'100% Linen. Machine wash cold, gentle cycle. Hang to dry. Iron on medium heat.',
+   fabricCare:'Soft Linen. Machine wash cold, gentle cycle. Hang to dry. Iron on medium heat.',
    sizeChart:'One Size: fits UK 8–20 / bust 86–116cm'},
-  {id:10,name:'Ivory Linen Long Shirt',price:1250,cat:'Long Shirts',badge:'',stock:5,
-   sizes:['One Size'],
-   images:['img/img1.jpg','img/img3.jpg','img/img5.jpg','img/img6.jpg'],
-   descShort:'Effortless and refined, the Ivory Linen Long Shirt is a versatile piece designed for graceful all-day wear in warm, natural tones.',
-   desc:'Effortless and refined, the Ivory Linen Long Shirt is a versatile piece designed for graceful all-day wear. The classic ivory hue and relaxed silhouette make it endlessly versatile — layer it over trousers or wear it as a light dress for sunny outings. 100% breathable linen for lasting comfort.',
-   designNotes:'Longline cut with relaxed fit. Button front placket. Classic collar. Long sleeves with button cuffs.',
-   fitNotes:'True to size. Model wears One Size. Lightweight 100% linen.',
-   fabricCare:'100% Linen. Machine wash cold. Hang to dry. Iron on medium heat while slightly damp.',
-   sizeChart:'One Size: fits UK 8–20'},
 ];
 
 const CART_KEY = 'pld_cart';
@@ -322,8 +296,10 @@ function cartTotal(c){return c.reduce((s,i)=>s+i.price*i.qty,0)}
 
 function getProductId(){
   const p=new URLSearchParams(location.search);
-  const id=parseInt(p.get('id'));
-  return isNaN(id)?1:id;
+  const urlId=parseInt(p.get('id'));
+  if(!isNaN(urlId)&&urlId>0) return urlId;
+  const lsId=parseInt(localStorage.getItem('pld_pid')||'');
+  return (!isNaN(lsId)&&lsId>0)?lsId:5;
 }
 
 let currentProduct=null;
@@ -360,6 +336,7 @@ function renderProduct(){
     <h1 class="product-title">${p.name}</h1>
     <div class="price-row">
       <span class="price-main">LE ${p.price.toLocaleString()}.00</span>
+      ${p.originalPrice?`<span class="price-main" style="text-decoration:line-through;opacity:.45;font-size:15px">LE ${p.originalPrice.toLocaleString()}.00</span>`:''}
       <span class="price-note">Taxes Included</span>
     </div>
     <p class="product-desc" id="descText">${p.descShort}</p>

@@ -1,0 +1,6 @@
+.product-image {
+    width: 100%;
+    max-width: 300px; /* Set a maximum width for all product images */
+    height: auto; /* Maintain aspect ratio */
+    object-fit: contain; /* Ensure the image fits within the container */
+}
