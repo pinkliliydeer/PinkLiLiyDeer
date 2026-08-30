@@ -92,6 +92,12 @@ nav{position:sticky;top:0;z-index:100;background:var(--cream);border-bottom:1px 
 .size-btn:hover{border-color:var(--dark);color:var(--dark)}
 .size-btn.active{border-color:var(--dark);background:var(--dark);color:#fff}
 
+/* COLOR */
+.color-btns{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:24px}
+.color-swatch{width:28px;height:28px;border-radius:50%;cursor:pointer;border:2px solid transparent;box-shadow:0 0 0 1px var(--border);transition:all .2s;padding:0}
+.color-swatch:hover{box-shadow:0 0 0 1px var(--mid)}
+.color-swatch.active{border-color:#fff;box-shadow:0 0 0 2px var(--dark)}
+
 /* QTY */
 .qty-row{display:flex;align-items:center;gap:16px;margin-bottom:16px}
 .qty-wrap{display:flex;align-items:center;border:1px solid var(--border)}
@@ -268,8 +274,19 @@ nav{position:sticky;top:0;z-index:100;background:var(--cream);border-bottom:1px 
 
 <script>
 const PRODUCTS = [
-  {id:5,name:'Everyday Linen Pant',price:750,originalPrice:900,cat:'Pants',badge:'new',stock:8,imgPosition:'center',
+  {id:10,name:'Pink Deer Denim Top',price:850,originalPrice:1100,cat:'Tops',badge:'new',stock:10,imgPosition:'center',
+   sizes:['One Size'],
+   colors:['#2c3e5c'],
+   images:['img/1.jpg','img/2.jpg','img/3.jpg','img/5.jpg','img/6.jpg','img/7.jpg','img/8.JPG','img/9.JPG','img/10.jpg','img/11.jpg','img/12.JPG','img/13.jpg','img/14.jpg','img/15.JPG','img/16.JPG','img/17.JPG','img/18.JPG'],
+   descShort:'A relaxed denim top with our signature pink deer embroidered on the chest — easy to dress up or down.',
+   desc:'A relaxed denim top with our signature pink deer embroidered on the chest. Cut with a wide collar and dropped shoulders for an easy, effortless drape. Pairs beautifully with wide-leg pants for a polished everyday look.',
+   designNotes:'Relaxed silhouette with a wide collar and dropped shoulders. Chest pocket with embroidered pink deer logo. Long sleeves with wide cuffs.',
+   fitNotes:'One Size. Relaxed, oversized fit. Our model is 170cm and wears One Size.',
+   fabricCare:'Cotton denim. Machine wash cold, gentle cycle. Hang to dry. Iron on low heat.',
+   sizeChart:'One Size: fits UK 8–18'},
+  {id:5,name:'Everyday Linen Pant',price:850,originalPrice:1000,cat:'Pants',badge:'new',stock:8,imgPosition:'center',
    sizes:['S-M','L-XL'],
+   colors:['#d5ceb8','#bab498'],
    images:['img/pant1.JPG','img/pant2.JPG','img/pant3.JPG','img/pant4.JPG'],
    descShort:'Elevated comfort meets refined simplicity. The Everyday Linen Pant pairs flawlessly with any top in our collection. A wide relaxed cut and soft linen blend.',
    desc:'Elevated comfort meets refined simplicity. The Everyday Linen Pant pairs flawlessly with any top in our collection. A wide relaxed cut and soft linen blend ensure you look polished without trying. High-waisted silhouette with a relaxed wide leg, crafted in breathable natural fabric that keeps you cool all day.',
@@ -277,17 +294,19 @@ const PRODUCTS = [
    fitNotes:'One Size fits UK 8–18. Our model is 170cm and wears One Size.',
    fabricCare:'Pure Linen. Machine wash cold, gentle cycle. Hang to dry. Iron while slightly damp.',
    sizeChart:'One Size: fits UK 8–18 / waist 26"–38"'},
-  {id:7,name:'Lily Blouse',price:610,originalPrice:700,cat:'Blouses',badge:'',stock:7,imgPosition:'center',
+  {id:7,name:'Lily Blouse',price:800,originalPrice:950,cat:'Blouses',badge:'',stock:7,imgPosition:'center',
    sizes:['One Size'],
-   images:['img/liliyorange5.JPG','img/liliycoffe1.JPG','img/liliycoffe3.JPG','img/liliyorange1.JPG','img/liliyorange2.JPG','img/liliymint1.JPG','img/liliymint2.JPG'],
+   colors:['#D2C9C3','#C4C6C1','#A59CA5','#F7BBBB','#B8C98A','#E8ADBA','#B8ADCA','#9DB89E','#FFFFFF'],
+   images:['img/liliyorange5.JPG','img/liliycoffe1.JPG','img/liliycoffe3.JPG','img/liliyorange1.JPG','img/liliyorange2.JPG','img/liliymint1.JPG','img/liliymint2.JPG','img/27.jpg','img/19.jpg','img/20.jpg','img/21.jpg','img/22.jpg','img/23.jpg','img/24.jpg','img/25.jpg','img/26.jpg','img/28.jpg'],
    descShort:'Light as air and graceful in every movement — the Lily Blouse is designed for effortless all-day elegance. Delicate draping and a relaxed silhouette.',
    desc:'Light as air and graceful in every movement — the Lily Blouse is designed for effortless all-day elegance. Delicate draping, a relaxed silhouette, and premium breathable linen fabric make it perfect for brunches, garden outings, and beyond. Available in multiple soft seasonal tones.',
    designNotes:'Relaxed silhouette with soft draping. Modest neckline. Long sleeves with delicate cuffs.',
    fitNotes:'One Size. True to size. Our model is 170cm and wears One Size.',
    fabricCare:'Soft Linen. Machine wash cold. Hang to dry. Iron on medium heat.',
    sizeChart:'One Size: fits UK 8–18'},
-  {id:9,name:'Basic Long Shirt',price:750,originalPrice:900,cat:'Long Shirts',badge:'new',stock:9,imgPosition:'bottom',
+  {id:9,name:'Basic Long Shirt',price:900,originalPrice:1000,cat:'Long Shirts',badge:'new',stock:9,imgPosition:'bottom',
    sizes:['One Size'],
+   colors:['#B8C98A','#E8ADBA','#B8ADCA','#D2C9C3','#C4C6C1','#A59CA5','#F7BBBB','#9DB89E','#FFFFFF'],
    images:['img/pinkshirt1.JPG','img/pinkshirt2.JPG','img/pinkshirt3.JPG','img/pinkshirt4.JPG','img/pinkshirt6.JPG','img/pinkshirt7.JPG','img/pinkshirt8.JPG','img/pinkshirt5.JPG','img/limeshirt1.JPG','img/limeshirt2.JPG','img/limeshirt3.JPG','img/limeshirt4.JPG','img/limeshirt5.JPG','img/limeshirt6.JPG','img/limeshirt7.JPG','img/limeshirt8.JPG','img/limeshirt9.JPG','img/purpleshirt1.JPG','img/purpleshirt2.JPG','img/purpleshirt3.JPG','img/purpleshirt4.JPG','img/purpleshirt5.JPG','img/purpleshirt6.JPG','img/purpleshirt7.JPG','img/purpleshirt8.JPG'],
    descShort:'The ultimate layering piece — our Basic Long Shirt moves seamlessly from casual to polished. Clean lines and a relaxed drape for effortless everyday wear.',
    desc:'The ultimate layering piece — our Basic Long Shirt moves seamlessly from casual to polished. Clean lines, a relaxed drape, and a versatile palette make it a true wardrobe essential. Can be styled as a standalone dress or layered effortlessly over our wide-leg trousers.',
@@ -315,6 +334,7 @@ function getProductId(){
 
 let currentProduct=null;
 let selectedSize='';
+let selectedColor='';
 let qty=1;
 let descExpanded=false;
 let currentSlide=0;
@@ -348,6 +368,7 @@ function renderProduct(){
   const p=PRODUCTS.find(x=>x.id===id)||PRODUCTS[0];
   currentProduct=p;
   selectedSize=p.sizes[0];
+  selectedColor=p.colors?p.colors[0]:'';
   document.title=p.name+' — Pink Liliy Deer';
   const bcCat=document.getElementById('bcCat');
   bcCat.textContent=p.cat;
@@ -402,6 +423,12 @@ function renderProduct(){
     <button class="read-more-btn" id="rmBtn" onclick="toggleDesc()">Read More +</button>
     <div class="divider"></div>
     ${p.stock<=5?`<div class="stock-badge"><span class="stock-dot"></span>Only ${p.stock} left in stock. Order soon.</div>`:''}
+    ${p.colors?`
+    <div class="field-label">Color</div>
+    <div class="color-btns" id="colorBtns">
+      ${p.colors.map(c=>`<button type="button" class="color-swatch${c===selectedColor?' active':''}" style="background:${c}" title="${c}" onclick="selectColor('${c}',this)"></button>`).join('')}
+    </div>
+    `:''}
     <div class="field-label">
       Size <span id="selSizeLabel">${selectedSize}</span>
       <button class="size-guide" onclick="toggleAcc('sizeAcc')">Size Guide</button>
@@ -476,6 +503,12 @@ function selectSize(size,el){
   el.classList.add('active');
 }
 
+function selectColor(color,el){
+  selectedColor=color;
+  document.querySelectorAll('.color-swatch').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+}
+
 function changeQty(delta){
   qty=Math.max(1,Math.min(currentProduct.stock,qty+delta));
   document.getElementById('qtyInput').value=qty;
@@ -483,10 +516,10 @@ function changeQty(delta){
 
 function handleATC(){
   const cart=getCart();
-  const key=`${currentProduct.id}-${selectedSize}`;
+  const key=`${currentProduct.id}-${selectedSize}-${selectedColor}`;
   const ex=cart.find(i=>i.key===key);
   if(ex){ex.qty=Math.min(currentProduct.stock,ex.qty+qty);}
-  else{cart.push({id:currentProduct.id,key,name:currentProduct.name,price:currentProduct.price,size:selectedSize,img:currentProduct.images[0],qty,stock:currentProduct.stock});}
+  else{cart.push({id:currentProduct.id,key,name:currentProduct.name,price:currentProduct.price,size:selectedSize,color:selectedColor,img:currentProduct.images[0],qty,stock:currentProduct.stock});}
   saveCart(cart);
   updateCartUI();
   openCart();
@@ -494,7 +527,7 @@ function handleATC(){
 }
 
 function handleBuyNow(){
-  const item={id:currentProduct.id,key:`${currentProduct.id}-${selectedSize}`,name:currentProduct.name,price:currentProduct.price,size:selectedSize,img:currentProduct.images[0],qty,stock:currentProduct.stock};
+  const item={id:currentProduct.id,key:`${currentProduct.id}-${selectedSize}-${selectedColor}`,name:currentProduct.name,price:currentProduct.price,size:selectedSize,color:selectedColor,img:currentProduct.images[0],qty,stock:currentProduct.stock};
   sessionStorage.setItem('pld_buynow',JSON.stringify(item));
   location.href='checkout.html?mode=buynow';
 }
@@ -530,7 +563,7 @@ function updateCartUI(){
       <div class="ci-img"><img src="${item.img}" alt="${item.name}"></div>
       <div class="ci-info">
         <div class="ci-name">${item.name}</div>
-        <div class="ci-meta">Size: ${item.size}</div>
+        <div class="ci-meta">Size: ${item.size}${item.color?` &middot; Color: <span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:${item.color};vertical-align:middle;border:1px solid var(--border)"></span>`:''}</div>
         <div class="ci-row">
           <span class="ci-price">LE ${(item.price*item.qty).toLocaleString()}.00</span>
           <div class="ci-qty">
@@ -561,7 +594,7 @@ function cartRemove(key){
 function handleCartCheckout(){
   if(!currentProduct)return location.href='checkout.html';
   const cart=getCart();
-  const key=`${currentProduct.id}-${selectedSize}`;
+  const key=`${currentProduct.id}-${selectedSize}-${selectedColor}`;
   const item=cart.find(i=>i.key===key);
   if(item){sessionStorage.setItem('pld_buynow',JSON.stringify(item));}
   location.href='checkout.html?mode=buynow';

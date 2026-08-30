@@ -459,7 +459,7 @@ function renderSummary(){
         </div>
         <div class="s-item-info">
           <div class="s-item-name">${item.name}</div>
-          <div class="s-item-meta">Size: ${item.size}</div>
+          <div class="s-item-meta">Size: ${item.size}${item.color?` &middot; Color: <span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:${item.color};vertical-align:middle;border:1px solid var(--border)"></span>`:''}</div>
           <div class="s-item-price">LE ${(item.price*item.qty).toLocaleString()}.00</div>
         </div>
       </div>
@@ -578,7 +578,7 @@ function buildItemsHtml(cart){
         </td>
         <td style="vertical-align:top">
           <div style="font-weight:bold;color:#1a1218;margin-bottom:4px">${i.name}</div>
-          <div style="color:#9c8790;font-size:12px;margin-bottom:2px">Size: ${i.size}</div>
+          <div style="color:#9c8790;font-size:12px;margin-bottom:2px">Size: ${i.size}${i.color?` &middot; Color: <span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:${i.color};border:1px solid #f5d5db"></span>`:''}</div>
           <div style="color:#9c8790;font-size:12px;margin-bottom:6px">Qty: ${i.qty}</div>
           <div style="color:#dc768c;font-weight:bold">LE ${(i.price*i.qty).toLocaleString()}.00</div>
         </td>

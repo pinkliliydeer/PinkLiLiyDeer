@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl -s \"http://localhost:8791/product.html?id=7\")",
+      "Bash(taskkill //F //IM node.exe)",
+      "Bash(firebase --version)",
+      "Bash(certutil -hashfile \"1.PNG\" MD5)",
+      "Bash(certutil -hashfile \"18.JPG\" MD5)",
+      "Bash(xxd \"1.PNG\")",
+      "Bash(command -v magick)",
+      "Bash(command -v convert)",
+      "Bash(command -v ffmpeg)",
+      "Bash(command -v python)",
+      "Bash(command -v python3)",
+      "Bash(python3 -c \"import PIL; print\\(PIL.__version__\\)\")",
+      "Bash(python3 -c \"import pillow_heif; print\\('heif ok'\\)\")",
+      "Bash(command -v firebase)",
+      "Bash(firebase projects:list)",
+      "Bash(certutil -hashfile \"17.JPG\" MD5)"
+    ]
+  }
+}

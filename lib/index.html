@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pink Liliy Deer — Modest Fashion</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&family=Kaushan+Script&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -21,6 +21,7 @@
   --accent-light:#fde8ec;
   --serif:'Cormorant Garamond',Georgia,serif;
   --sans:'Jost',sans-serif;
+  --script:'Kaushan Script',cursive;
 }
 html{scroll-behavior:smooth}
 body{background:var(--cream);color:var(--dark);font-family:var(--sans);font-weight:300;overflow-x:hidden}
@@ -266,7 +267,7 @@ nav{
 /* ── SECTION HEADERS ── */
 .section-header{text-align:center;padding:36px 40px 20px}
 .section-tag{
-  font-size:25px;letter-spacing:5px;text-transform:uppercase;font-weight: 600;
+  font-family:var(--script);font-size:30px;letter-spacing:0.5px;font-weight:400;
   color:var(--accent);margin-bottom:16px;
   display:flex;align-items:center;justify-content:center;gap:16px;
 }
@@ -286,7 +287,25 @@ nav{
 
 /* ── CATEGORY STRIP ── */
 .categories{padding:0 40px 48px}
-.cat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.cat-carousel-wrap{position:relative}
+.cat-grid{
+  display:flex;gap:20px;overflow-x:auto;scroll-behavior:smooth;
+  scroll-snap-type:x mandatory;padding-bottom:6px;scrollbar-width:none;
+}
+.cat-grid::-webkit-scrollbar{display:none}
+.cat-grid .cat-item{flex:0 0 200px;scroll-snap-align:start}
+.cat-arrow{
+  position:absolute;top:38%;transform:translateY(-50%);
+  width:44px;height:44px;border-radius:50%;
+  background:rgba(26,18,18,0.72);color:#fff;border:none;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;line-height:1;z-index:5;
+  transition:background .2s;
+  -webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);
+}
+.cat-arrow:hover{background:var(--accent)}
+.cat-arrow.prev{left:-6px}
+.cat-arrow.next{right:-6px}
 .cat-item{
   cursor:pointer;
   display:flex;flex-direction:column;
@@ -418,39 +437,17 @@ nav{
 .product-badge.new{background:var(--accent);box-shadow:0 2px 12px rgba(220,118,140,0.4)}
 .product-badge.sold{background:var(--muted)}
 .badge-soldout{
-  position:absolute;top:12px;left:12px;z-index:2;
-  background:#c0284a;color:#fff;
-  font-size:8px;font-weight:600;letter-spacing:2px;text-transform:uppercase;
-  padding:5px 11px;font-family:var(--sans);border-radius:2px;
-}
-.badge-save{
-  position:absolute;top:12px;right:12px;z-index:2;
-  background:var(--dark);color:#fff;
-  font-size:8px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;
-  padding:5px 11px;font-family:var(--sans);border-radius:2px;
+  position:absolute;bottom:12px;left:12px;z-index:2;
+  background:rgba(26,18,18,0.72);color:#fff;
+  font-size:11px;font-weight:500;letter-spacing:0.3px;
+  padding:7px 16px;font-family:var(--sans);border-radius:50px;
+  -webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);
 }
 .price-was{
   text-decoration:line-through;color:var(--muted);
   font-size:12px;margin-right:5px;
 }
 .price-sale{color:#c0284a;font-weight:500}
-.product-actions{
-  position:absolute;bottom:12px;left:12px;right:12px;
-  opacity:0;transform:translateY(6px);
-  transition:all .25s;
-}
-.product-card:hover .product-actions{opacity:1;transform:translateY(0)}
-.btn-addcart{
-  width:100%;padding:11px 16px;
-  background:var(--accent);color:#fff;border:none;
-  font-size:9px;letter-spacing:2px;text-transform:uppercase;
-  font-family:var(--sans);cursor:pointer;font-weight:500;
-  border-radius:50px;
-  transition:all .25s;
-  box-shadow:0 4px 20px rgba(220,118,140,.35);
-}
-.btn-addcart:hover{background:var(--accent-dark);box-shadow:0 6px 24px rgba(220,118,140,.45)}
-.btn-addcart:active{background:var(--accent);box-shadow:none;transform:scale(0.99)}
 .size-chips{display:flex;gap:4px;margin-bottom:6px;justify-content:center}
 .size-chip{
   background:rgba(250,248,245,0.9);color:var(--dark);
@@ -460,8 +457,8 @@ nav{
 }
 .size-chip:hover,.size-chip.active{background:var(--accent);color:#fff;border-color:var(--accent)}
 .product-name{
-  font-family:var(--serif);font-size:16px;font-weight:600;
-  color:var(--dark);margin-bottom:5px;line-height:1.5;
+  font-family:var(--script);font-size:19px;font-weight:400;
+  color:var(--dark);margin-bottom:5px;line-height:1.4;
 }
 .product-price{
   font-size:15px;color:var(--muted);letter-spacing:1px;font-weight:500;
@@ -705,7 +702,7 @@ footer{
   padding:24px 28px;border-bottom:1px solid var(--border);
   display:flex;align-items:center;justify-content:space-between;
 }
-.cart-head h3{font-family:var(--serif);font-size:22px;font-weight:400}
+.cart-head h3{font-family:var(--script);font-size:26px;font-weight:400}
 .cart-close{
   background:none;border:none;cursor:pointer;
   font-size:18px;color:var(--mid);line-height:1;
@@ -724,7 +721,7 @@ footer{
 }
 .cart-item-img-fill{width:100%;height:100%}
 .cart-item-info{flex:1}
-.cart-item-name{font-family:var(--serif);font-size:20px;margin-bottom:4px}
+.cart-item-name{font-family:var(--script);font-size:22px;margin-bottom:4px}
 .cart-item-meta{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
 .cart-item-price{font-size:13px;color:var(--dark);letter-spacing:0.5px}
 .cart-qty{display:flex;align-items:center;gap:12px;margin-top:8px}
@@ -779,7 +776,7 @@ footer{
 .sr-item:hover{background:var(--warm)}
 .sr-img{width:58px;height:72px;flex-shrink:0;overflow:hidden;border-radius:10px;background:var(--warm)}
 .sr-img img{width:100%;height:100%;object-fit:cover;display:block}
-.sr-name{font-family:var(--serif);font-size:16px;color:var(--dark);margin-bottom:4px}
+.sr-name{font-family:var(--script);font-size:18px;color:var(--dark);margin-bottom:4px}
 .sr-price{font-size:12px;color:var(--muted);font-family:var(--sans)}
 .sr-save{color:var(--accent)}
 .search-empty{text-align:center;padding:48px 0;font-family:var(--serif);font-size:20px;color:var(--muted)}
@@ -832,7 +829,7 @@ footer{
   position:sticky;top:0;z-index:10;
 }
 .all-products-screen-title{
-  font-family:var(--serif);font-size:30px;font-weight:500;
+  font-family:var(--script);font-size:32px;font-weight:400;
   color:var(--dark);letter-spacing:0.5px;
   position:absolute;left:50%;transform:translateX(-50%);
 }
@@ -870,43 +867,6 @@ footer{
   .all-products-body{padding:0 20px 60px}
 }
 @media(max-width:768px){
-  /* ── ADD TO BAG — always visible on touch ── */
-  .product-actions{
-    opacity:1;
-    transform:translateY(0);
-    bottom:8px;left:0;right:0;
-    padding:0 10px;
-    display:flex;justify-content:center;
-    z-index:1;
-  }
-  /* gradient behind button so it reads over any image */
-  .product-img::after{
-    content:'';
-    position:absolute;
-    bottom:0;left:0;right:0;
-    height:60px;
-    background:linear-gradient(to top,rgba(0,0,0,0.22) 0%,transparent 100%);
-    border-radius:0 0 18px 18px;
-    pointer-events:none;
-    z-index:0;
-  }
-  .btn-addcart{
-    width:auto;
-    padding:5px 14px;
-    font-size:7px;
-    letter-spacing:1.5px;
-    border-radius:40px;
-    background:rgba(192,40,74,0.88);
-    backdrop-filter:blur(6px);
-    -webkit-backdrop-filter:blur(6px);
-    box-shadow:0 2px 10px rgba(192,40,74,.35);
-  }
-  .btn-addcart:active{
-    transform:scale(0.97);
-    background:var(--accent-dark);
-    box-shadow:none;
-  }
-
   /* Filter bar becomes two stacked rows */
   .all-products-body .filter-bar{
     flex-direction:column;
@@ -1017,9 +977,9 @@ footer{
 }
 .featured-drop-eyebrow::before{content:'';width:16px;height:1px;background:var(--accent)}
 .featured-drop-name{
-  font-family:var(--serif);font-size:clamp(24px,2.5vw,36px);
-  font-weight:300;color:var(--dark);line-height:1.1;
-  margin-bottom:6px;letter-spacing:-0.5px;
+  font-family:var(--script);font-size:clamp(26px,3vw,40px);
+  font-weight:400;color:var(--dark);line-height:1.2;
+  margin-bottom:6px;letter-spacing:0;
 }
 .featured-drop-name em{font-style:italic;color:var(--accent)}
 .featured-drop-price{
@@ -1142,8 +1102,8 @@ footer{
 }
 .insta-follow-left{flex:1;max-width:400px}
 .insta-follow-title{
-  font-family:var(--serif);font-size:clamp(26px,3vw,42px);
-  font-weight:400;color:var(--dark);line-height:1.2;margin-bottom:28px;
+  font-family:var(--script);font-size:clamp(28px,3.3vw,46px);
+  font-weight:400;color:var(--dark);line-height:1.25;margin-bottom:28px;
 }
 .btn-follow{
   display:inline-block;border:1.5px solid var(--dark);color:var(--dark);
@@ -1185,7 +1145,7 @@ footer{
 }
 .footer-social-icon:hover{color:var(--accent)}
 .footer-info-col h4,.footer-contact-col h4{
-  font-family:var(--serif);font-size:22px;font-weight:500;
+  font-family:var(--script);font-size:24px;font-weight:400;
   color:var(--dark);margin-bottom:22px;letter-spacing:0.3px;
 }
 .footer-info-links{list-style:none;margin-bottom:0}
@@ -1205,7 +1165,7 @@ footer{
   margin-bottom:28px;
 }
 .footer-subscribe-title{
-  font-family:var(--serif);font-size:22px;font-weight:400;
+  font-family:var(--script);font-size:25px;font-weight:400;
   color:var(--dark);margin-bottom:18px;letter-spacing:0.3px;
 }
 .footer-subscribe-form{
@@ -1256,11 +1216,10 @@ footer{
 .slide-overlay{position:absolute;inset:0;background:rgba(0,0,0,0.35)}
 .slide-content{
   position:absolute;inset:0;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  text-align:center;color:#fff;padding:0 24px;
+  display:flex;flex-direction:column;align-items:center;justify-content:flex-end;
+  text-align:center;color:#fff;padding:0 24px 64px;
 }
-.slide-eyebrow{font-size:11px;letter-spacing:4px;text-transform:uppercase;font-family:var(--sans);margin-bottom:16px;opacity:0.85}
-.slide-title{font-family:var(--serif);font-size:clamp(36px,5vw,72px);font-weight:300;line-height:1.1;margin-bottom:16px;letter-spacing:-0.5px}
+.slide-title{font-family:var(--script);font-size:clamp(40px,5.5vw,80px);font-weight:400;line-height:1.15;margin-bottom:16px;letter-spacing:0}
 .slide-sub{font-size:12px;letter-spacing:2px;text-transform:uppercase;opacity:0.8;margin-bottom:32px;font-family:var(--sans)}
 .slide-btn{
   display:inline-flex;align-items:center;justify-content:center;
@@ -1271,9 +1230,6 @@ footer{
   transition:background .25s,color .25s;
 }
 .slide-btn:hover{background:#fff;color:var(--dark)}
-.slider-dots{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);display:flex;gap:10px;z-index:10}
-.slider-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.45);border:none;cursor:pointer;padding:0;transition:background .3s,transform .3s}
-.slider-dot.active{background:#fff;transform:scale(1.2)}
 .slider-arrow{
   position:absolute;top:50%;transform:translateY(-50%);
   background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);
@@ -1284,7 +1240,7 @@ footer{
 .slider-arrow.prev{left:20px}
 .slider-arrow.next{right:20px}
 @media(max-width:768px){
-  .slider{height:70vw;min-height:320px}
+  .slider{height:88vh;min-height:110px}
   .slider-arrow{display:none}
 }
 
@@ -1326,7 +1282,7 @@ footer{
   .hero-content{padding:0 24px 60px;max-width:100%}
   .hero-img-placeholder{display:none}
   .hero-bg{width:100%}
-  .cat-grid{grid-template-columns:repeat(2,1fr)}
+  .cat-grid .cat-item{flex:0 0 150px}
   .product-grid{grid-template-columns:repeat(2,1fr)}
   .products-section .product-grid{grid-template-columns:repeat(2,1fr);gap:12px}
   .products-section .product-img{aspect-ratio:2/3}
@@ -1412,6 +1368,7 @@ footer{
         <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg>
         Our Collections
       </button>
+      <a href="#" class="menu-nav-item" onclick="filterProducts('denim-tops');closeMenu()">Tops</a>
       <a href="#" class="menu-nav-item" onclick="filterProducts('tops');closeMenu()">Blouses</a>
       <a href="#" class="menu-nav-item" onclick="filterProducts('pants');closeMenu()">Pants</a>
       <a href="#" class="menu-nav-item" onclick="filterProducts('long-shirts');closeMenu()">Long Shirts</a>
@@ -1424,10 +1381,19 @@ footer{
 <div class="slider" id="heroSlider">
 
   <div class="slide active">
-    <img src="img/cover1.JPG" alt="Slide 1">
+    <img src="img/7.jpg" alt="Slide 1">
     <div class="slide-overlay"></div>
     <div class="slide-content">
-      <div class="slide-eyebrow">Summer / Spring '26</div>
+      <h1 class="slide-title">The Denim Edit</h1>
+      <p class="slide-sub">Introducing the Pink Deer Denim Top</p>
+      <button type="button" class="slide-btn" onclick="goProduct(10)">Shop Now</button>
+    </div>
+  </div>
+
+  <div class="slide">
+    <img src="img/16.JPG" alt="Slide 2">
+    <div class="slide-overlay"></div>
+    <div class="slide-content">
       <h1 class="slide-title">Elevate Your Style</h1>
       <p class="slide-sub">Discover timeless elegance &amp; contemporary modest fashion</p>
       <button type="button" class="slide-btn" onclick="openAllProducts()">Shop Now</button>
@@ -1435,10 +1401,9 @@ footer{
   </div>
 
   <div class="slide">
-    <img src="img/cover2.JPG" alt="Slide 2">
+    <img src="img/21.jpg" alt="Slide 2">
     <div class="slide-overlay"></div>
     <div class="slide-content">
-      <div class="slide-eyebrow">New Arrivals</div>
       <h1 class="slide-title">Summer Spring Edit</h1>
       <p class="slide-sub">Drop I · Now Available</p>
       <button type="button" class="slide-btn" onclick="openAllProducts()">Shop Now</button>
@@ -1449,7 +1414,6 @@ footer{
     <img src="img/cover3.JPG" alt="Slide 3">
     <div class="slide-overlay"></div>
     <div class="slide-content">
-      <div class="slide-eyebrow">Blouses &amp; Pants</div>
       <h1 class="slide-title">Crafted for You</h1>
       <p class="slide-sub">Modest · Refined · Effortless</p>
       <button type="button" class="slide-btn" onclick="openAllProducts()">Shop Now</button>
@@ -1460,31 +1424,8 @@ footer{
     <img src="img/cover4.JPG" alt="Slide 4">
     <div class="slide-overlay"></div>
     <div class="slide-content">
-      <div class="slide-eyebrow">Long Shirts</div>
       <h1 class="slide-title">Effortless Layers</h1>
       <p class="slide-sub">Relaxed · Modest · Refined</p>
-      <button type="button" class="slide-btn" onclick="openAllProducts()">Shop Now</button>
-    </div>
-  </div>
-
-  <div class="slide">
-    <img src="img/cover5.JPG" alt="Slide 5">
-    <div class="slide-overlay"></div>
-    <div class="slide-content">
-      <div class="slide-eyebrow">New In</div>
-      <h1 class="slide-title">The Summer Drop</h1>
-      <p class="slide-sub">Soft linen · Breathable · Beautiful</p>
-      <button type="button" class="slide-btn" onclick="openAllProducts()">Shop Now</button>
-    </div>
-  </div>
-
-  <div class="slide">
-    <img src="img/cover6.JPG" alt="Slide 6">
-    <div class="slide-overlay"></div>
-    <div class="slide-content">
-      <div class="slide-eyebrow">Summer / Spring '26</div>
-      <h1 class="slide-title">Timeless Elegance</h1>
-      <p class="slide-sub">Modest fashion for every occasion</p>
       <button type="button" class="slide-btn" onclick="openAllProducts()">Shop Now</button>
     </div>
   </div>
@@ -1492,20 +1433,23 @@ footer{
   <!-- Arrows -->
   <button type="button" class="slider-arrow prev" onclick="moveSlide(-1)">&#8592;</button>
   <button type="button" class="slider-arrow next" onclick="moveSlide(1)">&#8594;</button>
-
-  <!-- Dots -->
-  <div class="slider-dots" id="sliderDots"></div>
 </div>
 
 <!-- Categories -->
 <div class="section-header">
-  <div class="section-tag">Shop by category</div>
+  <div class="section-tag">Shop by Category</div>
 
 </div>
 <section class="categories">
-  <div class="cat-grid" style="grid-template-columns:repeat(3,1fr)">
+  <div class="cat-carousel-wrap">
+    <button type="button" class="cat-arrow prev" onclick="scrollCats(-1)" aria-label="Previous">&#8249;</button>
+    <div class="cat-grid">
+    <div class="cat-item" onclick="filterProducts('denim-tops')">
+      <div class="cat-img cat-img-1"><img src="img/6.jpg" alt="Tops"></div>
+      <div class="cat-label">Tops</div>
+    </div>
     <div class="cat-item" onclick="filterProducts('tops')">
-      <div class="cat-img cat-img-2"><img src="img/liliycoffe14.JPG" alt="Blouses"></div>
+      <div class="cat-img cat-img-2"><img src="img/25.jpg" alt="Blouses"></div>
       <div class="cat-label">Blouses</div>
     </div>
     <div class="cat-item" onclick="filterProducts('pants')">
@@ -1516,6 +1460,8 @@ footer{
       <div class="cat-img cat-img-3"><img src="img/limeshirt8.JPG" alt="Long Shirts"></div>
       <div class="cat-label">Long Shirts</div>
     </div>
+    </div>
+    <button type="button" class="cat-arrow next" onclick="scrollCats(1)" aria-label="Next">&#8250;</button>
   </div>
 </section>
 
@@ -1539,7 +1485,7 @@ footer{
       <div class="featured-drop-info">
         <div class="featured-drop-eyebrow">Summer / Spring '26</div>
         <div class="featured-drop-name">The <em>Lily</em><br>Blouse</div>
-        <div class="featured-drop-price">LE 610 <span style="text-decoration:line-through;opacity:.55;font-size:.75em;margin-left:4px">LE 700</span></div>
+      <div class="featured-drop-price">LE 800 <span style="text-decoration:line-through;opacity:.55;font-size:.75em;margin-left:4px">LE 950</span></div>
         <div class="featured-drop-divider"></div>
         <div class="featured-drop-desc">
           Light as air and graceful in every movement — the <strong>Lily Blouse</strong> is designed for effortless all-day elegance. Delicate draping, a relaxed silhouette, and premium breathable fabric make it perfect for brunches, garden outings, and beyond.
@@ -1572,7 +1518,7 @@ footer{
       <div class="featured-drop-info">
         <div class="featured-drop-eyebrow">Summer / Spring '26</div>
         <div class="featured-drop-name">Everyday <em>Linen</em><br>Pant</div>
-        <div class="featured-drop-price">LE 900 <span style="text-decoration:line-through;opacity:.55;font-size:.75em;margin-left:4px">LE 1,000</span></div>
+        <div class="featured-drop-price">LE 850 <span style="text-decoration:line-through;opacity:.55;font-size:.75em;margin-left:4px">LE 1,000</span></div>
         <div class="featured-drop-divider"></div>
         <div class="featured-drop-desc">
           Elevated comfort meets refined simplicity. The <strong>Everyday Linen Pant</strong> pairs flawlessly with any top in our collection. A wide relaxed cut and soft linen blend ensure you look polished without trying.
@@ -1602,7 +1548,7 @@ footer{
       <div class="featured-drop-info">
         <div class="featured-drop-eyebrow">Summer / Spring '26</div>
         <div class="featured-drop-name">Basic <em>Long</em><br>Shirt</div>
-        <div class="featured-drop-price">LE 750 <span style="text-decoration:line-through;opacity:.55;font-size:.75em;margin-left:4px">LE 900</span></div>
+        <div class="featured-drop-price">LE 900 <span style="text-decoration:line-through;opacity:.55;font-size:.75em;margin-left:4px">LE 1000</span></div>
         <div class="featured-drop-divider"></div>
         <div class="featured-drop-desc">
           The ultimate layering piece — our <strong>Basic Long Shirt</strong> moves seamlessly from casual to polished. Clean lines, a relaxed drape, and a versatile palette make it a true wardrobe essential.
@@ -1717,6 +1663,7 @@ footer{
     <div class="filter-bar">
       <ul class="filter-tabs" id="allFilterTabs">
         <li class="active" data-filter="all" onclick="setAllFilter(this,'all')">All</li>
+        <li data-filter="denim-tops" onclick="setAllFilter(this,'denim-tops')">Tops</li>
         <li data-filter="tops" onclick="setAllFilter(this,'tops')">Blouses</li>
         <li data-filter="pants" onclick="setAllFilter(this,'pants')">Pants</li>
         <li data-filter="long-shirts" onclick="setAllFilter(this,'long-shirts')">Long Shirts</li>
@@ -1816,13 +1763,15 @@ footer{
 
 <script>
 const PRODUCTS_DATA = [
-  {id:5,name:'Everyday Linen Pant',price:750,priceStr:'LE 750',originalPrice:900,cat:'pants',badge:'new',home:true,colors:['#d5ceb8','#bab498'],sizes:['S-M','L-XL'],bg:'p4',img:'img/pant1.JPG'},
-  {id:7,name:'Lily Blouse',price:610,priceStr:'LE 610',originalPrice:700,cat:'tops',badge:'',home:true,colors:['#D2C9C3','#C4C6C1','#A59CA5','#F7BBBB'],sizes:['One Size'],bg:'p3',img:'img/liliyorange5.JPG'},
-  {id:72,name:'Lily Blouse',price:610,priceStr:'LE 610',originalPrice:700,cat:'tops',badge:'',home:false,colors:['#9DB89E','#7EA882'],sizes:['One Size'],bg:'p3',img:'img/liliymint1.JPG',linkId:7},
-  {id:73,name:'Lily Blouse',price:610,priceStr:'LE 610',originalPrice:700,cat:'tops',badge:'',home:false,colors:['#C4AA88','#A88C68'],sizes:['One Size'],bg:'p3',img:'img/liliycoffe14.JPG',linkId:7},
-  {id:9,name:'Basic Long Shirt',price:750,priceStr:'LE 750',originalPrice:900,cat:'long-shirts',badge:'new',home:true,colors:['#B8C98A','#E8ADBA','#B8ADCA'],sizes:['One Size'],bg:'p3',img:'img/pinkshirt5.JPG'},
-  {id:74,name:'Basic Long Shirt',price:750,priceStr:'LE 750',originalPrice:900,cat:'long-shirts',badge:'new',home:false,colors:['#B8ADCA','#A89AB8'],sizes:['One Size'],bg:'p3',img:'img/purpleshirt6.JPG',linkId:9},
-  {id:75,name:'Basic Long Shirt',price:750,priceStr:'LE 750',originalPrice:900,cat:'long-shirts',badge:'new',home:false,colors:['#B8C98A','#9AB870'],sizes:['One Size'],bg:'p3',img:'img/limeshirt8.JPG',linkId:9},
+  {id:10,name:'Pink Deer Denim Top',price:850,priceStr:'LE 850',originalPrice:1100,cat:'denim-tops',badge:'new',home:true,colors:['#2c3e5c'],sizes:['One Size'],bg:'p5',img:'img/1.jpg'},
+  {id:5,name:'Everyday Linen Pant',price:850,priceStr:'LE 850',originalPrice:1000,cat:'pants',badge:'new',home:true,colors:['#d5ceb8','#bab498'],sizes:['S-M','L-XL'],bg:'p4',img:'img/pant1.JPG'},
+  {id:7,name:'Lily Blouse',price:800,priceStr:'LE 800',originalPrice:950,cat:'tops',badge:'',home:true,colors:['#D2C9C3','#C4C6C1','#A59CA5','#F7BBBB'],sizes:['One Size'],bg:'p3',img:'img/liliyorange5.JPG'},
+  {id:72,name:'Lily Blouse',price:800,priceStr:'LE 800',originalPrice:950,cat:'tops',badge:'',home:false,colors:['#9DB89E','#7EA882'],sizes:['One Size'],bg:'p3',img:'img/liliymint1.JPG',linkId:7},
+  {id:73,name:'Lily Blouse',price:800,priceStr:'LE 800',originalPrice:950,cat:'tops',badge:'',home:false,colors:['#C4AA88','#A88C68'],sizes:['One Size'],bg:'p3',img:'img/liliycoffe14.JPG',linkId:7},
+  {id:76,name:'Lily Blouse',price:800,priceStr:'LE 800',originalPrice:950,cat:'tops',badge:'',home:false,colors:['#D2C9C3'],sizes:['One Size'],bg:'p3',img:'img/27.jpg',linkId:7},
+  {id:9,name:'Basic Long Shirt',price:900,priceStr:'LE 900',originalPrice:1000,cat:'long-shirts',badge:'new',home:true,colors:['#B8C98A','#E8ADBA','#B8ADCA'],sizes:['One Size'],bg:'p3',img:'img/pinkshirt5.JPG'},
+  {id:74,name:'Basic Long Shirt',price:900,priceStr:'LE 900',originalPrice:1000,cat:'long-shirts',badge:'new',home:false,colors:['#B8ADCA','#A89AB8'],sizes:['One Size'],bg:'p3',img:'img/purpleshirt6.JPG',linkId:9},
+  {id:75,name:'Basic Long Shirt',price:900,priceStr:'LE 900',originalPrice:1000,cat:'long-shirts',badge:'new',home:false,colors:['#B8C98A','#9AB870'],sizes:['One Size'],bg:'p3',img:'img/limeshirt8.JPG',linkId:9},
 ];
 
 const CART_KEY = 'pld_cart';
@@ -1838,7 +1787,6 @@ let allCurrentSort = 'featured';
 
 function makeProductCard(p){
   const rid = p.linkId||p.id;
-  const savePercent = p.originalPrice ? Math.round((1 - p.price/p.originalPrice)*100) : 0;
   return `
     <div class="product-card fade-up" onclick="goProduct(${rid})">
       <div class="product-img">
@@ -1846,14 +1794,8 @@ function makeProductCard(p){
           <img src="${p.img}" alt="${p.name}" style="width:100%;height:100%;object-fit:cover;display:block;">
         </div>
         ${p.soldOut
-          ? `<div class="badge-soldout">Sold Out</div>`
+          ? `<div class="badge-soldout">Sold out</div>`
           : p.badge ? `<div class="product-badge ${p.badge}">${p.badge==='new'?'New In':p.badge}</div>` : ''}
-        ${savePercent ? `<div class="badge-save">✦ Save ${savePercent}%</div>` : ''}
-        <div class="product-actions">
-          ${p.soldOut
-            ? `<button type="button" class="btn-addcart" disabled style="opacity:.6;cursor:not-allowed;background:rgba(156,120,133,0.75)">Sold Out</button>`
-            : `<button type="button" class="btn-addcart" onclick="event.stopPropagation();addToCart(${rid})">Add to Bag</button>`}
-        </div>
       </div>
       <div class="product-name">${p.name}</div>
       <div class="product-price">
@@ -1881,6 +1823,11 @@ function setFilter(el,filter){
 
 function filterProducts(cat){
   openAllProducts(cat);
+}
+
+function scrollCats(dir){
+  const el = document.querySelector('.cat-grid');
+  el.scrollBy({left: dir*220, behavior:'smooth'});
 }
 
 function openAllProducts(cat){
@@ -2092,23 +2039,12 @@ function hideMenuSub(){
 /* ── SLIDER ── */
 (function(){
   const slides = document.querySelectorAll('.slide');
-  const dotsWrap = document.getElementById('sliderDots');
   let current = 0, timer;
-
-  slides.forEach((_,i)=>{
-    const dot = document.createElement('button');
-    dot.className = 'slider-dot' + (i===0?' active':'');
-    dot.setAttribute('aria-label','Slide '+(i+1));
-    dot.onclick = ()=>goSlide(i);
-    dotsWrap.appendChild(dot);
-  });
 
   function goSlide(n){
     slides[current].classList.remove('active');
-    dotsWrap.children[current].classList.remove('active');
     current = (n + slides.length) % slides.length;
     slides[current].classList.add('active');
-    dotsWrap.children[current].classList.add('active');
     resetTimer();
   }
 
