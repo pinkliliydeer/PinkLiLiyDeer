@@ -1391,7 +1391,7 @@ footer{
   </div>
 
   <div class="slide">
-    <img src="img/16.JPG" alt="Slide 2">
+    <img src="img/16.JPG" alt="Slide 2" loading="lazy">
     <div class="slide-overlay"></div>
     <div class="slide-content">
       <h1 class="slide-title">Elevate Your Style</h1>
@@ -1401,7 +1401,7 @@ footer{
   </div>
 
   <div class="slide">
-    <img src="img/21.jpg" alt="Slide 2">
+    <img src="img/21.jpg" alt="Slide 2" loading="lazy">
     <div class="slide-overlay"></div>
     <div class="slide-content">
       <h1 class="slide-title">Summer Spring Edit</h1>
@@ -1411,7 +1411,7 @@ footer{
   </div>
 
   <div class="slide">
-    <img src="img/cover3.JPG" alt="Slide 3">
+    <img src="img/cover3.JPG" alt="Slide 3" loading="lazy">
     <div class="slide-overlay"></div>
     <div class="slide-content">
       <h1 class="slide-title">Crafted for You</h1>
@@ -1421,7 +1421,7 @@ footer{
   </div>
 
   <div class="slide">
-    <img src="img/cover4.JPG" alt="Slide 4">
+    <img src="img/cover4.JPG" alt="Slide 4" loading="lazy">
     <div class="slide-overlay"></div>
     <div class="slide-content">
       <h1 class="slide-title">Effortless Layers</h1>
@@ -1445,19 +1445,19 @@ footer{
     <button type="button" class="cat-arrow prev" onclick="scrollCats(-1)" aria-label="Previous">&#8249;</button>
     <div class="cat-grid">
     <div class="cat-item" onclick="filterProducts('denim-tops')">
-      <div class="cat-img cat-img-1"><img src="img/6.jpg" alt="Tops"></div>
+      <div class="cat-img cat-img-1"><img src="img/6.jpg" alt="Tops" loading="lazy"></div>
       <div class="cat-label">Tops</div>
     </div>
     <div class="cat-item" onclick="filterProducts('tops')">
-      <div class="cat-img cat-img-2"><img src="img/25.jpg" alt="Blouses"></div>
+      <div class="cat-img cat-img-2"><img src="img/25.jpg" alt="Blouses" loading="lazy"></div>
       <div class="cat-label">Blouses</div>
     </div>
     <div class="cat-item" onclick="filterProducts('pants')">
-      <div class="cat-img cat-img-4"><img src="img/pant3.JPG" alt="Pants"></div>
+      <div class="cat-img cat-img-4"><img src="img/pant3.JPG" alt="Pants" loading="lazy"></div>
       <div class="cat-label">Pants</div>
     </div>
     <div class="cat-item" onclick="filterProducts('long-shirts')">
-      <div class="cat-img cat-img-3"><img src="img/limeshirt8.JPG" alt="Long Shirts"></div>
+      <div class="cat-img cat-img-3"><img src="img/limeshirt8.JPG" alt="Long Shirts" loading="lazy"></div>
       <div class="cat-label">Long Shirts</div>
     </div>
     </div>
@@ -1476,7 +1476,7 @@ footer{
     <div class="featured-drop-slide active" id="fdSlide0">
       <div class="featured-drop-img-side">
         <div class="featured-drop-badge">New In</div>
-        <img src="img/featuredproduct1.JPG" alt="Lily Blouse" class="featured-drop-img-link" onclick="goProduct(7)">
+        <img src="img/featuredproduct1.JPG" alt="Lily Blouse" class="featured-drop-img-link" loading="lazy" onclick="goProduct(7)">
         <div class="featured-drop-slide-btns">
           <button type="button" class="featured-slide-btn" onclick="featuredSlide(-1)">&#8592;</button>
           <button type="button" class="featured-slide-btn" onclick="featuredSlide(1)">&#8594;</button>
@@ -1509,7 +1509,7 @@ footer{
     <div class="featured-drop-slide" id="fdSlide1">
       <div class="featured-drop-img-side">
         <div class="featured-drop-badge">New In</div>
-        <img src="img/featuredproduct3.JPG" alt="Everyday Linen Pant">
+        <img src="img/featuredproduct3.JPG" alt="Everyday Linen Pant" loading="lazy">
         <div class="featured-drop-slide-btns">
           <button type="button" class="featured-slide-btn" onclick="featuredSlide(-1)">&#8592;</button>
           <button type="button" class="featured-slide-btn" onclick="featuredSlide(1)">&#8594;</button>
@@ -1539,7 +1539,7 @@ footer{
     <div class="featured-drop-slide" id="fdSlide2">
       <div class="featured-drop-img-side">
         <div class="featured-drop-badge">New In</div>
-        <img src="img/featuredproduct2.JPG" alt="Basic Long Shirt" class="featured-drop-img-link" onclick="goProduct(9)">
+        <img src="img/featuredproduct2.JPG" alt="Basic Long Shirt" class="featured-drop-img-link" loading="lazy" onclick="goProduct(9)">
         <div class="featured-drop-slide-btns">
           <button type="button" class="featured-slide-btn" onclick="featuredSlide(-1)">&#8592;</button>
           <button type="button" class="featured-slide-btn" onclick="featuredSlide(1)">&#8594;</button>
@@ -1589,8 +1589,8 @@ footer{
     <a href="https://www.instagram.com/pinkliliydeer.eg/" target="_blank" rel="noopener" class="btn-follow">Follow Us</a>
   </div>
   <div class="insta-follow-imgs">
-    <div class="insta-follow-thumb"><img src="img/followus.JPG" alt="Instagram"></div>
-    <div class="insta-follow-thumb"><img src="img/followus2.JPG" alt="Instagram"></div>
+    <div class="insta-follow-thumb"><img src="img/followus.JPG" alt="Instagram" loading="lazy"></div>
+    <div class="insta-follow-thumb"><img src="img/followus2.JPG" alt="Instagram" loading="lazy"></div>
   </div>
 </section>
 
@@ -1791,7 +1791,7 @@ function makeProductCard(p){
     <div class="product-card fade-up" onclick="goProduct(${rid})">
       <div class="product-img">
         <div class="product-img-fill ${p.bg}">
-          <img src="${p.img}" alt="${p.name}" style="width:100%;height:100%;object-fit:cover;display:block;">
+          <img src="${p.img}" alt="${p.name}" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;">
         </div>
         ${p.soldOut
           ? `<div class="badge-soldout">Sold out</div>`
