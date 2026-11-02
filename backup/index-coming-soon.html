@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pink Liliy Deer — Coming Soon</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@300;400;500&family=Cairo:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--cream:#fff5f7;--blush:#f9c8d0;--dark:#1a1218;--accent:#dc768c}
+html,body{height:100%}
+body{
+  background:var(--cream);color:var(--dark);
+  font-family:'Montserrat',sans-serif;font-weight:300;
+  display:flex;align-items:center;justify-content:center;
+  text-align:center;padding:32px 24px;
+  background-image:radial-gradient(circle at 50% 0%,#fde3e9 0%,transparent 60%);
+}
+.wrap{max-width:520px;width:100%}
+.logo{height:56px;width:auto;margin-bottom:56px}
+.eyebrow{font-size:12px;font-weight:500;letter-spacing:4px;text-transform:uppercase;color:var(--accent);margin-bottom:18px}
+h1{
+  font-family:'Cormorant Garamond',serif;font-weight:300;
+  font-size:clamp(48px,12vw,88px);line-height:1;margin-bottom:24px;
+}
+h1 em{font-style:italic;color:var(--accent)}
+p{font-size:14px;line-height:1.8;color:#5a4f47;margin-bottom:36px}
+.ea-form{display:flex;max-width:420px;margin:0 auto 14px;border:1.5px solid var(--accent);background:#fff}
+.ea-form input{flex:1;min-width:0;border:none;outline:none;background:transparent;padding:14px 16px;font-family:inherit;font-size:13px;color:var(--dark)}
+.ea-form input::placeholder{color:#a8999f}
+.ea-form button{border:none;cursor:pointer;background:var(--accent);color:#fff;padding:0 22px;font-family:inherit;font-size:11px;font-weight:500;letter-spacing:2.5px;text-transform:uppercase;transition:opacity .2s}
+.ea-form button:disabled{opacity:.6;cursor:default}
+.ea-msg{min-height:20px;font-size:12px;margin-bottom:32px;color:#5a4f47}
+.ea-msg.err{color:#c0284a}
+.ig{
+  display:inline-block;text-decoration:none;color:var(--accent);
+  border:1.5px solid var(--accent);padding:14px 32px;
+  font-size:11px;font-weight:500;letter-spacing:3px;text-transform:uppercase;
+  transition:background .25s,color .25s;
+}
+.ig:hover{background:var(--accent);color:#fff}
+.lang{position:fixed;top:20px;right:20px;border:1.5px solid var(--accent);background:transparent;color:var(--accent);cursor:pointer;padding:8px 16px;font-family:'Cairo','Montserrat',sans-serif;font-size:13px;font-weight:600;transition:background .25s,color .25s}
+.lang:hover{background:var(--accent);color:#fff}
+[dir=rtl] .lang{right:auto;left:20px}
+[dir=rtl] body,[dir=rtl] .ea-form input,[dir=rtl] .ea-form button{font-family:'Cairo',sans-serif}
+[dir=rtl] .eyebrow,[dir=rtl] .ea-form button,[dir=rtl] .ig{letter-spacing:0}
+[dir=rtl] h1{font-family:'Cairo',sans-serif;font-weight:300;line-height:1.3}
+[dir=rtl] h1 em{font-style:normal;font-weight:600}
+.pw-toggle{background:none;border:none;cursor:pointer;color:var(--accent);font-family:inherit;font-size:12px;letter-spacing:.5px;text-decoration:underline;margin:0 0 18px}
+.pw-form{margin-bottom:10px}
+.pw-form[hidden]{display:none}
+</style>
+</head>
+<body>
+<button type="button" class="lang" id="langBtn" aria-label="Language">العربية</button>
+<main class="wrap">
+  <img class="logo" src="img/logo2.svg" alt="Pink Liliy Deer">
+  <div class="eyebrow" data-t="eyebrow">Winter / Fall &#8217;27 Collection</div>
+  <h1><span data-t="h1a">Coming</span> <em data-t="h1b">Soon</em></h1>
+  <p data-t="body">Our Winter / Fall &#8217;27 collection is almost here. Follow us to be the first to know when we launch.</p>
+  <form class="ea-form" id="eaForm" novalidate>
+    <input type="email" name="email" id="eaEmail" placeholder="Your email" autocomplete="email" required aria-label="Email address">
+    <button type="submit" id="eaBtn" data-t="btn">Get early access</button>
+  </form>
+  <div class="ea-msg" id="eaMsg" role="status"></div>
+  <button type="button" class="pw-toggle" id="pwToggle" data-t="havePw">Already have a password?</button>
+  <form class="ea-form pw-form" id="pwForm" hidden novalidate>
+    <input type="password" id="pwInput" autocomplete="current-password" aria-label="Password">
+    <button type="submit" data-t="pwBtn">Enter</button>
+  </form>
+  <div class="ea-msg" id="pwMsg" role="status"></div>
+  <a class="ig" href="https://www.instagram.com/pinkliliydeer.eg/" target="_blank" rel="noopener">@pinkliliydeer.eg</a>
+</main>
+<script>
+// Deploy apps-script/Code.gs as a web app and paste its URL here
+const SIGNUP_URL='https://script.google.com/macros/s/AKfycbwOFL_tBYemeMcHXVtvcRh8dneOWmyY16p_R3hBhjaTJc31RgOSnH21F3hAT4GohOgHsg/exec';
+const I18N={
+  en:{eyebrow:'Winter / Fall \u201927 Collection',h1a:'Coming',h1b:'Soon',body:'Our Winter / Fall \u201927 collection is almost here. Follow us to be the first to know when we launch.',btn:'Get early access',ph:'Your email',invalid:'Please enter a valid email.',ok:'You\u2019re on the list \u2726 We\u2019ll be in touch soon.',err:'Something went wrong. Please try again.',toggle:'\u0627\u0644\u0639\u0631\u0628\u064a\u0629'},
+  ar:{eyebrow:'\u0643\u0648\u0644\u064a\u0643\u0634\u0646 \u0627\u0644\u0634\u062a\u0627\u0621 / \u0627\u0644\u062e\u0631\u064a\u0641 \u0662\u0666',h1a:'\u0642\u0631\u064a\u0628\u0627\u064b',h1b:'\u062c\u062f\u0627\u064b',body:'\u0643\u0648\u0644\u064a\u0643\u0634\u0646 \u0627\u0644\u0634\u062a\u0627\u0621 / \u0627\u0644\u062e\u0631\u064a\u0641 \u0662\u0666 \u0639\u0644\u0649 \u0648\u0634\u0643 \u0627\u0644\u0648\u0635\u0648\u0644. \u062a\u0627\u0628\u0639\u064a\u0646\u0627 \u0644\u062a\u0643\u0648\u0646\u064a \u0623\u0648\u0644 \u0645\u0646 \u064a\u0639\u0631\u0641 \u0639\u0646\u062f \u0627\u0644\u0625\u0637\u0644\u0627\u0642.',btn:'\u0627\u062d\u0635\u0644\u064a \u0639\u0644\u0649 \u0648\u0635\u0648\u0644 \u0645\u0628\u0643\u0631',ph:'\u0628\u0631\u064a\u062f\u0643 \u0627\u0644\u0625\u0644\u0643\u062a\u0631\u0648\u0646\u064a',invalid:'\u0645\u0646 \u0641\u0636\u0644\u0643 \u0623\u062f\u062e\u0644\u064a \u0628\u0631\u064a\u062f\u0627\u064b \u0625\u0644\u0643\u062a\u0631\u0648\u0646\u064a\u0627\u064b \u0635\u062d\u064a\u062d\u0627\u064b.',ok:'\u062a\u0645 \u062a\u0633\u062c\u064a\u0644\u0643 \u2726 \u0633\u0646\u062a\u0648\u0627\u0635\u0644 \u0645\u0639\u0643 \u0642\u0631\u064a\u0628\u0627\u064b.',err:'\u062d\u062f\u062b \u062e\u0637\u0623. \u062d\u0627\u0648\u0644\u064a \u0645\u0631\u0629 \u0623\u062e\u0631\u0649.',toggle:'English'}
+};
+Object.assign(I18N.en,{
+  havePw:'Already have a password?',pwPh:'Early access password',pwBtn:'Enter',pwBad:'Incorrect password.',locked:'Early access opens on Thursday, 5 November. Please come back then \u2726',
+  ok:'You\u2019re on the list \u2726 Check your email for your early access password. Early access opens on Thursday, 5 November.'
+});
+Object.assign(I18N.ar,{
+  havePw:'لديك كلمة مرور؟',pwPh:'كلمة مرور الوصول المبكر',pwBtn:'دخول',pwBad:'كلمة المرور غير صحيحة.',locked:'يفتح الوصول المبكر يوم الخميس ٥ نوفمبر. نراكِ حينها ✦',
+  ok:'تم تسجيلك ✦ تحقق من بريدك الإلكتروني للحصول على كلمة مرور الوصول المبكر. يفتح الوصول المبكر يوم الخميس ٥ نوفمبر.'
+});
+// NOTE: this is a client-side gate only (the password is visible in this file).
+const ACCESS_PW='pink2027';
+// Password entry opens Thursday 5 Nov 2026, 00:00 Cairo time (UTC+2). Client-side only.
+const UNLOCK_AT=new Date('2026-11-05T00:00:00+02:00').getTime();
+try{if(Date.now()>=UNLOCK_AT&&localStorage.getItem('pld_access')==='1')location.replace('home.html')}catch(_){}
+let lang='en';
+try{lang=localStorage.getItem('pld_lang')||'en'}catch(_){}
+function setLang(l){
+  lang=l;
+  document.documentElement.lang=l;document.documentElement.dir=l==='ar'?'rtl':'ltr';
+  document.querySelectorAll('[data-t]').forEach(el=>el.textContent=I18N[l][el.dataset.t]);
+  document.getElementById('eaEmail').placeholder=I18N[l].ph;
+  document.getElementById('langBtn').textContent=I18N[l].toggle;
+  document.getElementById('eaMsg').textContent='';document.getElementById('pwMsg').textContent='';
+  document.getElementById('pwInput').placeholder=I18N[l].pwPh;
+  try{localStorage.setItem('pld_lang',l)}catch(_){}
+}
+document.getElementById('langBtn').addEventListener('click',()=>setLang(lang==='ar'?'en':'ar'));
+const form=document.getElementById('eaForm'),msg=document.getElementById('eaMsg'),btn=document.getElementById('eaBtn'),input=document.getElementById('eaEmail');
+form.addEventListener('submit',async e=>{
+  e.preventDefault();
+  const email=input.value.trim();
+  msg.className='ea-msg';
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){msg.className='ea-msg err';msg.textContent=I18N[lang].invalid;return}
+  btn.disabled=true;
+  try{
+    await fetch(SIGNUP_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({type:'signup',email,source:'early-access',lang})});
+    form.reset();msg.textContent=I18N[lang].ok;
+  }catch(_){msg.className='ea-msg err';msg.textContent=I18N[lang].err}
+  btn.disabled=false;
+});
+const pwForm=document.getElementById('pwForm'),pwMsg=document.getElementById('pwMsg'),pwInput=document.getElementById('pwInput');
+document.getElementById('pwToggle').addEventListener('click',()=>{pwForm.hidden=!pwForm.hidden;if(!pwForm.hidden)pwInput.focus()});
+pwForm.addEventListener('submit',e=>{
+  e.preventDefault();
+  if(Date.now()<UNLOCK_AT){pwMsg.className='ea-msg err';pwMsg.textContent=I18N[lang].locked;return}
+  if(pwInput.value.trim()===ACCESS_PW){
+    try{localStorage.setItem('pld_access','1')}catch(_){}
+    location.href='home.html';
+  }else{pwMsg.className='ea-msg err';pwMsg.textContent=I18N[lang].pwBad}
+});
+setLang(lang);
+</script>
+</body>
+</html>

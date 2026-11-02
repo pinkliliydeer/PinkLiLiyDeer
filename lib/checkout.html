@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Checkout — Pink Liliy Deer</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -561,31 +560,8 @@ function validateForm(){
   return valid;
 }
 
-emailjs.init('6LRRvq-ENdWBck1yH');
-
-const SERVICE_ID        = 'service_b5kh73h';
-const OWNER_TEMPLATE    = 'template_mgrowk2'; // owner notification
-const CUSTOMER_TEMPLATE = 'template_mo671vp';
-const SITE_BASE         = 'https://pink-liliy-deer.web.app/';
-
-function buildItemsHtml(cart){
-  return cart.map(i=>`
-    <table style="width:100%;margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid #f5d5db;border-collapse:collapse">
-      <tr>
-        <td style="width:80px;vertical-align:top;padding-right:14px">
-          <img src="${SITE_BASE}${i.img}" width="70" height="88"
-               style="display:block;object-fit:cover;border:1px solid #f5d5db">
-        </td>
-        <td style="vertical-align:top">
-          <div style="font-weight:bold;color:#1a1218;margin-bottom:4px">${i.name}</div>
-          <div style="color:#9c8790;font-size:12px;margin-bottom:2px">Size: ${i.size}${i.color?` &middot; Color: <span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:${i.color};border:1px solid #f5d5db"></span>`:''}</div>
-          <div style="color:#9c8790;font-size:12px;margin-bottom:6px">Qty: ${i.qty}</div>
-          <div style="color:#dc768c;font-weight:bold">LE ${(i.price*i.qty).toLocaleString()}.00</div>
-        </td>
-      </tr>
-    </table>
-  `).join('');
-}
+// Orders are sent to a Google Apps Script web app (see apps-script/Code.gs)
+const ORDERS_URL = 'https://script.google.com/macros/s/AKfycbwOFL_tBYemeMcHXVtvcRh8dneOWmyY16p_R3hBhjaTJc31RgOSnH21F3hAT4GohOgHsg/exec';
 
 function showSuccess(orderNum){
   if(IS_BUYNOW) sessionStorage.removeItem('pld_buynow');
@@ -606,16 +582,18 @@ function placeOrder(){
   const actualShip = sub >= FREE_SHIP ? 0 : shippingFee;
   const total      = sub + actualShip - discountAmount;
 
-  const sharedParams = {
+  const f = id => document.getElementById(id).value.trim();
+  const order = {
+    type:             'order',
     order_num:        orderNum,
     order_date:       orderDate,
-    customer_name:    document.getElementById('fFirstName').value.trim() + ' ' + document.getElementById('fLastName').value.trim(),
-    customer_email:   document.getElementById('fEmail').value.trim(),
-    customer_phone:   document.getElementById('fPhone').value.trim(),
-    customer_address: document.getElementById('fAddress').value.trim() + (document.getElementById('fAddress2').value.trim() ? ', ' + document.getElementById('fAddress2').value.trim() : ''),
-    customer_city:    document.getElementById('fCity').value.trim(),
+    customer_name:    f('fFirstName') + ' ' + f('fLastName'),
+    customer_email:   f('fEmail'),
+    customer_phone:   f('fPhone'),
+    customer_address: f('fAddress') + (f('fAddress2') ? ', ' + f('fAddress2') : ''),
+    customer_city:    f('fCity'),
     customer_gov:     document.getElementById('fGov').value,
-    order_items_html: buildItemsHtml(cart),
+    items:            cart.map(i => ({name:i.name,size:i.size,color:i.color||'',qty:i.qty,price:i.price,img:i.img})),
     subtotal:         'LE ' + sub.toLocaleString() + '.00',
     shipping:         actualShip === 0 ? 'Free' : 'LE ' + actualShip.toLocaleString() + '.00',
     total:            'LE ' + total.toLocaleString() + '.00',
@@ -626,23 +604,11 @@ function placeOrder(){
   btn.textContent = 'Placing Order...';
   btn.disabled = true;
 
-  // Send owner notification first, then customer confirmation
-  emailjs.send(SERVICE_ID, OWNER_TEMPLATE, sharedParams)
-    .then(() => {
-      // Send customer confirmation
-      return emailjs.send(SERVICE_ID, CUSTOMER_TEMPLATE, {
-        ...sharedParams,
-        to_email: sharedParams.customer_email,
-      });
-    })
-    .then(() => {
-      showSuccess(orderNum);
-    })
-    .catch(err => {
-      console.error('EmailJS error:', err);
-      showSuccess(orderNum); // still confirm order even if email fails
-    })
+  // text/plain avoids a CORS preflight; the response is opaque so the order is confirmed regardless
+  fetch(ORDERS_URL, {method:'POST', mode:'no-cors', headers:{'Content-Type':'text/plain;charset=utf-8'}, body:JSON.stringify(order)})
+    .catch(err => console.error('Order email error:', err))
     .finally(() => {
+      showSuccess(orderNum);
       btn.textContent = 'Place Order →';
       btn.disabled = false;
     });
